@@ -17,6 +17,17 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpModule", "cmlFpSensorEngi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DutUtils", "cmlFpTestEngine\DutUtils\msvc\DutUtils.vcxproj", "{7554C18F-FB7A-4C19-A445-C1B6BE59D79C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpTestEngine", "cmlFpTestEngine\FpTestEngine\msvc\FpTestEngine.vcxproj", "{C918C13B-F08F-4625-B39F-FBB33828F1CC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CFD4042F-64AF-495C-ABAB-F17E8E904A81} = {CFD4042F-64AF-495C-ABAB-F17E8E904A81}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpTestStep", "cmlFpTestEngine\FpTestStep\msvc\FpTestStep.vcxproj", "{CFD4042F-64AF-495C-ABAB-F17E8E904A81}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2374867A-3F15-4FC5-8401-41E1A82CF3F5} = {2374867A-3F15-4FC5-8401-41E1A82CF3F5}
+		{7554C18F-FB7A-4C19-A445-C1B6BE59D79C} = {7554C18F-FB7A-4C19-A445-C1B6BE59D79C}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -39,6 +50,14 @@ Global
 		{7554C18F-FB7A-4C19-A445-C1B6BE59D79C}.Debug|Win32.Build.0 = Debug|Win32
 		{7554C18F-FB7A-4C19-A445-C1B6BE59D79C}.Release|Win32.ActiveCfg = Release|Win32
 		{7554C18F-FB7A-4C19-A445-C1B6BE59D79C}.Release|Win32.Build.0 = Release|Win32
+		{C918C13B-F08F-4625-B39F-FBB33828F1CC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C918C13B-F08F-4625-B39F-FBB33828F1CC}.Debug|Win32.Build.0 = Debug|Win32
+		{C918C13B-F08F-4625-B39F-FBB33828F1CC}.Release|Win32.ActiveCfg = Release|Win32
+		{C918C13B-F08F-4625-B39F-FBB33828F1CC}.Release|Win32.Build.0 = Release|Win32
+		{CFD4042F-64AF-495C-ABAB-F17E8E904A81}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CFD4042F-64AF-495C-ABAB-F17E8E904A81}.Debug|Win32.Build.0 = Debug|Win32
+		{CFD4042F-64AF-495C-ABAB-F17E8E904A81}.Release|Win32.ActiveCfg = Release|Win32
+		{CFD4042F-64AF-495C-ABAB-F17E8E904A81}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
