@@ -28,6 +28,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpTestStep", "cmlFpTestEngi
 		{7554C18F-FB7A-4C19-A445-C1B6BE59D79C} = {7554C18F-FB7A-4C19-A445-C1B6BE59D79C}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MTConfigGenerator", "cmlFpTestApp\MTConfigGenerator\msvc\MTConfigGenerator.vcxproj", "{E651F59C-BBF4-404D-8EBC-2859109965EE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cmlLogParser", "cmlFpTestApp\cmlLogParser\msvc\cmlLogParser.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -58,6 +62,14 @@ Global
 		{CFD4042F-64AF-495C-ABAB-F17E8E904A81}.Debug|Win32.Build.0 = Debug|Win32
 		{CFD4042F-64AF-495C-ABAB-F17E8E904A81}.Release|Win32.ActiveCfg = Release|Win32
 		{CFD4042F-64AF-495C-ABAB-F17E8E904A81}.Release|Win32.Build.0 = Release|Win32
+		{E651F59C-BBF4-404D-8EBC-2859109965EE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E651F59C-BBF4-404D-8EBC-2859109965EE}.Debug|Win32.Build.0 = Debug|Win32
+		{E651F59C-BBF4-404D-8EBC-2859109965EE}.Release|Win32.ActiveCfg = Release|Win32
+		{E651F59C-BBF4-404D-8EBC-2859109965EE}.Release|Win32.Build.0 = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Debug|Win32.Build.0 = Debug|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.ActiveCfg = Release|Win32
+		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
