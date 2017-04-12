@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libM5Drv", "cmlSensorEngine\libM5Drv\msvc\libM5Drv.vcxproj", "{C000777D-B3FD-4214-B496-4A49812F862D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpBridge", "cmlSensorEngine\FpBridge\msvc\FpBridge.vcxproj", "{919165D2-2C82-42EF-A9D4-35A827CF8197}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C000777D-B3FD-4214-B496-4A49812F862D} = {C000777D-B3FD-4214-B496-4A49812F862D}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpModule", "cmlSensorEngine\FpModule\msvc\FpModule.vcxproj", "{2374867A-3F15-4FC5-8401-41E1A82CF3F5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{919165D2-2C82-42EF-A9D4-35A827CF8197} = {919165D2-2C82-42EF-A9D4-35A827CF8197}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DutUtils", "cmlTestEngine\DutUtils\msvc\DutUtils.vcxproj", "{7554C18F-FB7A-4C19-A445-C1B6BE59D79C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C000777D-B3FD-4214-B496-4A49812F862D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C000777D-B3FD-4214-B496-4A49812F862D}.Debug|Win32.Build.0 = Debug|Win32
+		{C000777D-B3FD-4214-B496-4A49812F862D}.Release|Win32.ActiveCfg = Release|Win32
+		{C000777D-B3FD-4214-B496-4A49812F862D}.Release|Win32.Build.0 = Release|Win32
+		{919165D2-2C82-42EF-A9D4-35A827CF8197}.Debug|Win32.ActiveCfg = Debug|Win32
+		{919165D2-2C82-42EF-A9D4-35A827CF8197}.Debug|Win32.Build.0 = Debug|Win32
+		{919165D2-2C82-42EF-A9D4-35A827CF8197}.Release|Win32.ActiveCfg = Release|Win32
+		{919165D2-2C82-42EF-A9D4-35A827CF8197}.Release|Win32.Build.0 = Release|Win32
+		{2374867A-3F15-4FC5-8401-41E1A82CF3F5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2374867A-3F15-4FC5-8401-41E1A82CF3F5}.Debug|Win32.Build.0 = Debug|Win32
+		{2374867A-3F15-4FC5-8401-41E1A82CF3F5}.Release|Win32.ActiveCfg = Release|Win32
+		{2374867A-3F15-4FC5-8401-41E1A82CF3F5}.Release|Win32.Build.0 = Release|Win32
+		{7554C18F-FB7A-4C19-A445-C1B6BE59D79C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7554C18F-FB7A-4C19-A445-C1B6BE59D79C}.Debug|Win32.Build.0 = Debug|Win32
+		{7554C18F-FB7A-4C19-A445-C1B6BE59D79C}.Release|Win32.ActiveCfg = Release|Win32
+		{7554C18F-FB7A-4C19-A445-C1B6BE59D79C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
