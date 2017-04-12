@@ -1,0 +1,9 @@
+[submodule "cmlFpSensorEngine"]
+	path = cmlFpSensorEngine
+	url = ssh://gitms@git.synaptics.com/git/biometrics/mt/cmlFpSensorEngine.git
+[submodule "cmlFpTestApp"]
+	path = cmlFpTestApp
+	url = ssh://gitms@git.synaptics.com/git/biometrics/mt/cmlFpTestApp.git
+[submodule "cmlFpTestEngine"]
+	path = cmlFpTestEngine
+	url = ssh://gitms@git.synaptics.com/git/biometrics/mt/cmlFpTestEngine.git
