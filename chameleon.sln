@@ -20,6 +20,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpTestEngine", "cmlFpTestEngine\FpTestEngine\msvc\FpTestEngine.vcxproj", "{C918C13B-F08F-4625-B39F-FBB33828F1CC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{CFD4042F-64AF-495C-ABAB-F17E8E904A81} = {CFD4042F-64AF-495C-ABAB-F17E8E904A81}
+		{7554C18F-FB7A-4C19-A445-C1B6BE59D79C} = {7554C18F-FB7A-4C19-A445-C1B6BE59D79C}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpTestStep", "cmlFpTestEngine\FpTestStep\msvc\FpTestStep.vcxproj", "{CFD4042F-64AF-495C-ABAB-F17E8E904A81}"
