@@ -3,8 +3,8 @@
 #include <stdint.h>
 
 //Generic parameter
-#define SYN_MAXROW				200
-#define SYN_MAXCOL				200
+#define SYN_MAXROW				400 //200
+#define SYN_MAXCOL				400 //200
 
 //SNR parameter
 #define SYN_QNTY_SNR_ZONES		7
