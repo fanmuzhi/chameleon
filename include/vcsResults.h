@@ -1,15 +1,16 @@
 /*! @file vcsResults.h
  *******************************************************************************
- ** 
- ** 		NDA AND NEED-TO-KNOW REQUIRED
- ** 
+ **
+ **                           NDA AND NEED-TO-KNOW REQUIRED
+ **
  *****************************************************************************
- ** 
- **  Copyright ©2006-2016 Synaptics Incorporated. All rights reserved.
- ** 
- ** 
+ **
+ **  Copyright (C) 2006-2016 Synaptics Incorporated. All rights reserved.
+ **
+ **
  ** This file contains information that is proprietary to Synaptics
- ** Incorporated (“Synaptics”). The holder of this file shall treat all
+ ** Incorporated ("Synaptics"). The holder of this file shall treat all
+>>>>>>> f22e8f0cc923f35f84d0342858dd9ffe501d6b4d
  ** information contained herein as confidential, shall use the
  ** information only for its intended purpose, and shall not duplicate,
  ** disclose, or disseminate any of this information in any manner unless
@@ -18,9 +19,10 @@
  ** from a third party or from Synaptics. Receipt or possession of this
  ** file conveys no express or implied licenses to any intellectual
  ** property rights belonging to Synaptics.
- ** 
- **  
- ** INFORMATION CONTAINED IN THIS DOCUMENT IS PROVIDED "AS-IS,” AND
+ **
+ **
+ ** INFORMATION CONTAINED IN THIS DOCUMENT IS PROVIDED "AS-IS," AND
+>>>>>>> f22e8f0cc923f35f84d0342858dd9ffe501d6b4d
  ** SYNAPTICS EXPRESSLY DISCLAIMS ALL EXPRESS AND IMPLIED WARRANTIES,
  ** INCLUDING ANY IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
  ** PARTICULAR PURPOSE, AND ANY WARRANTIES OF NON-INFRINGEMENT OF ANY
@@ -32,11 +34,9 @@
  ** NEGLIGENCE OR OTHER TORTIOUS ACTION, AND EVEN IF SYNAPTICS WAS ADVISED
  ** OF THE POSSIBILITY OF SUCH DAMAGE. IF A TRIBUNAL OF COMPETENT
  ** JURISDICTION DOES NOT PERMIT THE DISCLAIMER OF DIRECT DAMAGES OR ANY
- ** OTHER DAMAGES, SYNAPTICS’ TOTAL CUMULATIVE LIABILITY TO ANY PARTY
- **  SHALL NOT EXCEED ONE HUNDRED U.S. DOLLARS.
+ ** OTHER DAMAGES, SYNAPTICS' TOTAL CUMULATIVE LIABILITY TO ANY PARTY
+ ** SHALL NOT EXCEED ONE HUNDRED U.S. DOLLARS.
 */
-
-
 
 /*!
 *******************************************************************************
@@ -212,6 +212,11 @@ VCS_RESULT_SENSOR_NEED_TO_RESET_OWNER error should be used instead. */
 #define VCS_RESULT_SENSOR_INVALID_BASELINE              ((vcsResult_t) 216)
 #define VCS_RESULT_SENSOR_CAPTURE_RESET                 ((vcsResult_t) 217)
 
+
+#define VCS_RESULT_SENSOR_FRAME_NOT_READY               ((vcsResult_t) 218)
+#define VCS_RESULT_SENSOR_FINGER_REMOVED                ((vcsResult_t) 219)
+
+
 /*!
 *******************************************************************************
 **  Error codes in 300-399 range are used to indicate matcher specific error
@@ -244,6 +249,10 @@ CODE. */
 #define VCS_RESULT_MATCHER_SET_PARAMETER_FAILED         ((vcsResult_t) 307)
 
 #define VCS_RESULT_MATCHER_CLOSE_FAILED                 ((vcsResult_t) 308)
+
+/**< Failed to set the parameter. */
+#define VCS_RESULT_MATCHER_GET_PARAMETER_FAILED         ((vcsResult_t) 309)
+
 /*!
 *******************************************************************************
 **  Error codes in 400-499 range are used to indicate image processing

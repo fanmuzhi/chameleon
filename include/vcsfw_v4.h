@@ -1389,6 +1389,23 @@
                                                 (VCSFW_STATUS_ERR_FLAG | 587)
 #define VCSFW_STATUS_ERR_EVENT_NOT_ALLOWED_NOW                              \
                                                 (VCSFW_STATUS_ERR_FLAG | 588)
+#define VCSFW_STATUS_ERR_FRAME_ACQ_NOTRIGGER                                \
+                                                (VCSFW_STATUS_ERR_FLAG | 589)
+#define VCSFW_STATUS_ERR_FRAME_TAG_EXTFPS_SIGCTRL_TOOSHORT                  \
+                                                (VCSFW_STATUS_ERR_FLAG | 590)
+#define VCSFW_STATUS_ERR_FRAME_TAG_EXTFPS_SIGCTRL_TOOLONG                   \
+                                                (VCSFW_STATUS_ERR_FLAG | 591)
+#define VCSFW_STATUS_ERR_FRAME_TAG_EXTFPS_SUNDRYREGS_TOOSHORT               \
+                                                (VCSFW_STATUS_ERR_FLAG | 592)
+#define VCSFW_STATUS_ERR_FRAME_TAG_EXTFPS_SUNDRYREGS_TOOLONG                \
+                                                (VCSFW_STATUS_ERR_FLAG | 593)
+#define VCSFW_STATUS_ERR_FRAME_TAG_EXTFPS_SIGCTRL_WAKEHIGH                  \
+                                                (VCSFW_STATUS_ERR_FLAG | 594)
+#define VCSFW_STATUS_ERR_FRAME_TAG_EXTFPS_SIGCTRL_DUPEGPIO                  \
+                                                (VCSFW_STATUS_ERR_FLAG | 595)
+#define VCSFW_STATUS_ERR_FRAME_ACQ_NOSUNDRYREGS                             \
+                                                (VCSFW_STATUS_ERR_FLAG | 596)
+
 /****************************************************************************/
 /* Every command begins with the following structure.  See the vcsfw_cmd_t  */
 /* structure near the bottom of this file. Subsequent data differs by       */
@@ -1488,6 +1505,8 @@ typedef struct VCS_PACKED vcsfw_reply_get_version_s
 #define VCSFW_PRODUCT_SHASTA        60  /* Shasta aka b1216 (Nassau f/w) */
 #define VCSFW_PRODUCT_SHASTAPBL     61  /* Shasta primary boot loader */
 #define VCSFW_PRODUCT_WHITNEY       62  /* Whitney ROM code */
+#define VCSFW_PRODUCT_BYRON         63  /* Steller controller b2224 SC24  */
+#define VCSFW_PRODUCT_BYRONPBL      64  /* Steller controller b2224 (bootldr) */
 
 
 /* The following bits are for vcsfw_reply_get_version_t::platform */
@@ -5530,6 +5549,7 @@ typedef struct VCS_PACKED vcsfw_cmd_flash_erase_s {
 #define VCSFW_EVENT_TYPE_IOTA_INSINUATED    0x0E
 #define VCSFW_EVENT_TYPE_FINGER_REJECTED    0x0F
 #define VCSFW_EVENT_TYPE_NAV_SWIPE_ABORTED  0x10
+#define VCSFW_EVENT_TYPE_SOFT_BUTTON        0x11
 /* NOTE: When a new event is added here, the EVENT_SUPPORTED_MASK and
  * EVENT_NEVENTTYPES need to be updated in fw/nassau/mission/event.h.
  */
@@ -5715,6 +5735,8 @@ typedef struct VCS_PACKED vcsfw_reply_frame_stream_s {
                                     /* current state of illumination (HBM) */
 #define VCSFW_REPLY_FRAME_STREAM_FLAGS_EXTFP    0x0008
                     /* current state of external finger presence detection */
+#define VCSFW_REPLY_FRAME_STREAM_FLAGS_SUNLIGHT 0x0010
+                    /* image was acquired with sunlight settings */
 
 /****************************************************************************/
 /* VCSFW_CMD_IOTA_FIND                                                      */
@@ -6772,6 +6794,16 @@ typedef struct VCS_PACKED vcsfw_frame_tag_s {
                                               *  squared matrix). */
 #define VCSFW_FRAME_TAG_IMGPROC_DISABLE  17  /* image processing, selective
                                               *  filter disabling */
+#define VCSFW_FRAME_TAG_EXTFPS_OTP_TEMPCORRECT  18 /* temperature correction
+                                                    * value from
+                                                    * external FPS OTPROM */
+#define VCSFW_FRAME_TAG_EXTFPS_OTP_DIEIMPRINT  19 /* die imprint information
+                                                    * from external FPS
+                                                    * OTPROM */
+#define VCSFW_FRAME_TAG_EXTFPS_SIGCTRL  20      /* control GPIOs/signals */
+#define VCSFW_FRAME_TAG_EXTFPS_SUNDRYREGS  21   /* alternative register
+                                                 * settings for sun/dry
+                                                 * finger */
 
 /* Development-only tags: */
 
@@ -6830,6 +6862,8 @@ typedef struct VCS_PACKED vcsfw_frame_tag_acqopt_s {
 #define VCSFW_FRAME_TAG_ACQOPT_MODE_IMAGE       0x01
 #define VCSFW_FRAME_TAG_ACQOPT_MODE_NAV         0x02
 #define VCSFW_FRAME_TAG_ACQOPT_MODE_BUTTON      0x03
+#define VCSFW_FRAME_TAG_ACQOPT_MODE_SUNSENSE    0x04
+#define VCSFW_FRAME_TAG_ACQOPT_MODE_DRYFINGER   0x05
 
 #define VCSFW_FRAME_TAG_ACQOPT_TRIGGER_NONE     0x00
 #define VCSFW_FRAME_TAG_ACQOPT_TRIGGER_NORMAL   0x01
@@ -7033,6 +7067,133 @@ typedef struct VCS_PACKED vcsfw_frame_tag_imgproc_disable_s {
 #define VCSFW_FRAME_TAG_IMGPROC_DISABLE_FILTERS_RESHALF     0x0000020
 
 } vcsfw_frame_tag_imgproc_disable_t;
+
+/* VCSFW_FRAME_TAG_EXTFPS_OTP_TEMPCORRECT */
+
+/*
+ * Temperature correction factor stored in external fingerprint
+ *  sensor (Diamond Peak) OTPROM.
+ */
+
+typedef struct VCS_PACKED vcsfw_frame_tag_extfps_otp_tempcorrect_s {
+    vcsUint16_t     tempcorrect60;      /* temperature calibration @ 60 degC */
+    vcsUint16_t     tempcorrect25;      /* temperature calibration @ 25 degC */
+} vcsfw_frame_tag_extfps_otp_tempcorrect_t;
+
+/* VCSFW_FRAME_TAG_EXTFPS_OTP_DIEIMPRINT */
+
+/*
+ * Die information stored in external fingerprint
+ *  sensor (Diamond Peak) OTPROM.
+ */
+
+typedef struct VCS_PACKED vcsfw_frame_tag_extfps_otp_dieimprint_s {
+    vcsUint8_t       waferlot[8];
+    vcsUint8_t       xcoord;
+    vcsUint8_t       ycoord;
+    vcsUint8_t       fabno;
+    vcsUint8_t       waferno;
+} vcsfw_frame_tag_extfps_otp_dieimprint_t;
+
+/* VCSFW_FRAME_TAG_EXTFPS_SIGCTRL */
+
+/*
+ * This tag allows the host (or the flash) to modify the
+ *  behaviors of the external signals attached to the Crystal
+ *  Peak controller.  For each signal this tag contains
+ *  three fields:
+ *      DISABLE Turns the signal off.  For inputs the firmware
+ *              imagines them to always be active.  For
+ *              outputs if DISABLE is set we do not configure
+ *              the GPIO as an output at all.
+ *      ACTIVEHIGH This sets the sense of the input or output.
+ *      GPIONUM A 4 bit field which indicates which GPIO to
+ *              use to implement this signal.
+ *
+ *  There are three signal right now:
+ *
+ *      hbm     This is an input to the controller that tells
+ *              it that the "high brightness mode" is enabled.
+ *              Note that this signal is the on reflected by
+ *              the VCSFW_REPLY_FRAME_STREAM_FLAGS_ILLUM bit
+ *              in vcsfw_reply_frame_stream_t::flags.
+ *
+ *      hbmreq  This is an output from the controller indicating
+ *              that the controller wants to turn on the high
+ *              brightness mode in order to acquire an image.
+ *              This signal is asserted right before starting
+ *              the acquisition and deasserted immediately after.
+ *              Designs can use this signal to minimize the time
+ *              the high brightness mode is used.
+ *
+ *      wake    This is an input to the controller that will
+ *              cause the controller to wake up.  In the
+ *              current design only the USB_DP input can be
+ *              used for this signal, and only in an active-low
+ *              setup, so the ACTIVEHIGH and GPIONUM fields are
+ *              silently ignored.
+ */
+
+typedef struct VCS_PACKED vcsfw_frame_tag_extfps_sigctrl_s {
+    vcsUint8_t      hbm;
+    vcsUint8_t      hbmreq;
+    vcsUint8_t      wake;
+    vcsUint8_t      unused;
+} vcsfw_frame_tag_extfps_sigctrl_t;
+
+#define VCSFW_FRAME_TAG_EXTFPS_SIGCTRL_DISABLE      0x80
+#define VCSFW_FRAME_TAG_EXTFPS_SIGCTRL_ACTIVEHIGH   0x40
+#define VCSFW_FRAME_TAG_EXTFPS_SIGCTRL_GPIONUM      0x0f
+#define VCSFW_FRAME_TAG_EXTFPS_SIGCTRL_GPIONUM_B        0
+#define VCSFW_FRAME_TAG_EXTFPS_SIGCTRL_GPIONUM_N        4
+
+/* VCSFW_FRAME_TAG_EXTFPS_SUNDRYREGS */
+
+/*
+ * This tag allows the host/flash to specify different
+ *  register settings for the external fingerprint sensor
+ *  for use in several different modes:
+ *      sunsense    In this mode the sensor is operated in a
+ *                  "region-of-interest" mode with a short
+ *                  integration time.  This allows the firmware
+ *                  to gather image information to determine
+ *                  whether the sensor is in a bright
+ *                  environment or not.  Based on the result
+ *                  of this determination the firmware will
+ *                  aquire a full image either with a short
+ *                  integration time ("sun" mode) or a longer
+ *                  integration time ("normal" mode).
+ *                  Note that the region-of-interest information
+ *                  needs to be already programmed into the
+ *                  base registers (for Diamond Peak this means
+ *                  the {VSTART,VSIZE}_{0,1,2}_ROI and {HSTART,HSIZE}_ROI
+ *                  registers must be programmed).
+ *      sunlight    This is the mode the sensor operates in
+ *                  after the 'sunsense' mode, above, if the
+ *                  firmware determines the sensor is in a
+ *                  bright environment.
+ *      dryfinger   This is the mode the sensor operates in
+ *                  if the host sends an ACQOPT tag with
+ *                  vcsfw_frame_tag_acqopt_t::mode =
+ *                  VCSFW_FRAME_TAG_ACQOPT_MODE_DRYFINGER.
+ */
+
+typedef struct VCS_PACKED vcsfw_frame_tag_extfps_sundryregs_regset_s {
+    vcsUint16_t     shutter;
+    vcsUint16_t     vblank;
+    vcsUint16_t     gain;
+    vcsUint16_t     unused;
+} vcsfw_frame_tag_extfps_sundryregs_regset_t;
+
+typedef struct VCS_PACKED vcsfw_frame_tag_extfps_sundryregs_s {
+    vcsfw_frame_tag_extfps_sundryregs_regset_t  sunsense;   /* ROI, low integ.
+                                                             * time */
+    vcsfw_frame_tag_extfps_sundryregs_regset_t  sunlight;   /* full, low integ.
+                                                             * time */
+    vcsfw_frame_tag_extfps_sundryregs_regset_t  dryfinger;  /* full, low integ.
+                                                             * time */
+    vcsUint32_t     sunsense_threshold;
+} vcsfw_frame_tag_extfps_sundryregs_t;
 
 /*
  * iotas are blocks of bytes that are stored in non-volatile

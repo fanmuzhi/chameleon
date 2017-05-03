@@ -1,4 +1,4 @@
-/*! @file vcsPushPack1.h
+/*! @file vcsEvent.h
  *******************************************************************************
  **
  **                           NDA AND NEED-TO-KNOW REQUIRED
@@ -37,34 +37,71 @@
 */
 
 
-/*!
+/*! 
 *******************************************************************************
-**  USDK control structure alignment
-**
-**  This file pushes the current alignment setting to the internal stack
-**  and set the alignment to 1.
-**
+**  This header file contains definitions and APIs to work with vcs events.
 **
 */
 
-#ifdef _MSC_VER
- #ifndef VCS_OS_SGX
-    #include <pshpack1.h> /*{*/
- #else
-    #pragma warning(disable:4103)
-    #pragma pack(push,1)
- #endif
-#else
-  #ifdef __GNUC__
-    #pragma pack(push,1)
-  #elif defined(macintosh)
-    #pragma options align=packed
+#ifndef __vcsEvent_h__
+#define __vcsEvent_h__
 
-  #elif defined _CVI_
-	    #pragma pack(push,1)
-  #elif defined(__arm)
-        #pragma push
-        #pragma pack(1)
-  #endif
-#endif
+#define DBG_VCS_EVENT_SYS   0x00000040L
 
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
+#include "vcsTypes.h"
+#include "vcsResults.h"
+
+/*!
+*******************************************************************************
+**  Handle to event information.
+*/
+typedef struct vcsEvent_s *   vcsEventHandle_t;
+
+/*!
+*******************************************************************************
+**  Event ID type definition.
+*/
+typedef vcsUint32_t vcsEventId_t;
+
+
+extern vcsResult_t VCS_API
+vcsEventCreate(
+    vcsEventHandle_t *  phEvent,
+    vcsUint32_t         eventId,
+    vcsUint32_t         status,
+    vcsUint32_t         eventDataSize,
+    void *              pEventData);
+
+extern vcsResult_t VCS_API
+vcsEventDestroy(
+    vcsEventHandle_t hEvent);
+
+/** Return event ID. 0 in case of error. */
+extern vcsEventId_t VCS_API
+vcsEventGetId(
+    vcsEventHandle_t hEvent);
+
+/** Return status of event. */
+extern vcsUint32_t VCS_API
+vcsEventGetStatus(
+    vcsEventHandle_t hEvent);
+
+/** Return event specific data. */
+extern void * VCS_API
+vcsEventGetData(
+    vcsEventHandle_t hEvent);
+
+/** Return event specific data size. */
+extern vcsUint32_t VCS_API
+vcsEventGetDataSize(
+    vcsEventHandle_t hEvent);
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+
+#endif /* __vcsEvent_h__ */

@@ -1,4 +1,4 @@
-/*! @file vcsPushPack1.h
+/*! @file vcsEccCurveParam.h
  *******************************************************************************
  **
  **                           NDA AND NEED-TO-KNOW REQUIRED
@@ -39,32 +39,41 @@
 
 /*!
 *******************************************************************************
-**  USDK control structure alignment
+**  Define ECC curve param data structure.
 **
-**  This file pushes the current alignment setting to the internal stack
-**  and set the alignment to 1.
-**
-**
+** 
 */
 
-#ifdef _MSC_VER
- #ifndef VCS_OS_SGX
-    #include <pshpack1.h> /*{*/
- #else
-    #pragma warning(disable:4103)
-    #pragma pack(push,1)
- #endif
-#else
-  #ifdef __GNUC__
-    #pragma pack(push,1)
-  #elif defined(macintosh)
-    #pragma options align=packed
+#ifndef __vcsEccCurveParam_h__
+#define __vcsEccCurveParam_h__
 
-  #elif defined _CVI_
-	    #pragma pack(push,1)
-  #elif defined(__arm)
-        #pragma push
-        #pragma pack(1)
-  #endif
-#endif
+#include "vcsTypes.h"
 
+/**************ECC Related Definitions and Types*****************/
+/* 
+*  The length of the buffer holding 
+*  521-bit long integer, increased to
+*  be multiple to 32 bit. 
+*/
+#define VCS_ECC_MAX_BUF_LEN 68 
+
+/* 
+*  Elliptic curve parameters.
+*  EC formula on Prime field of order n: y^2 mod p = x^3 + ax + b mod p 
+*  NOTE: Parameters are in little endian byte order. 
+*/
+
+typedef struct vcsEccCurveParams_s
+{
+    vcsUint32_t ianaId;                     /* Curve IANA (or custom) ID            */
+    vcsUint32_t strength;                   /* Strength in bits: 256, 348 or 521    */
+    vcsUint32_t h;                          /* Cofactor                             */
+    vcsUint8_t  a[VCS_ECC_MAX_BUF_LEN];     /* Coefficient 'a'                      */
+    vcsUint8_t  b[VCS_ECC_MAX_BUF_LEN];     /* Coefficient 'b'                      */
+    vcsUint8_t  gX[VCS_ECC_MAX_BUF_LEN];    /* X coordinate of Base Point           */
+    vcsUint8_t  gY[VCS_ECC_MAX_BUF_LEN];    /* Y coordinate of Base Point           */
+    vcsUint8_t  n[VCS_ECC_MAX_BUF_LEN];     /* Order                                */
+    vcsUint8_t  p[VCS_ECC_MAX_BUF_LEN];     /* Prime 'P'                            */
+} vcsEccCurveParams_t;
+
+#endif /* __vcsEccCurveParam_h__ */
