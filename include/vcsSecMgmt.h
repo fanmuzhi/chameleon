@@ -1,4 +1,4 @@
-/*! @file vcsPushPack1.h
+/*! @file vcsSecMgmt.h
  *******************************************************************************
  **
  **                           NDA AND NEED-TO-KNOW REQUIRED
@@ -39,32 +39,17 @@
 
 /*!
 *******************************************************************************
-**  USDK control structure alignment
+**  Security Management Functions Functions
 **
-**  This file pushes the current alignment setting to the internal stack
-**  and set the alignment to 1.
+**  This file contains the USDK PAL Subsystem definitions.
 **
-**
+**  
 */
 
-#ifdef _MSC_VER
- #ifndef VCS_OS_SGX
-    #include <pshpack1.h> /*{*/
- #else
-    #pragma warning(disable:4103)
-    #pragma pack(push,1)
- #endif
-#else
-  #ifdef __GNUC__
-    #pragma pack(push,1)
-  #elif defined(macintosh)
-    #pragma options align=packed
+#ifndef __vcsSecMgmt_h__
+#define __vcsSecMgmt_h__
 
-  #elif defined _CVI_
-	    #pragma pack(push,1)
-  #elif defined(__arm)
-        #pragma push
-        #pragma pack(1)
-  #endif
-#endif
+#include "vcsClient.h"
+#include "vcsEccCurveParam.h"
 
+#endif /* __vcsSecMgmt_h__ */
