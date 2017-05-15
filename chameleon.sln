@@ -44,6 +44,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DotNetTestEngine", "cmlFpTe
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Logging", "cmlFpSensorEngine\Logging\msvc\Logging.vcxproj", "{E4B98D36-2652-4423-86D7-17665C757DDF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpImageProcessing", "cmlFpTestEngine\FpImageProcessing\msvc\FpImageProcessing.vcxproj", "{587F8203-19C9-46B7-9CE7-468BC24E44C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -90,6 +92,10 @@ Global
 		{E4B98D36-2652-4423-86D7-17665C757DDF}.Debug|Win32.Build.0 = Debug|Win32
 		{E4B98D36-2652-4423-86D7-17665C757DDF}.Release|Win32.ActiveCfg = Release|Win32
 		{E4B98D36-2652-4423-86D7-17665C757DDF}.Release|Win32.Build.0 = Release|Win32
+		{587F8203-19C9-46B7-9CE7-468BC24E44C5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{587F8203-19C9-46B7-9CE7-468BC24E44C5}.Debug|Win32.Build.0 = Debug|Win32
+		{587F8203-19C9-46B7-9CE7-468BC24E44C5}.Release|Win32.ActiveCfg = Release|Win32
+		{587F8203-19C9-46B7-9CE7-468BC24E44C5}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
