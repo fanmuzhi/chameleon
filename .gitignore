@@ -1,5 +1,6 @@
 # Ignore LocalSettings
 **/LocalSettings.xml
+log/
 
 # Ignore thumbnails created by windows
 Thumbs.db
@@ -47,8 +48,8 @@ BundleArtifacts
 
 # Ignore files build by ndk and eclipse
 #libs/
-#bin/
-#obj/
+bin/
+obj/
 #gen/
 #assets/
 #local.properties
