@@ -1,0 +1,254 @@
+# -*- mode: makefile -*-
+#
+# Makefile for building boot loader patches.
+#
+# Bjoren Davis, June 19, 2015.
+#
+
+NASSAU_ROOT?=../..
+NASSAU_PATCH_BOOTLDR=$(NASSAU_ROOT)/patch/bootldr
+NASSAU_COMMON=$(NASSAU_ROOT)/common
+NASSAU_COMMON_INCLUDE=$(NASSAU_ROOT)/common/include
+NASSAU_PATCH_COMMON_INCLUDE=$(NASSAU_ROOT)/patch/common/include
+BPD_COMMON_INCLUDE=$(NASSAU_ROOT)/../../include
+FWBPD_COMMON_INCLUDE=$(NASSAU_ROOT)/../include
+BPD_COMMON_TOOLS=$(NASSAU_ROOT)/../../tools
+NASSAU_TOOLS=$(NASSAU_ROOT)/tools
+
+NASSAU_PRODUCT?=denali hayes shasta
+ALL_PRODUCTS?=denali hayes shasta
+ALL_TARGETS=rom fpga
+
+GENBOOTLDRPATCHFLAGS+=
+
+.PHONY: _default default envid FORCE
+
+_default: default
+
+FORCE:
+
+ifeq ($(SUBMAKE),)
+
+# TOP level make
+
+#
+# The following lines really should be within the SUBMAKE conditional,
+#  below, but there appears to be a bug in GNU make 3.80 where
+#  the use of 'eval' inside of an 'ifeq' is not supported
+#  (I always get the error "missing 'endif'").
+# There's no harm in having these targets here.
+#
+
+define PxT_template
+obj/$(1)-$(2):
+	mkdir -p $$@
+
+obj/$(1)-$(2)/%: obj/$(1)-$(2) FORCE
+	$(MAKE) -C obj/$(1)-$(2) NASSAU_PRODUCT=$(1) NASSAU_TARGET=$(2) \
+	    NASSAU_ROOT=../../$(NASSAU_ROOT)				   \
+	    SUBMAKE=yes	-f ../../makefile $$(@F)
+
+# A dummy target.  This lets me say things like 'make denali-rom'
+$(1)-$(2): obj/$(1)-$(2)/default
+
+endef
+
+define PRODUCT_template
+# A dummy target.  This lets me say things like 'make denali'
+$(1): $$(foreach target,$$(ALL_TARGETS),$(1)-$$(target))
+
+endef
+
+define TARGET_template
+# A dummy target.  This lets me say things like 'make rom'
+$(1): $$(foreach product,$$(ALL_PRODUCTS),$$(product)-$(1))
+
+endef
+
+$(eval $(foreach product,$(ALL_PRODUCTS),$(foreach target,$(ALL_TARGETS), \
+		$(call PxT_template,$(product),$(target)))))
+
+$(eval $(foreach product,$(ALL_PRODUCTS),$(call PRODUCT_template,$(product))))
+
+$(eval $(foreach target,$(ALL_TARGETS),$(call TARGET_template,$(target))))
+
+.PHONY: clean envid
+
+clean:
+	rm -rf obj
+	@$(MAKE) -C $(NASSAU_COMMON)/crypt clean
+
+envid:
+	@$(MAKE) -f $(NASSAU_COMMON)/makefile.envid --no-print-directory
+
+# Default target.  Make this if nothing else is specified.
+default:
+	for prod in $(ALL_PRODUCTS) ; do				\
+	    for targ in $(ALL_TARGETS) ; do				\
+		mkdir -p obj/$$prod-$$targ ;				\
+		$(MAKE) -C obj/$$prod-$$targ NASSAU_PRODUCT=$$prod	\
+		    NASSAU_TARGET=$$targ				\
+		    NASSAU_ROOT=../../$(NASSAU_ROOT)			\
+	    SUBMAKE=yes	-f ../../makefile $@ ;				\
+	    done    ;							\
+	done
+
+else
+
+# OBJECT DIRECTORY make
+
+include $(NASSAU_COMMON)/makefile.common
+
+PRODUCTS?=$(BOOTLDRPATCHNAME).elf $(BOOTLDRPATCHNAME).dmp		\
+	 $(BOOTLDRPATCHNAME).verihex $(BOOTLDRPATCHNAME).hexlist	\
+	$(BOOTLDRPATCHNAME).blpatch $(BOOTLDRPATCHNAME).blpbin		\
+	$(BOOTLDRPATCHNAME).blxepatch $(BOOTLDRPATCHNAME).blxepbin	\
+	$(BOOTLDRPATCHNAME).cdata.h 
+
+INCLUDES=   -I$(NASSAU_COMMON_INCLUDE)		\
+	    -I$(NASSAU_PATCH_COMMON_INCLUDE)	\
+	    -I$(BPD_COMMON_INCLUDE)		\
+	    -I$(FWBPD_COMMON_INCLUDE)		\
+	    -I$(HW_INCLUDE)			\
+	    -I../..
+
+VPATH=../..
+
+CMNFLAGS +=								\
+ -DNASSAU_PRODUCT=NASSAU_PRODUCT_$(shell echo $(NASSAU_PRODUCT)		\
+						    | tr [a-z] [A-Z])	\
+ -DNASSAU_PATCH_TYPE=NASSAU_PATCH_TYPE_BOOTLDR
+ifdef ($(NASSAU_PATCH_BOOTLDR_IFVER)
+CMNFLAGS += -DNASSAU_PATCH_BOOTLDR_IFVER=$(NASSAU_PATCH_BOOTLDR_IFVER)
+endif
+
+ASFLAGS=$(INCLUDES)
+CFLAGS=$(INCLUDES) -g -c -Os -fno-inline -Wall -Wextra -Wno-unused-parameter \
+	$(DBG_FLAGS) $(CMNFLAGS)
+OBJS=$(patsubst %.s,%.o,$(SOURCES_S)) $(patsubst %.c,%.o,$(SOURCES_C))
+ANCILLARIES=bootldrpatch.xi $(BOOTLDRPATCHNAME).cref $(BOOTLDRPATCHNAME).bin
+BUILDTIME=$(shell gawk 'END {printf("0x%x\n", systime());}' < /dev/null) 
+BUILDTIMESTR=$(shell gawk 'END {print strftime("%c %Z", $(BUILDTIME));}' < /dev/null)
+
+ifeq ($(NASSAU_PRODUCT),denali)
+HW_INCLUDE=$(NASSAU_ROOT)/../../b1210/common/include
+HWTOOLSDIR=$(NASSAU_ROOT)/../../b1210/tools
+endif
+
+ifeq ($(NASSAU_PRODUCT),hayes)
+HW_INCLUDE=$(NASSAU_ROOT)/../../b1212/common/include
+HWTOOLSDIR=$(NASSAU_ROOT)/../../b1212/tools
+endif
+
+ifeq ($(NASSAU_PRODUCT),shasta)
+HW_INCLUDE=$(NASSAU_ROOT)/../../b1216/common/include
+HWTOOLSDIR=$(NASSAU_ROOT)/../../b1216/tools
+endif
+
+ifeq ($(NASSAU_TARGET),rom)
+PRODUCTS += prodprep.tar.bz2
+endif
+
+default: $(PRODUCTS)
+
+%.dmp: %.elf
+	-($(OBJDUMP) $(XTENSA_CFLAGS) -S -s -x -d -t -r $< ;	    \
+		$(READELF) -a -w $<  ;				    \
+		$(OBJDUMP) $(XTENSA_CFLAGS) -t $<		    \
+		    | sort -k 5					    \
+		    | grep -e '^[[:xdigit:]]\{8\}'		    \
+		    | grep -v '\.FRAME'				    \
+		    | perl -ne '@a=split / /; $$c{hex $$a[0]}.=$$_; END { print "$$c{$$_}" for sort { $$a <=> $$b } keys %c}'                          \
+		    | uniq;					    \
+		) > $@
+ifneq ($(shell uname -s),Linux)
+# For Cygwin, convert the .dmp file to LF-delimited
+	@-dos2unix -k $@ 2>/dev/null
+endif
+
+clean: 
+	-rm -f $(PRODUCTS) $(OBJS) $(ANCILLARIES)
+
+
+BOOTLDRVENGPSKPEM=$(NASSAU_PATCH_BOOTLDR)/tools/denali_bootldr_1.0_eng_vpsk.pem
+
+$(BOOTLDRPATCHNAME).elf: $(OBJS) bootldrpatch.xi
+	$(LD) -g $(XTENSA_LDFLAGS) -T bootldrpatch.xi  --cref	\
+	    --defsym _bootldrpatch_buildtime=$(BUILDTIME)		\
+	    -o $@ $(OBJS) > $(BOOTLDRPATCHNAME).cref
+
+$(BOOTLDRPATCHNAME).blpbin: $(BOOTLDRPATCHNAME).elf
+	$(NASSAU_PATCH_BOOTLDR)/tools/genbootldrpatch.pl $(GENBOOTLDRPATCHFLAGS) -o $@ $<
+
+$(BOOTLDRPATCHNAME).blpatch: $(BOOTLDRPATCHNAME).elf
+	$(NASSAU_PATCH_BOOTLDR)/tools/genbootldrpatch.pl $(GENBOOTLDRPATCHFLAGS) -o $@ -genhdr $<
+
+$(BOOTLDRPATCHNAME).blxepbin: $(BOOTLDRPATCHNAME).elf
+	$(NASSAU_PATCH_BOOTLDR)/tools/genbootldrpatch.pl $(GENBOOTLDRPATCHFLAGS) -xpsk $(BOOTLDRVENGPSKPEM) -o $@ $<
+
+$(BOOTLDRPATCHNAME).blxepatch: $(BOOTLDRPATCHNAME).elf
+	$(NASSAU_PATCH_BOOTLDR)/tools/genbootldrpatch.pl $(GENBOOTLDRPATCHFLAGS) -xpsk $(BOOTLDRVENGPSKPEM) -o $@ -genhdr $<
+
+
+$(BOOTLDRPATCHNAME).cdata.h: $(BOOTLDRPATCHNAME).elf
+	$(NASSAU_PATCH_BOOTLDR)/tools/genbootldrpatch.pl $(GENBOOTLDRPATCHFLAGS) -o $@ -genc $<
+
+%.hexlist: %.elf
+	$(HWTOOLSDIR)/hexlist.pl $<  > $@
+
+%.ihex: %.elf
+	$(OBJCOPY) $(XTENSA_CFLAGS) -O ihex $< $@
+
+%.bin: %.elf
+	$(OBJCOPY) $(XTENSA_CFLAGS) $< -O binary --change-addresses -0x60000000 --change-section-address .text-0x507f0000 --change-section-address .literal-0x507f0000 $@
+
+%.verihex: %.bin
+	echo "// Bootldr patch for Synaptics BPD $(NASSAU_PRODUCT)" > $@
+	echo "//  patch name: $(BOOTLDRPATCHNAME)" >> $@
+	echo "//  built: $(BUILDTIMESTR)" >> $@
+	echo "//  by: $(shell whoami)" >> $@
+	echo "//  on: $(shell uname -a)" >> $@
+	echo "//  This file is meant to be loaded into RAM." >> $@
+	echo '@00000000' >> $@
+	od -A n -t x4 -v -w4 $< | sed -e 's/^ *//' >> $@
+
+bootldrpatch.xi: $(NASSAU_PATCH_BOOTLDR)/bootldrpatch.x
+	$(CC) -E $(CFLAGS) $(XTENSA_CFLAGS) $(COMMONDEFS) -D__LDSCRIPT__ \
+	     -x c $< | sed -e '/^#/d' -e '/^[ 	]*$$/d' > $@
+
+# Generate a script that can be run on the secure system to generate
+#  a production-signed version of the patch.
+prodgen.sh: 
+	@echo -e "\
+#!/bin/bash\n\
+# This is an automatically-generated script.\n\
+# It is intended for generation of production-key\n\
+#  encrypted patches.\n\
+# It should be run with the first argument being\n\
+#  a path to the production-key PEM file,\n\
+#  the second argument being a path to the\n\
+#  production encryption key/IV.\n\
+#\n\
+#  Date:      `date +"%a, %d %b %Y  %H:%M:%S %z (%Z)"`\n\
+#  User:      `whoami`\n\
+#  Host:      `hostname`\n\
+#  Uname:     `uname -a`\n\
+#  Dir:       `cd ../../ ; pwd`\n\
+#  Product:   $(NASSAU_PRODUCT)\n\
+#  Target:    $(NASSAU_TARGET)\n\
+#  Patchname: $(BOOTLDRPATCHNAME)\n\
+if [ \$$# -lt 2 ] ; then\n\
+    echo Usage: prodgen.sh rsa-pem-file aes-key-iv-file\n\
+    exit 1\n\
+fi\n\
+mkdir -p outputs\n\
+./genbootldrpatch.pl $(GENBOOTLDRPATCHFLAGS) -xpsk \$$1 -xkey \$$2 -o outputs/$(BOOTLDRPATCHNAME).blxppbin $(BOOTLDRPATCHNAME).elf"  > $@
+
+# Create a tarball of all needed files to do a production
+#  signing.
+prodprep.tar.bz2: $(BOOTLDRPATCHNAME).elf prodgen.sh	    \
+	     $(NASSAU_PATCH_BOOTLDR)/tools/genbootldrpatch.pl \
+	     $(BPD_COMMON_TOOLS)/elfio.pm
+	tar cf - --absolute-names --transform 's=.*/==g' $^ | bzip2 > $@
+
+endif
