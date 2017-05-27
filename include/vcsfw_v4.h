@@ -1405,6 +1405,12 @@
                                                 (VCSFW_STATUS_ERR_FLAG | 595)
 #define VCSFW_STATUS_ERR_FRAME_ACQ_NOSUNDRYREGS                             \
                                                 (VCSFW_STATUS_ERR_FLAG | 596)
+#define VCSFW_STATUS_ERR_PRNG_FAILED                                        \
+                                                (VCSFW_STATUS_ERR_FLAG | 597)
+#define VCSFW_STATUS_ERR_FRAME_TAG_XSREG8BLK_TOOSHORT                       \
+                                                (VCSFW_STATUS_ERR_FLAG | 598)
+#define VCSFW_STATUS_ERR_FRAME_STATE_GET_BUSY                               \
+                                                (VCSFW_STATUS_ERR_FLAG | 599)
 
 /****************************************************************************/
 /* Every command begins with the following structure.  See the vcsfw_cmd_t  */
@@ -1460,6 +1466,7 @@ typedef struct VCS_PACKED vcsfw_reply_get_version_s
 /* VCSFW_TARGET_ISS, below, is deprecated */
 #define VCSFW_TARGET_ISS              4
 #define VCSFW_TARGET_FPGADBG          5
+#define VCSFW_TARGET_ROMDBG           6
 
 /* values for vcsfw_reply_get_version_t::interface */
 #define VCSFW_IFACE_UNKNOWN       0
@@ -1505,8 +1512,10 @@ typedef struct VCS_PACKED vcsfw_reply_get_version_s
 #define VCSFW_PRODUCT_SHASTA        60  /* Shasta aka b1216 (Nassau f/w) */
 #define VCSFW_PRODUCT_SHASTAPBL     61  /* Shasta primary boot loader */
 #define VCSFW_PRODUCT_WHITNEY       62  /* Whitney ROM code */
-#define VCSFW_PRODUCT_BYRON         63  /* Steller controller b2224 SC24  */
-#define VCSFW_PRODUCT_BYRONPBL      64  /* Steller controller b2224 (bootldr) */
+#define VCSFW_PRODUCT_SC24          63  /* Steller controller b2224 SC24  */
+#define VCSFW_PRODUCT_BYRON         VCSFW_PRODUCT_SC24  /* alias */
+#define VCSFW_PRODUCT_SC24PBL       64  /* Steller controller b2224 (bootldr) */
+#define VCSFW_PRODUCT_BYRONPBL      VCSFW_PRODUCT_SC24PBL   /* alias */
 
 
 /* The following bits are for vcsfw_reply_get_version_t::platform */
@@ -2288,11 +2297,15 @@ typedef struct VCS_PACKED vcsfw_reply_peek_s
 /* COMMAND                                                                  */
 /*   - Command uses the vcsfw_generic_command_t structure                                                                  */
 
-/* REPLY                                                                    */
-typedef struct VCS_PACKED vcsfw_reply_prng_s
+typedef struct VCS_PACKED vcsfw_cmd_prng_s
 {
-    vcsUint8_t   value[256];
-} vcsfw_reply_prng_t;
+    vcsUint16_t   bytes;    /* Bytes requested in the reply */
+} vcsfw_cmd_prng_t;
+
+/* REPLY                                                                    */
+/*   - Reply uses the vcsfw_generic_reply_t structure                       */
+
+/*  If no error, then reply is followed by the reply data of length 'bytes'. */
 
 /****************************************************************************/
 /* VCSFW_CMD_POKE */
@@ -4787,6 +4800,20 @@ typedef struct VCS_PACKED vcsfw_cmd_otprom_tag_find_s
 #define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_REV1_WOF_FU_ZONE0    0x80000013
 #define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_REV1_WOF_FU_ZONE1    0x80000014
 
+/* VGA gain for frame imaging */
+#define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_VGA_GAIN             0x80000015
+/* PGA ratio for frame imaging */
+#define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_PGA_RATIO            0x80000016
+/* WOVAR LNA gain */
+#define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_WOVAR_LNAGAIN        0x80000020
+/* WOVAR VGA gain */
+#define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_WOVAR_VGAGAIN        0x80000021
+/* WOVAR PGA gain */
+#define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_WOVAR_PGAGAIN        0x80000022
+/* WOVAR PGA ratio */
+#define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_WOVAR_PGARATIO       0x80000023
+/* WOVAR threshold */
+#define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_WOVAR_THRESHOLD      0x80000024
 
 typedef struct VCS_PACKED vcsfw_reply_otprom_tag_find_s
 {
@@ -5549,7 +5576,13 @@ typedef struct VCS_PACKED vcsfw_cmd_flash_erase_s {
 #define VCSFW_EVENT_TYPE_IOTA_INSINUATED    0x0E
 #define VCSFW_EVENT_TYPE_FINGER_REJECTED    0x0F
 #define VCSFW_EVENT_TYPE_NAV_SWIPE_ABORTED  0x10
-#define VCSFW_EVENT_TYPE_SOFT_BUTTON        0x11
+#define VCSFW_EVENT_TYPE_SOFT_BUTTON0_PRESS     0x11
+#define VCSFW_EVENT_TYPE_SOFT_BUTTON0_RELEASE   0x12
+#define VCSFW_EVENT_TYPE_SOFT_BUTTON1_PRESS     0x13
+#define VCSFW_EVENT_TYPE_SOFT_BUTTON1_RELEASE   0x14
+#define VCSFW_EVENT_TYPE_SOFT_BUTTON2_PRESS     0x15
+#define VCSFW_EVENT_TYPE_SOFT_BUTTON2_RELEASE   0x16
+#define VCSFW_EVENT_TYPE_FINGERHIGH         0x17
 /* NOTE: When a new event is added here, the EVENT_SUPPORTED_MASK and
  * EVENT_NEVENTTYPES need to be updated in fw/nassau/mission/event.h.
  */
@@ -5609,6 +5642,19 @@ typedef struct VCS_PACKED vcsfw_cmd_event_read_s {
     vcsUint16_t         firstnum;           /* first requested event number */
     vcsUint16_t         nevents;            /* number of events requested */
 } vcsfw_cmd_event_read_t;
+
+/* An alternative command structure is defined for EVENT_READ that allows
+ * for behavior adjustments with flags.  If the new structure provided to
+ * firmware that doesn't support it, the host will get a CMDTOOLONG error. */
+typedef struct VCS_PACKED vcsfw_cmd_event_read_v2_s {
+    vcsUint16_t         firstnum;           /* first requested event number */
+    vcsUint16_t         nevents;            /* number of events requested */
+    vcsUint32_t         flags;              /* flags to modify command behavior */
+} vcsfw_cmd_event_read_v2_t;
+
+/* The FREE_ON_READ flag causes events to be removed from the event queue
+ * when they are read with EVENT_READ. */
+#define VCSFW_CMD_EVENT_READ_V2_FLAGS_FREE_ON_READ     0x0001
 
 /* The reply: */
 typedef struct VCS_PACKED vcsfw_reply_event_read_s {
@@ -5671,7 +5717,6 @@ typedef struct VCS_PACKED vcsfw_reply_s
         vcsfw_reply_get_version_t           get_version;
         vcsfw_reply_get_print_signature_t   get_signature;
         vcsfw_reply_peek_t                  peek;
-        vcsfw_reply_prng_t                  prng;
         vcsfw_reply_gpio_t                  gpio;
         vcsfw_reply_get_finger_status_t     get_finger_status;
         vcsfw_reply_get_startinfo_t         get_startinfo;
@@ -7260,6 +7305,7 @@ typedef struct VCS_PACKED vcsfw_frame_tag_extfps_sundryregs_s {
   */
 #define VCSFW_IOTA_ITYPE_CPID_CAL_MEAN_BGD_BAD_PIXELS   0x0019 /* CPID dark rate map saved at 1000 DPI */
 
+
 /* The IPL_PARAM and IPL_METRIC iotas are pass-through iotas used to configure
  *the host-side image processing library.  */
 #define VCSFW_IOTA_ITYPE_IPL_PARAM     0x001A
@@ -7273,7 +7319,34 @@ typedef struct VCS_PACKED vcsfw_frame_tag_extfps_sundryregs_s {
  */
 #define VCSFW_IOTA_ITYPE_CUSTOMER_DATA  0x001D
 
+#define VCSFW_IOTA_ITYPE_CPID_CONFIG_CHARACTERISTICS  0x001E
+
+/* VCSFW_IOTA_ITYPE_CONFIG_SOFT_BUTTON contains an array of button
+ * configuration structs, one for each enabled soft-button. */
+#define VCSFW_IOTA_ITYPE_CONFIG_SOFT_BUTTON     0x001F
+
+/* Specific to CPID: Gain map: This is the gain map, ref_high - ref_low
+  * Also this gain map has interpolated of static bad-pixels done
+  */
+#define VCSFW_IOTA_ITYPE_CPID_CAL_1000DPI_GAIN_MAP_PIXELS   0x0020 /* CPID gain map, saved at 1000 DPI */
+
+
 #define VCSFW_IOTA_ITYPE_CHAINEND       0xFFFF /* end of the chain (internal) */
+
+
+
+/* Specific to CPID: sensor config characteristics, contains different integration
+  * times to start with, for different environment and finger conditions
+  * corresponding to VCSFW_IOTA_ITYPE_CPID_CONFIG_CHARACTERISTICS iota
+  */
+
+typedef struct VCS_PACKED vcsfw_cpid_sensor_cfg_charcteristics_s{
+     vcsUint16_t     integTime_normal;   /* This will be the value we pass to temp comp code for MT or normal integration time*/
+     vcsUint16_t     integTime_sunlight; /* This will be the value we pass to temp comp code for live image integration time in case of sunlight*/
+     vcsUint16_t     integTime_dryfinger; /* This may be the value we pass to temp comp code for live image integration time in case of dry finger*/
+     vcsUint16_t     unused;
+} vcsfw_cpid_sensor_cfg_charcteristics_t;
+
 
 
 
@@ -7447,11 +7520,23 @@ typedef struct VCS_PACKED vcsfw_cal_image_mean_and_bad_pix_header_s {
     vcsUint16_t      npixels;       /* number of pixels in a row */
     vcsUint16_t      nlines;        /* number of rows */
     vcsUint8_t       bitdepth;      /* bit-depth: 8,12,16 */
-    vcsUint8_t       dpi;           /* DPI: 1 - 500dpi, 2 - 1000dpi */
+    vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI */
     vcsUint8_t       dummy1;
     vcsUint8_t       dummy2;
 } vcsfw_cal_image_mean_and_bad_pix_header_t;
 
+/*
+ * The vcsfw_cal_image_1000DPI_gain_map_pix_header_t is the data header for
+ * VCSFW_IOTA_ITYPE_CPID_CAL_1000DPI_GAIN_MAP_PIXELS iota.
+*/
+typedef struct VCS_PACKED vcsfw_cal_image_1000DPI_gain_map_pix_header_s {
+    vcsUint32_t      compressedSize;
+    vcsUint16_t      offset;        /* offset in dwords */
+    vcsUint16_t      npixels;       /* number of pixels in a row */
+    vcsUint16_t      nlines;        /* number of rows */
+    vcsUint8_t       bitdepth;      /* bit-depth: 8,12,16 */
+    vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI */
+} vcsfw_cal_image_1000DPI_gain_map_pix_header_t;
 
 /*
  * VCSFW_IOTA_ITYPE_CPID_CAL_DARK_RATE_MAP_1000DPI
@@ -7461,6 +7546,23 @@ typedef struct VCS_PACKED vcsfw_cal_image_mean_and_bad_pix_header_s {
  * It starts with the image header as defined below, followed by
  * the 1000 DPI, 12-bpp image data.
  */
+
+typedef struct VCS_PACKED vcsfw_cal_dark_rate_map_image_header_cal_5_s {
+    vcsUint32_t      compressedSize;
+    vcsInt32_t       temperature_std_dev;
+    vcsUint16_t      offset;        /* offset in dwords */
+    vcsUint16_t      npixels;       /* number of pixels in a row */
+    vcsUint16_t      nlines;        /* number of rows */
+    vcsUint8_t       bitdepth;      /* bit-depth: 8,12,16. Choose 12 here */
+    vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI. Choose 2 here as it is 1000 DPI image*/
+} vcsfw_cal_dark_rate_map_image_header_cal_5_t;
+
+/*
+* The following is an obsoleted structure; should not be used.
+* Some IST branches are using it in FlashTool; Should update to
+* vcsfw_cal_dark_rate_map_image_header_cal_5_t
+*/
+
 typedef struct VCS_PACKED vcsfw_cal_dark_rate_map_image_header_s {
     vcsUint32_t      stdDeviationOfFirstRowOfD1; /* Standard Deviation  Dark rate map
                                                                     MT will get two dark current images at high (D2, 1000 DPI) and low integration (D1, 1000 DPI) times
@@ -7478,17 +7580,6 @@ typedef struct VCS_PACKED vcsfw_cal_dark_rate_map_image_header_s {
     vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI. Choose 2 here as it is 1000 DPI image*/
     vcsUint8_t       unused[2];
 } vcsfw_cal_dark_rate_map_image_header_t;
-
-typedef struct VCS_PACKED vcsfw_cal_dark_rate_map_image_header_cal_5_s {
-    vcsUint32_t      compressedSize;
-    vcsInt32_t       temperature_std_dev;
-    vcsUint16_t      offset;        /* offset in dwords */
-    vcsUint16_t      npixels;       /* number of pixels in a row */
-    vcsUint16_t      nlines;        /* number of rows */
-    vcsUint8_t       bitdepth;      /* bit-depth: 8,12,16. Choose 12 here */
-    vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI. Choose 2 here as it is 1000 DPI image*/
-} vcsfw_cal_dark_rate_map_image_header_cal_5_t;
-
 
 
 /* VCSFW_IOTA_ITYPE_CONFIG_VERSION */
@@ -7560,6 +7651,7 @@ typedef struct VCS_PACKED vcsfw_config_nav_tap_s {
     vcsUint32_t      max_gap_time;    /*     double tap                       */
     vcsUint32_t      min_press_time;  /* press time - long press time         */
     vcsUint32_t      max_press_time;
+    vcsUint32_t      quiescent_time3;  /* response time for Dtap              */
 } vcsfw_config_nav_tap_t;
 
 
@@ -7611,6 +7703,17 @@ typedef struct VCS_PACKED vcsfw_config_foreground_img_s{
 typedef struct VCS_PACKED vcsfw_mission_sha256_s{
     vcsUint32_t sha256 [8];     /* SHA256 */
 } vcsfw_mission_sha256_t;
+
+/* Configuration structure used for VCSFW_IOTA_ITYPE_CONFIG_SOFT_BUTTON.  This
+ * structure includes reserved fields not otherwise included in iota structures.
+ * Since the iota contains an array of these, the length must be fixed for
+ * backward compatibility. */
+typedef struct VCS_PACKED vcsfw_soft_button_config_s {
+    vcsUint16_t bframe_index;       /* The index of the bscan frame that this button corresponds to */
+    vcsInt16_t  press_threshold;    /* When exceeded, indicates a button press */
+    vcsInt16_t  recal_threshold;    /* When exceeded, forces button recalibration (a la FINGER_HIGH in WOF) */
+    vcsUint16_t reserved[3];
+} vcsfw_soft_button_config_t;
 
 #include "vcsPopPack.h"
 
