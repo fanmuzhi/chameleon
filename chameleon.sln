@@ -53,6 +53,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BravoDebugTool", "cmlFpTest
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cmlLogging", "cmlFpSensorEngine\cmlLogging\msvc\cmlLogging.vcxproj", "{9AAA7C16-D0E1-4B3C-B90B-913D0B00314E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StripTester", "cmlFpTestApp\StripTester\msvc\StripTester.vcxproj", "{CCBB9430-BA14-4EAB-8810-AFD6241475EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -107,6 +109,10 @@ Global
 		{9AAA7C16-D0E1-4B3C-B90B-913D0B00314E}.Debug|Win32.Build.0 = Debug|Win32
 		{9AAA7C16-D0E1-4B3C-B90B-913D0B00314E}.Release|Win32.ActiveCfg = Release|Win32
 		{9AAA7C16-D0E1-4B3C-B90B-913D0B00314E}.Release|Win32.Build.0 = Release|Win32
+		{CCBB9430-BA14-4EAB-8810-AFD6241475EF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CCBB9430-BA14-4EAB-8810-AFD6241475EF}.Debug|Win32.Build.0 = Debug|Win32
+		{CCBB9430-BA14-4EAB-8810-AFD6241475EF}.Release|Win32.ActiveCfg = Release|Win32
+		{CCBB9430-BA14-4EAB-8810-AFD6241475EF}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
