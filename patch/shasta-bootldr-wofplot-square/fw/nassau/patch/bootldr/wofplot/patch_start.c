@@ -92,7 +92,7 @@ static wof_amp_gain_t   wof_gain_setting[WOF_GAIN_MAX_IDX] =
 {
     {.amp2=0,   .amp3=3,    .amp4=0,  .value=0x818},    /* Lower Gain  */ 
     {.amp2=0,   .amp3=4,    .amp4=0,  .value=0x820},    /* Low Gain    */
-    {.amp2=0,   .amp3=5,    .amp4=1,  .value=0x829},    /* Normal Gain */
+    {.amp2=0,   .amp3=5,    .amp4=0,  .value=0x828},    /* Normal Gain */
     {.amp2=0,   .amp3=6,    .amp4=0,  .value=0x830},    /* High Gain   */
     {.amp2=0,   .amp3=7,    .amp4=0,  .value=0x838},    /* Higer Gain  */
 };
