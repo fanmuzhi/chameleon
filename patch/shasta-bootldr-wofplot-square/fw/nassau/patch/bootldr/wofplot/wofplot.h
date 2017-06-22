@@ -21,7 +21,7 @@
 #define VCSFW_CMD_WOF_SIGNAL   255
 
 /* set how many gain will scan */
-#define WOF_GAIN_MAX_IDX 5 
+#define WOF_GAIN_MAX_IDX 10 
 
 #define  WOF_BASELINE   80
 
