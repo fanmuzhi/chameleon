@@ -54,6 +54,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cmlLogging", "cmlFpSensorEngine\cmlLogging\msvc\cmlLogging.vcxproj", "{9AAA7C16-D0E1-4B3C-B90B-913D0B00314E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NativeTestEngine", "cmlFpTestEngine\NativeTestEngine\msvc\NativeTestEngine.vcxproj", "{061DE17D-5DC5-4D37-8D12-524327133754}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C918C13B-F08F-4625-B39F-FBB33828F1CC} = {C918C13B-F08F-4625-B39F-FBB33828F1CC}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
