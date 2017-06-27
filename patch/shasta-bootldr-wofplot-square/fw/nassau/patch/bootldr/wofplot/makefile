@@ -24,7 +24,7 @@ INCLUDES += -I$(NASSAU_ROOT)/patch/common/cmdmgr
 
 # Provide support for older parts with CMDMGR_OPT_DIRSPI
 cmdmgr.o: CFLAGS += -DCMDMGR_OPT_CMDSET -DCMDMGR_OPT_DIRSPI \
-	-DCMDMGR_MAXREPLY=32 -DCMDMGR_MAXCMD='((50*1024)+64)'
+	-DCMDMGR_MAXREPLY=50 -DCMDMGR_MAXCMD='((50*1024)+64)'
 
 vpath nvm_prog.c $(NASSAU_ROOT)/patch/common/nvm_prog/
 INCLUDES += -I$(NASSAU_ROOT)/patch/common/nvm_prog/

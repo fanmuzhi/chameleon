@@ -179,23 +179,8 @@ patch_cmd_handler_wof_baseline(void *ctxp, const uint8_t *cmdbufp,
     *(((uint16_t *) replyp)+1) = VCSFW_STATUS_OKAY;
 
     uint16_t *rp = (uint16_t *) replyp + 1;
-
-    for(iter_gain=0; iter_gain< 5; iter_gain++)
-    {
-        //program gain
-        wr_word(SCM_WOF_GAIN, wof_gain_setting[iter_gain].value);
-
-        //get offset
-        get_dca_offset(&offset);
-
-        *++rp = wof_gain_setting[iter_gain].value;
-        *++rp = (uint16_t)offset;
-    }	
-	
-    cmdmgr_reply(ctxp, (uint8_t *)(((uint16_t *) replyp)+1),
-                 sizeof(uint16_t) + 2 * WOF_GAIN_MAX_IDX  * sizeof(uint16_t));
 				 
-    for(iter_gain=5; iter_gain< WOF_GAIN_MAX_IDX; iter_gain++)
+    for(iter_gain=0; iter_gain< WOF_GAIN_MAX_IDX; iter_gain++)
     {
         //program gain
         wr_word(SCM_WOF_GAIN, wof_gain_setting[iter_gain].value);
@@ -229,27 +214,8 @@ patch_cmd_handler_wof_signal(void *ctxp, const uint8_t *cmdbufp,
 
     *(((uint16_t *) replyp)+1) = VCSFW_STATUS_OKAY;
     uint16_t *rp = (uint16_t *) replyp + 1;
-
-    for(iter_gain=0; iter_gain< 5; iter_gain++)
-    {
-        //program gain
-        wr_word(SCM_WOF_GAIN, ecpp->gains[iter_gain]);
-        
-        //program DCA offset
-        wr_word(WOE_WOF_DCA_OFFSET, ecpp->offsets[iter_gain] << WOE_WOF_DCA_OFFSET_RXP_B | 
-                                    ecpp->offsets[iter_gain] << WOE_WOF_DCA_OFFSET_RXM_B);       
-
-        //get signal with gain and DCA offset
-        get_signal_level_direct(&signal);
-
-        *++rp = (uint16_t)signal;
-
-    }
-
-    cmdmgr_reply(ctxp, (uint8_t *)(((uint16_t *) replyp)+1),
-                 sizeof(uint16_t) + WOF_GAIN_MAX_IDX  * sizeof(uint16_t));	
 	
-    for(iter_gain=5; iter_gain< WOF_GAIN_MAX_IDX; iter_gain++)
+    for(iter_gain=0; iter_gain< WOF_GAIN_MAX_IDX; iter_gain++)
     {
         //program gain
         wr_word(SCM_WOF_GAIN, ecpp->gains[iter_gain]);
