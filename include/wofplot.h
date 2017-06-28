@@ -20,6 +20,7 @@
 #ifndef __WOFPLOT_H
 #define __WOFPLOT_H
 
+
 #define VCSFW_CMD_WOF_BASELINE 254
 #define VCSFW_CMD_WOF_SIGNAL   255
 
@@ -29,7 +30,7 @@
 #define  WOF_BASELINE   80
 
 
-/*command structure for VCSFW_CMD_WOFBAELINE*/
+/* command structure for VCSFW_CMD_WOFBAELINE */
 typedef struct vcsfw_cmd_wofbaseline_s
 {
     uint16_t  gain_value;
@@ -37,7 +38,7 @@ typedef struct vcsfw_cmd_wofbaseline_s
 }vcsfw_cmd_wofbaseline_t;
 
 
-/*replay structure for VCSFW_CMD_WOFBAELINE*/
+/* replay structure for VCSFW_CMD_WOFBAELINE */
 typedef struct vcsfw_reply_wofbaseline_s
 {
     uint16_t    gain_value;
@@ -45,14 +46,14 @@ typedef struct vcsfw_reply_wofbaseline_s
 }vcsfw_reply_wofbaseline_t;
 
 
-/*command structure for VCSFW_CMD_WOFSIGNAL*/
+/* command structure for VCSFW_CMD_WOFSIGNAL */
 typedef struct vcsfw_cmd_wofsignal_s
 {
     uint16_t    gain_value;
     uint16_t    offsets;
 }vcsfw_cmd_wofsignal_t;
 
-/*reply structure for VCSFW_CMD_WOFSIGNAL*/
+/* reply structure for VCSFW_CMD_WOFSIGNAL */
 typedef struct vcsfw_reply_wofbsignal_s
 {
     uint16_t    gain_value;
