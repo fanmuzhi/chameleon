@@ -13,7 +13,6 @@ if [ "$1" != "" ]; then
 	exit
 fi
 
-
 # make sure current working directory is chameleon
 cwd=$(basename $(pwd))
 
@@ -23,7 +22,7 @@ if [ "$cwd" != "chameleon" ]; then
 	exit
 fi
 
-#TODO: Add to check wheather the branch path is same or not. 
-git status
-#git submodule foreach --recursive 'git status;branch="$(git rev-parse --abbrev-ref HEAD)";echo $branch; echo $strString;echo $path'
-git submodule foreach --recursive 'git status;'
+echo $branch
+git submodule foreach --recursive "branch=$(git rev-parse --abbrev-ref HEAD); echo $branch;"
+
+
