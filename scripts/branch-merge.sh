@@ -9,7 +9,7 @@ branch=$(git rev-parse --abbrev-ref HEAD)
 if [ "$1" == "" ]; then
     echo "Merge local code from existing branch"
     echo "USAGE  : $0 <branch_name>"
-    echo "example: $0 feature/new_work_20170601"
+    echo "example: $0 mt/feature/new_work_20170601"
 	exit
 fi
 

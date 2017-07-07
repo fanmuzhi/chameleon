@@ -7,7 +7,7 @@
 if [ "$1" == "" ]; then
     echo "Create a new annotated tag on the current working branch"
     echo "USAGE  : $0 <tag_name> <tag_message>"
-    echo "example: $0 feature/new_work_20170601 \"tagging message\""
+    echo "example: $0 mt/1_00_0300_20170419 \"tagging message\""
 	exit
 fi
 

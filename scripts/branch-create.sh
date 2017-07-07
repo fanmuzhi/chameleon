@@ -7,7 +7,7 @@
 if [ "$1" == "" ]; then
     echo "Create a new branch from the current working tree"
     echo "USAGE  : $0 <branch_name>"
-    echo "example: $0 feature/new_work_20170601"
+    echo "example: $0 mt/feature/new_work_20170601"
 	exit
 fi
 
