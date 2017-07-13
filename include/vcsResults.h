@@ -10,7 +10,6 @@
  **
  ** This file contains information that is proprietary to Synaptics
  ** Incorporated ("Synaptics"). The holder of this file shall treat all
->>>>>>> f22e8f0cc923f35f84d0342858dd9ffe501d6b4d
  ** information contained herein as confidential, shall use the
  ** information only for its intended purpose, and shall not duplicate,
  ** disclose, or disseminate any of this information in any manner unless
@@ -22,7 +21,6 @@
  **
  **
  ** INFORMATION CONTAINED IN THIS DOCUMENT IS PROVIDED "AS-IS," AND
->>>>>>> f22e8f0cc923f35f84d0342858dd9ffe501d6b4d
  ** SYNAPTICS EXPRESSLY DISCLAIMS ALL EXPRESS AND IMPLIED WARRANTIES,
  ** INCLUDING ANY IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
  ** PARTICULAR PURPOSE, AND ANY WARRANTIES OF NON-INFRINGEMENT OF ANY
