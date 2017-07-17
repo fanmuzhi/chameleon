@@ -49,6 +49,7 @@ using namespace std;
 #define TEST_STEP_ID_IMPERFECTION                      5008 
 #define TEST_STEP_ID_SNRTEST                           5009 
 #define TEST_STEP_ID_CPIMAGEQUALITY                    5010 
+#define TEST_STEP_ID_CPBUBBLETEST                      5011
 
 #define TEST_STEP_ID_IOTACHECK                         6001 
 #define TEST_STEP_ID_MISSIONFIRMWARECHECK              6002 
@@ -74,7 +75,7 @@ static vector<test_step_db_t> TestStepDB =
     {  TEST_STEP_ID_RUNATEPATCH,                    "RunATEPatch",                      "",                                                                                                         "",                    "",             "ATE Patch for OSCTrim workaround"  },
     {  TEST_STEP_ID_UPDATEFIB,                      "UpdateFIB",                        "",                                                                                                         "",                    "",             "resize the flash"                  },
     {  TEST_STEP_ID_VERIFYOSCTRIM,                  "VerifyOSCTrim",                    "",                                                                                                         "",                    "",             "verify OSC trim value exists"      },
-    {  TEST_STEP_ID_VERIFYSENSORCOMM,               "VerifySensorComm",                 "",                                                                                                         "",                    "",             "verify comm to extension sensor"   },
+    {  TEST_STEP_ID_VERIFYSENSORCOMM,               "VerifySensorComm",                 "ExtChipID",                                                                                                "",                    "",             "verify comm to extension sensor"   },
 
     /* no stimulus test steps */
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
@@ -91,7 +92,7 @@ static vector<test_step_db_t> TestStepDB =
     {  TEST_STEP_ID_DRDYTEST,                       "DRdyTest",                         "",                                                                                                         "",                    "",             "GPIO DRDy Test"                    },
     {  TEST_STEP_ID_SYNCHRONIZE,                    "Synchronize",                      "",                                                                                                         "",                    "",             "Wait for stimulus"                 },
     {  TEST_STEP_ID_PROGRAMMINGMISSIONFIRMWARE,     "ProgrammingMissionFirmware",       "",                                                                                                         "",                    "",             ""                                  },
-    {  TEST_STEP_ID_PROGRAMMINGIOTA_BIN,            "ProgrammingIOTA_BIN",              "DIMS;PSELECT;CONFIG_VERSION;FRAME_NAV;CONFIG_NAV_SWIPE;CONFIG_NAV_TAP;FRAME_BUTTON;CONFIG_SOFTBUTTON",     "1",                   "",             ""                                  },
+	{ TEST_STEP_ID_PROGRAMMINGIOTA_BIN,				"ProgrammingIOTA_BIN", "DIMS;PSELECT;CONFIG_VERSION;FRAME_NAV;CONFIG_NAV_SWIPE;CONFIG_NAV_TAP;FRAME_BUTTON;CONFIG_SOFTBUTTON;CP_ATTRIBUTES;CONFIG_CHARACTERISTICS", "1", "",		   ""								   },
 
     /*  stimulus "fake finger" test steps */
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
@@ -118,6 +119,7 @@ static vector<test_step_db_t> TestStepDB =
     {  TEST_STEP_ID_CPBADPIXELTEST,                 "CpBadPixelTest",                   "",                                                                                                         "10;5;5;4;8",          "",             ""                                  },
     {  TEST_STEP_ID_SHARPNESSTEST,                  "SharpnessTest",                    "Percent Variant High Limit",                                                                               "20",                  "",             ""                                  },
     {  TEST_STEP_ID_BUBBLETEST,                     "BubbleTest",                       "High Threshold;Low Threshold",                                                                             "150;100",             "",             ""                                  },
+    {  TEST_STEP_ID_CPBUBBLETEST,                   "CPBubbleTest",                     "MaxBubbles;MaxBubblePixels;BubbleDetectThreshold",															"6;150;75",            "",             ""                                  },
     {  TEST_STEP_ID_PIXELUNIFORMITYTEST,            "PixelUniformityTest",              "Floored Threshold;Pegged Threshold;Row Failure Counts;Col Failure Counts;Area Failure Counts",             "300;300;8;8;8",       "",             ""                                  },
     {  TEST_STEP_ID_RXTXSTANDARDDEV,                "RxTxStandardDev",                  "Limit",                                                                                                    "30",                  "",             ""                                  },
     {  TEST_STEP_ID_IMPERFECTION,                   "Imperfection",                     "High Threshold;Low Threshold;Consectutive Limit",                                                          "150;110;6",           "",             ""                                  },
@@ -128,6 +130,6 @@ static vector<test_step_db_t> TestStepDB =
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
     {  TEST_STEP_ID_IOTACHECK,                      "IOTACheck",                        "DIMS;FW_BL;LNA_BL;WOF;PSELECT;CONFIG_VERSION;FRAME_NAV;CONFIG_NAV_SWIPE;CONFIG_NAV_TAP;FRAME_BUTTON;CONFIG_SOFTBUTTON","",        "",             "check IOTA exists"                 },
     {  TEST_STEP_ID_MISSIONFIRMWARECHECK,           "MissionFirmwareCheck",             "",                                                                                                         "",                    "",             "check MFW  exists"                 },
-    {  TEST_STEP_ID_PROGRAMMINGIOTA_DATA,           "ProgrammingIOTA_DATA",             "LNA_BL;FW_BL;WOF",																							"",                    "",             "program MT IOTA data"              },
+    {  TEST_STEP_ID_PROGRAMMINGIOTA_DATA,           "ProgrammingIOTA_DATA",             "LNA_BL;FW_BL;WOF;TempStdDev;DarkRateMap;MeanBGBadPixel;GainMap",											"",                    "",             "program MT IOTA data"              },
     {  TEST_STEP_ID_FINALIZATIONSTEP,               "FinalizationStep",                 "",                                                                                                         "",                    "",             "finalize,"                         },
 };
