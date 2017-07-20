@@ -34,6 +34,7 @@ using namespace std;
 
 #define TEST_STEP_ID_CPACQIMGREFHIGH                   3001
 #define TEST_STEP_ID_CPACQIMGROI                       3002
+#define TEST_STEP_ID_CPTUNEINTEGRATIONTIME			   3003
 
 #define TEST_STEP_ID_CURRENTTEST                       4001
 #define TEST_STEP_ID_SLEEPCURRENTTEST                  4002
@@ -79,8 +80,8 @@ static vector<test_step_db_t> TestStepDB =
 
     /* no stimulus test steps */
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
-    {  TEST_STEP_ID_RAMTEST,                        "RAMTest",                          "",                                                                                                    "500",                 "mSec",         "RAM test with patch"               },
-    {  TEST_STEP_ID_ROMTEST,                        "ROMTest",                          "Type;XOR Checksum",                                                                                                    "500",                 "mSec",         "ROM test with patch"               },
+    {  TEST_STEP_ID_RAMTEST,                        "RAMTest",                          "Delay",                                                                                                    "500",                 "mSec",         "RAM test with patch"               },
+    {  TEST_STEP_ID_ROMTEST,                        "ROMTest",                          "Delay",                                                                                                    "500",                 "mSec",         "ROM test with patch"               },
     {  TEST_STEP_ID_OPENSSHORTSTEST,                "OpensShortsTest",                  "ReponseSize;Delay",                                                                                        "2056;500",            ";mSec",        "Open Short test with patch"        },
     {  TEST_STEP_ID_WOF_BASELINE,                   "WOF_Baseline",                     "",                                                                                                         "",                    "",             "WOF baseline calibration"          },
     {  TEST_STEP_ID_CALIBRATE,                      "Calibrate",                        "",                                                                                                         "",                    "",             "Image baseline cabliration"        },
@@ -105,6 +106,7 @@ static vector<test_step_db_t> TestStepDB =
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
     {  TEST_STEP_ID_CPACQIMGREFHIGH,                "CpAcqImgRefHigh",                  "frames",                                                                                                   "30",                  "",             "acquire images from sensor"        },
     {  TEST_STEP_ID_CPACQIMGROI,                    "CpAcqImgROI",                      "frames",                                                                                                   "30",                  "",             "acquire images from sensor"        },
+	{ TEST_STEP_ID_CPTUNEINTEGRATIONTIME,			"CpTuneIntegrationTime", "sensorFrequency;maxIntegrationTime;minIntegrationTime;targetDN",														"48;330;120;2800",		"",				"Tune IntegrationTime"				},
 
     /* current test */
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
@@ -115,7 +117,7 @@ static vector<test_step_db_t> TestStepDB =
     /* image quality test */
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
     {  TEST_STEP_ID_HUAWEIIMAGEQUALITYTEST,         "HuaweiImageQualityTest",           "SNR Low Limit;Signal Low Limit",                                                                           "30;80",               "",             ""                                  },
-    {  TEST_STEP_ID_CPDARKBADPIXELTEST,             "CpDarkBadPixelTest",               "Coeff;Max Dark Bad Pixels;Max Dark Long Bad Pixels",                                                       "2;1500;1500",         "",             ""                                  },
+    {  TEST_STEP_ID_CPDARKBADPIXELTEST,             "CpDarkBadPixelTest",               "",                                                                                                         "2;1500;1500",         "",             ""                                  },
     {  TEST_STEP_ID_CPBADPIXELTEST,                 "CpBadPixelTest",                   "",                                                                                                         "10;5;5;4;8",          "",             ""                                  },
     {  TEST_STEP_ID_SHARPNESSTEST,                  "SharpnessTest",                    "Percent Variant High Limit",                                                                               "20",                  "",             ""                                  },
     {  TEST_STEP_ID_BUBBLETEST,                     "BubbleTest",                       "High Threshold;Low Threshold",                                                                             "150;100",             "",             ""                                  },
