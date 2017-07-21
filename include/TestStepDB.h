@@ -74,7 +74,7 @@ static vector<test_step_db_t> TestStepDB =
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
     {  TEST_STEP_ID_INITIALIZATIONSTEP,             "InitializationStep",               "",                                                                                                         "",                    "",             "initialize sensor comm"            },
     {  TEST_STEP_ID_RUNATEPATCH,                    "RunATEPatch",                      "",                                                                                                         "",                    "",             "ATE Patch for OSCTrim workaround"  },
-    {  TEST_STEP_ID_UPDATEFIB,                      "UpdateFIB",                        "",                                                                                                         "",                    "",             "resize the flash"                  },
+	{ TEST_STEP_ID_UPDATEFIB,						"UpdateFIB",						"FIB_MISSIONSIZE;FIB_IOTAOFFSET;FIB_IOTASIZE",																"",						"",				"resize the flash" },
     {  TEST_STEP_ID_VERIFYOSCTRIM,                  "VerifyOSCTrim",                    "",                                                                                                         "",                    "",             "verify OSC trim value exists"      },
     {  TEST_STEP_ID_VERIFYSENSORCOMM,               "VerifySensorComm",                 "ExtChipID",                                                                                                "",                    "",             "verify comm to extension sensor"   },
 
@@ -106,7 +106,7 @@ static vector<test_step_db_t> TestStepDB =
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
     {  TEST_STEP_ID_CPACQIMGREFHIGH,                "CpAcqImgRefHigh",                  "frames",                                                                                                   "30",                  "",             "acquire images from sensor"        },
     {  TEST_STEP_ID_CPACQIMGROI,                    "CpAcqImgROI",                      "frames",                                                                                                   "30",                  "",             "acquire images from sensor"        },
-	{ TEST_STEP_ID_CPTUNEINTEGRATIONTIME,			"CpTuneIntegrationTime", "sensorFrequency;maxIntegrationTime;minIntegrationTime;targetDN",														"48;330;120;2800",		"",				"Tune IntegrationTime"				},
+	{  TEST_STEP_ID_CPTUNEINTEGRATIONTIME,			"CpTuneIntegrationTime",			"sensorFrequency;maxIntegrationTime;minIntegrationTime;targetDN;maxDN;minDN",								"48;330;120;2800;4000;1000", "",		"Tune IntegrationTime" },
 
     /* current test */
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
@@ -126,7 +126,7 @@ static vector<test_step_db_t> TestStepDB =
     {  TEST_STEP_ID_RXTXSTANDARDDEV,                "RxTxStandardDev",                  "Limit",                                                                                                    "30",                  "",             ""                                  },
     {  TEST_STEP_ID_IMPERFECTION,                   "Imperfection",                     "High Threshold;Low Threshold;Consectutive Limit",                                                          "150;110;6",           "",             ""                                  },
     {  TEST_STEP_ID_SNRTEST,                        "SNR",                              "SNR High Limit;SNR Low Limit;Signal High Limit;Signal Low Limit;Noise High Limit",                         "5000;800;10000;80;10","",             ""                                  },
-    {  TEST_STEP_ID_CPIMAGEQUALITY,                 "CpImageQuality",                   "SNR High Limit;SNR Low Limit;Signal High Limit;Signal Low Limit;Noise High Limit",                         "5000;800;10000;80;10","",             ""                                  },
+	{ TEST_STEP_ID_CPIMAGEQUALITY, "CpImageQuality", "NumStaticBadPixelsHigh;NumDynammicBadPixelsHigh;Num2*2BadPixelsHigh;Num3*3BadPixelsHigh;SNR High Limit;SNR Low Limit;Signal High Limit;Signal Low Limit;Noise High Limit;moireInFingerBandHigh;moireInFingerBandLow;moireOutOfFingerBandHigh;moireOutOfFingerBandLow", "110;10;54;0;5000;800;10000;80;10;0.2;0;15;0", "", "" },
 
     /*  Finalize */
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
