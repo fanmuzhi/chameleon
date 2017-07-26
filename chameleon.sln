@@ -18,6 +18,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpModule", "cmlFpSensorEngi
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DutUtils", "cmlFpTestEngine\DutUtils\msvc\DutUtils.vcxproj", "{7554C18F-FB7A-4C19-A445-C1B6BE59D79C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9AAA7C16-D0E1-4B3C-B90B-913D0B00314E} = {9AAA7C16-D0E1-4B3C-B90B-913D0B00314E}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpTestEngine", "cmlFpTestEngine\FpTestEngine\msvc\FpTestEngine.vcxproj", "{C918C13B-F08F-4625-B39F-FBB33828F1CC}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -52,6 +55,11 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NativeTestEngine", "cmlFpTestEngine\NativeTestEngine\msvc\NativeTestEngine.vcxproj", "{061DE17D-5DC5-4D37-8D12-524327133754}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C918C13B-F08F-4625-B39F-FBB33828F1CC} = {C918C13B-F08F-4625-B39F-FBB33828F1CC}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DemoConSoleApp", "cmlFpTestApp\DemoConsoleApp\DemoConSoleApp.vcxproj", "{7EF4F877-1D8D-469A-9208-7F4C9AEBD772}"
+	ProjectSection(ProjectDependencies) = postProject
+		{061DE17D-5DC5-4D37-8D12-524327133754} = {061DE17D-5DC5-4D37-8D12-524327133754}
 	EndProjectSection
 EndProject
 Global
@@ -158,6 +166,14 @@ Global
 		{061DE17D-5DC5-4D37-8D12-524327133754}.Release|Win32.Build.0 = Release|Win32
 		{061DE17D-5DC5-4D37-8D12-524327133754}.Release|x64.ActiveCfg = Release|x64
 		{061DE17D-5DC5-4D37-8D12-524327133754}.Release|x64.Build.0 = Release|x64
+		{7EF4F877-1D8D-469A-9208-7F4C9AEBD772}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7EF4F877-1D8D-469A-9208-7F4C9AEBD772}.Debug|Win32.Build.0 = Debug|Win32
+		{7EF4F877-1D8D-469A-9208-7F4C9AEBD772}.Debug|x64.ActiveCfg = Debug|x64
+		{7EF4F877-1D8D-469A-9208-7F4C9AEBD772}.Debug|x64.Build.0 = Debug|x64
+		{7EF4F877-1D8D-469A-9208-7F4C9AEBD772}.Release|Win32.ActiveCfg = Release|Win32
+		{7EF4F877-1D8D-469A-9208-7F4C9AEBD772}.Release|Win32.Build.0 = Release|Win32
+		{7EF4F877-1D8D-469A-9208-7F4C9AEBD772}.Release|x64.ActiveCfg = Release|x64
+		{7EF4F877-1D8D-469A-9208-7F4C9AEBD772}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
