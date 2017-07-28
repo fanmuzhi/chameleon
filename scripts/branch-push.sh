@@ -22,5 +22,5 @@ if [ "$cwd" != "chameleon" ]; then
 	exit
 fi
 
-git push origin $branch
 git submodule foreach --recursive 'branch="$(git rev-parse --abbrev-ref HEAD)"; git push origin $branch'
+git push origin $branch

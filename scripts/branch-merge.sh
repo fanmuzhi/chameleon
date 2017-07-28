@@ -22,5 +22,5 @@ if [ "$cwd" != "chameleon" ]; then
 	exit
 fi
 
-git merge --no-ff $1
 git submodule foreach --recursive "git merge --no-ff $1"
+git merge --no-ff $1
