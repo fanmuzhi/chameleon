@@ -54,7 +54,8 @@ using namespace std;
 
 #define TEST_STEP_ID_IOTACHECK                         6001 
 #define TEST_STEP_ID_MISSIONFIRMWARECHECK              6002 
-#define TEST_STEP_ID_PROGRAMMINGIOTA_DATA              6003                                 
+#define TEST_STEP_ID_PROGRAMMINGIOTA_DATA              6003
+#define TEST_STEP_ID_PROVISION						   6004
 #define TEST_STEP_ID_FINALIZATIONSTEP                  9001 
 
 typedef struct test_step_db_s                   
@@ -93,7 +94,7 @@ static vector<test_step_db_t> TestStepDB =
     {  TEST_STEP_ID_DRDYTEST,                       "DRdyTest",                         "",                                                                                                         "",                    "",             "GPIO DRDy Test"                    },
     {  TEST_STEP_ID_SYNCHRONIZE,                    "Synchronize",                      "",                                                                                                         "",                    "",             "Wait for stimulus"                 },
     {  TEST_STEP_ID_PROGRAMMINGMISSIONFIRMWARE,     "ProgrammingMissionFirmware",       "",                                                                                                         "",                    "",             ""                                  },
-	{ TEST_STEP_ID_PROGRAMMINGIOTA_BIN,				"ProgrammingIOTA_BIN", "DIMS;PSELECT;CONFIG_VERSION;FRAME_NAV;CONFIG_NAV_SWIPE;CONFIG_NAV_TAP;FRAME_BUTTON;CONFIG_SOFTBUTTON;CP_ATTRIBUTES;CONFIG_CHARACTERISTICS", "1", "",		   ""								   },
+	{ TEST_STEP_ID_PROGRAMMINGIOTA_BIN,				"ProgrammingIOTA_BIN",				"DIMS;PSELECT;CONFIG_VERSION;FRAME_NAV;CONFIG_NAV_SWIPE;CONFIG_NAV_TAP;FRAME_BUTTON;CONFIG_SOFTBUTTON;CP_ATTRIBUTES;CONFIG_CHARACTERISTICS;CONFIG_WOE;FPPRESENT_PARAMS",	"1", "", "" },
 
     /*  stimulus "fake finger" test steps */
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
@@ -130,7 +131,7 @@ static vector<test_step_db_t> TestStepDB =
 
     /*  Finalize */
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
-    {  TEST_STEP_ID_IOTACHECK,                      "IOTACheck",                        "DIMS;FW_BL;LNA_BL;WOF;PSELECT;CONFIG_VERSION;FRAME_NAV;CONFIG_NAV_SWIPE;CONFIG_NAV_TAP;FRAME_BUTTON;CONFIG_SOFTBUTTON","",        "",             "check IOTA exists"                 },
+    {  TEST_STEP_ID_IOTACHECK,                      "IOTACheck",                        "DIMS;FW_BL;LNA_BL;WOF;PSELECT;CONFIG_VERSION;FRAME_NAV;CONFIG_NAV_SWIPE;CONFIG_NAV_TAP;FRAME_BUTTON;CONFIG_SOFTBUTTON;CONFIG_WOE;FPPRESENT_PARAMS","",        "",             "check IOTA exists"                 },
     {  TEST_STEP_ID_MISSIONFIRMWARECHECK,           "MissionFirmwareCheck",             "",                                                                                                         "",                    "",             "check MFW  exists"                 },
     {  TEST_STEP_ID_PROGRAMMINGIOTA_DATA,           "ProgrammingIOTA_DATA",             "LNA_BL;FW_BL;WOF;TempStdDev;DarkRateMap;MeanBGBadPixel;GainMap",											"",                    "",             "program MT IOTA data"              },
     {  TEST_STEP_ID_FINALIZATIONSTEP,               "FinalizationStep",                 "",                                                                                                         "",                    "",             "finalize,"                         },
