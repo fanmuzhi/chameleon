@@ -26,6 +26,7 @@ using namespace std;
 #define TEST_STEP_ID_SYNCHRONIZE                       1017
 #define TEST_STEP_ID_PROGRAMMINGMISSIONFIRMWARE        1018
 #define TEST_STEP_ID_PROGRAMMINGIOTA_BIN               1019
+#define TEST_STEP_ID_ERASE_FLASH					   1020
 
 #define TEST_STEP_ID_WOF_SIGNAL                        2001
 #define TEST_STEP_ID_BUTTONTESTWITHSTIMULUS            2002
@@ -78,6 +79,7 @@ static vector<test_step_db_t> TestStepDB =
 	{ TEST_STEP_ID_UPDATEFIB,						"UpdateFIB",						"FIB_MISSIONSIZE;FIB_IOTAOFFSET;FIB_IOTASIZE",																"",					   "",			   "resize the flash" },
     {  TEST_STEP_ID_VERIFYOSCTRIM,                  "VerifyOSCTrim",                    "",                                                                                                         "",                    "",             "verify OSC trim value exists"      },
     {  TEST_STEP_ID_VERIFYSENSORCOMM,               "VerifySensorComm",                 "ExtChipID",                                                                                                "",                    "",             "verify comm to extension sensor"   },
+	{  TEST_STEP_ID_ERASE_FLASH,					"EraseFlash",						"mission firmware;iota",																					"",						"",				"erase flash(mission firmware and iota)" },
 
     /* no stimulus test steps */
     // id                                           name                                arg_names,                                                                                                  args,                  args_desc       description
@@ -134,5 +136,6 @@ static vector<test_step_db_t> TestStepDB =
     {  TEST_STEP_ID_IOTACHECK,                      "IOTACheck",                        "DIMS;FW_BL;LNA_BL;WOF;PSELECT;CONFIG_VERSION;FRAME_NAV;CONFIG_NAV_SWIPE;CONFIG_NAV_TAP;FRAME_BUTTON;CONFIG_SOFTBUTTON;CONFIG_WOE;FPPRESENT_PARAMS","",        "",             "check IOTA exists"                 },
     {  TEST_STEP_ID_MISSIONFIRMWARECHECK,           "MissionFirmwareCheck",             "",                                                                                                         "",                    "",             "check MFW  exists"                 },
     {  TEST_STEP_ID_PROGRAMMINGIOTA_DATA,           "ProgrammingIOTA_DATA",             "LNA_BL;FW_BL;WOF;TempStdDev;DarkRateMap;MeanBGBadPixel;GainMap",											"",                    "",             "program MT IOTA data"              },
-    {  TEST_STEP_ID_FINALIZATIONSTEP,               "FinalizationStep",                 "",                                                                                                         "",                    "",             "finalize,"                         },
+    {  TEST_STEP_ID_FINALIZATIONSTEP,               "Provision",						"Type",                                                                                                     "1",                   "",             "provision"                        },
+    {  TEST_STEP_ID_FINALIZATIONSTEP,               "FinalizationStep",                 "",                                                                                                         "",                    "",             "finalize"                         },
 };
