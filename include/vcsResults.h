@@ -36,7 +36,6 @@
  ** SHALL NOT EXCEED ONE HUNDRED U.S. DOLLARS.
 */
 
-
 /*!
 *******************************************************************************
 **  Result Code Definitions
@@ -211,8 +210,10 @@ VCS_RESULT_SENSOR_NEED_TO_RESET_OWNER error should be used instead. */
 #define VCS_RESULT_SENSOR_INVALID_BASELINE              ((vcsResult_t) 216)
 #define VCS_RESULT_SENSOR_CAPTURE_RESET                 ((vcsResult_t) 217)
 
+
 #define VCS_RESULT_SENSOR_FRAME_NOT_READY               ((vcsResult_t) 218)
 #define VCS_RESULT_SENSOR_FINGER_REMOVED                ((vcsResult_t) 219)
+
 
 /*!
 *******************************************************************************

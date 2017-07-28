@@ -17,47 +17,48 @@
  *
  */
 
+#ifndef __WOFPLOT_H
+#define __WOFPLOT_H
+
+
 #define VCSFW_CMD_WOF_BASELINE 254
 #define VCSFW_CMD_WOF_SIGNAL   255
 
 /* set how many gain will scan */
 #define WOF_GAIN_MAX_IDX 5 
 
-#define  WOF_BASELINE   74
+#define  WOF_BASELINE   80
 
-typedef struct wof_amp_gain_s
+
+/* command structure for VCSFW_CMD_WOFBAELINE */
+typedef struct vcsfw_cmd_wofbaseline_s
 {
-    uint8_t    amp2;  
-    uint8_t    amp3;
-    uint8_t    amp4;
-    uint8_t    reserved;    
-    uint16_t   value;
-}wof_amp_gain_t;
+    uint16_t  gain_value;
+
+}vcsfw_cmd_wofbaseline_t;
 
 
-//static wof_amp_gain_t   wof_gain_setting[WOF_GAIN_MAX_IDX] = 
-//{
-//    {.amp2=0,   .amp3=4,    .amp4=1,  .value=0x821},    /* Normal Gain */
-//    {.amp2=0,   .amp3=2,    .amp4=0,  .value=0x810},    /* Lower Gain  */
-//    {.amp2=0,   .amp3=3,    .amp4=0,  .value=0x818},    /* Low Gain    */
-//    {.amp2=0,   .amp3=5,    .amp4=0,  .value=0x828},    /* High Gain   */
-//    {.amp2=1,   .amp3=1,    .amp4=0,  .value=0x848},    /* Higer Gain  */
-//};
-
-//typedef struct vcsfw_cmd_wofbaseline_s
-//{
-//    uint8_t  size;
-//    wof_amp_gain_t  wof_gain_setting[WOF_GAIN_MAX_IDX]; 
-//}vcsfw_cmd_wofbaseline_t;
-
+/* replay structure for VCSFW_CMD_WOFBAELINE */
 typedef struct vcsfw_reply_wofbaseline_s
 {
-    uint16_t    gains[WOF_GAIN_MAX_IDX];
-    uint16_t    offsets[WOF_GAIN_MAX_IDX];
+    uint16_t    gain_value;
+    uint16_t    offsets;
 }vcsfw_reply_wofbaseline_t;
 
+
+/* command structure for VCSFW_CMD_WOFSIGNAL */
 typedef struct vcsfw_cmd_wofsignal_s
 {
-    uint16_t    gains[WOF_GAIN_MAX_IDX];
-    uint16_t    offsets[WOF_GAIN_MAX_IDX];
+    uint16_t    gain_value;
+    uint16_t    offsets;
 }vcsfw_cmd_wofsignal_t;
+
+/* reply structure for VCSFW_CMD_WOFSIGNAL */
+typedef struct vcsfw_reply_wofbsignal_s
+{
+    uint16_t    gain_value;
+    uint16_t    offsets;
+	uint16_t    signal;
+}vcsfw_reply_wofsignal_t;
+
+#endif /* !__WOFPLOT_H */
