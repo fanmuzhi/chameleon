@@ -3,7 +3,7 @@
 #
 # Usage: ./scripts/branch-status.sh
 #
-branch=$(git rev-parse --abbrev-ref HEAD)
+
 
 
 if [ "$1" != "" ]; then
@@ -22,7 +22,23 @@ if [ "$cwd" != "chameleon" ]; then
 	exit
 fi
 
-echo $branch
-git submodule foreach --recursive "branch=$(git rev-parse --abbrev-ref HEAD); echo $branch;"
+branch=$(git rev-parse --abbrev-ref HEAD)
+echo ----------------------------------
+echo "Branch:"$branch
+echo ----------------------------------
+echo
+
+git submodule foreach --recursive '
+	branchMain="$(git -C $toplevel symbolic-ref --short HEAD)"
+	branchSubmodule="$(git rev-parse --abbrev-ref HEAD)"
+	echo ----------------------------------
+	echo "Branch:"$branchSubmodule
+	echo ----------------------------------	
+	if [ $branchMain != $branchSubmodule ]; then
+		echo "Warning!! Submodule is different branch now!" 
+		echo 
+	fi
+	echo 
+'
 
 
