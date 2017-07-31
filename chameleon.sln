@@ -55,15 +55,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StripTester", "cmlFpTestApp
 		{919165D2-2C82-42EF-A9D4-35A827CF8197} = {919165D2-2C82-42EF-A9D4-35A827CF8197}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NativeTestEngine", "cmlFpTestEngine\NativeTestEngine\msvc\NativeTestEngine.vcxproj", "{061DE17D-5DC5-4D37-8D12-524327133754}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "demoPrimax", "cmlFpTestApp\demoPrimax\msvc\demoPrimax.vcxproj", "{C251858A-8D39-4170-A60D-EDEAE864CB25}"
 	ProjectSection(ProjectDependencies) = postProject
-		{C918C13B-F08F-4625-B39F-FBB33828F1CC} = {C918C13B-F08F-4625-B39F-FBB33828F1CC}
+		{061DE17D-5DC5-4D37-8D12-524327133754} = {061DE17D-5DC5-4D37-8D12-524327133754}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DotNetTestEngine", "cmlFpTestEngine\DotNetTestEngine\msvc\DotNetTestEngine.vcxproj", "{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}"
-	ProjectSection(ProjectDependencies) = postProject
-		{C918C13B-F08F-4625-B39F-FBB33828F1CC} = {C918C13B-F08F-4625-B39F-FBB33828F1CC}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DotNetTestEngine", "cmlFpTestApp\DotNetTestEngine\msvc\DotNetTestEngine.vcxproj", "{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NativeTestEngine", "cmlFpTestApp\NativeTestEngine\msvc\NativeTestEngine.vcxproj", "{061DE17D-5DC5-4D37-8D12-524327133754}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,14 +118,18 @@ Global
 		{CCBB9430-BA14-4EAB-8810-AFD6241475EF}.Debug|Win32.Build.0 = Debug|Win32
 		{CCBB9430-BA14-4EAB-8810-AFD6241475EF}.Release|Win32.ActiveCfg = Release|Win32
 		{CCBB9430-BA14-4EAB-8810-AFD6241475EF}.Release|Win32.Build.0 = Release|Win32
-		{061DE17D-5DC5-4D37-8D12-524327133754}.Debug|Win32.ActiveCfg = Debug|Win32
-		{061DE17D-5DC5-4D37-8D12-524327133754}.Debug|Win32.Build.0 = Debug|Win32
-		{061DE17D-5DC5-4D37-8D12-524327133754}.Release|Win32.ActiveCfg = Release|Win32
-		{061DE17D-5DC5-4D37-8D12-524327133754}.Release|Win32.Build.0 = Release|Win32
+		{C251858A-8D39-4170-A60D-EDEAE864CB25}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C251858A-8D39-4170-A60D-EDEAE864CB25}.Debug|Win32.Build.0 = Debug|Win32
+		{C251858A-8D39-4170-A60D-EDEAE864CB25}.Release|Win32.ActiveCfg = Release|Win32
+		{C251858A-8D39-4170-A60D-EDEAE864CB25}.Release|Win32.Build.0 = Release|Win32
 		{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}.Debug|Win32.ActiveCfg = Debug|Win32
 		{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}.Debug|Win32.Build.0 = Debug|Win32
 		{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}.Release|Win32.ActiveCfg = Release|Win32
 		{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}.Release|Win32.Build.0 = Release|Win32
+		{061DE17D-5DC5-4D37-8D12-524327133754}.Debug|Win32.ActiveCfg = Debug|Win32
+		{061DE17D-5DC5-4D37-8D12-524327133754}.Debug|Win32.Build.0 = Debug|Win32
+		{061DE17D-5DC5-4D37-8D12-524327133754}.Release|Win32.ActiveCfg = Release|Win32
+		{061DE17D-5DC5-4D37-8D12-524327133754}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
