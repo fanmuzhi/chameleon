@@ -37,12 +37,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpTestStep", "cmlFpTestEngi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MTConfigGenerator", "cmlFpTestApp\MTConfigGenerator\msvc\MTConfigGenerator.vcxproj", "{E651F59C-BBF4-404D-8EBC-2859109965EE}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChameleonQt", "cmlFpTestApp\ChameleonQt\msvc\Jingan.vcxproj", "{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{CFD4042F-64AF-495C-ABAB-F17E8E904A81} = {CFD4042F-64AF-495C-ABAB-F17E8E904A81}
-		{C918C13B-F08F-4625-B39F-FBB33828F1CC} = {C918C13B-F08F-4625-B39F-FBB33828F1CC}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpImageProcessing", "cmlFpTestEngine\FpImageProcessing\msvc\FpImageProcessing.vcxproj", "{587F8203-19C9-46B7-9CE7-468BC24E44C5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BravoDebugTool", "cmlFpTestApp\BravoDebugTool\msvc\BravoDebugTool.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
@@ -63,6 +57,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NativeTestEngine", "cmlFpTe
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DotNetTestEngine", "cmlFpTestApp\DotNetTestEngine\msvc\DotNetTestEngine.vcxproj", "{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C918C13B-F08F-4625-B39F-FBB33828F1CC} = {C918C13B-F08F-4625-B39F-FBB33828F1CC}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChameleonQt", "cmlFpTestApp\ChameleonQt\msvc\Jingan.vcxproj", "{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C918C13B-F08F-4625-B39F-FBB33828F1CC} = {C918C13B-F08F-4625-B39F-FBB33828F1CC}
 	EndProjectSection
@@ -131,14 +130,6 @@ Global
 		{E651F59C-BBF4-404D-8EBC-2859109965EE}.Release|Win32.Build.0 = Release|Win32
 		{E651F59C-BBF4-404D-8EBC-2859109965EE}.Release|x64.ActiveCfg = Release|x64
 		{E651F59C-BBF4-404D-8EBC-2859109965EE}.Release|x64.Build.0 = Release|x64
-		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Debug|Win32.Build.0 = Debug|Win32
-		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Debug|x64.ActiveCfg = Debug|x64
-		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Debug|x64.Build.0 = Debug|x64
-		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Release|Win32.ActiveCfg = Release|Win32
-		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Release|Win32.Build.0 = Release|Win32
-		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Release|x64.ActiveCfg = Release|x64
-		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Release|x64.Build.0 = Release|x64
 		{587F8203-19C9-46B7-9CE7-468BC24E44C5}.Debug|Win32.ActiveCfg = Debug|Win32
 		{587F8203-19C9-46B7-9CE7-468BC24E44C5}.Debug|Win32.Build.0 = Debug|Win32
 		{587F8203-19C9-46B7-9CE7-468BC24E44C5}.Debug|x64.ActiveCfg = Debug|x64
@@ -187,6 +178,14 @@ Global
 		{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}.Release|Win32.Build.0 = Release|Win32
 		{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}.Release|x64.ActiveCfg = Release|x64
 		{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}.Release|x64.Build.0 = Release|x64
+		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Debug|Win32.Build.0 = Debug|Win32
+		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Debug|x64.ActiveCfg = Debug|x64
+		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Debug|x64.Build.0 = Debug|x64
+		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Release|Win32.ActiveCfg = Release|Win32
+		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Release|Win32.Build.0 = Release|Win32
+		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Release|x64.ActiveCfg = Release|x64
+		{33C1ABB7-5A20-45F2-A69F-0E77D74DCA1B}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
