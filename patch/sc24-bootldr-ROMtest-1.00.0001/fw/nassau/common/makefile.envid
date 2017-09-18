@@ -1,0 +1,45 @@
+# -*- mode: makefile -*-
+
+#
+# Common makefile contents to identify the firmware build environment.
+#
+# Bjoren Davis, February 24, 2012.
+#
+
+MAKEFILE_ENVID:=$(lastword $(MAKEFILE_LIST))
+.PHONY: envid
+
+include $(dir $(MAKEFILE_ENVID))/makefile.common
+
+
+envid:
+	@echo "--------------------- uname -a -------------------------------"
+	-uname -a
+	@echo "--------------------- /etc/motd ------------------------------"
+	-cat /etc/motd
+	@echo "--------------------- printenv -------------------------------"
+	-printenv | sort
+	@echo "--------------------- which $(CC) ----------------------------"
+	-which $(CC)
+	@echo "--------------------- $(CC) --version ------------------------"
+	-$(CC) $(XTENSA_CFLAGS) --version
+	@echo "--------------------- which gcc ------------------------------"
+	-which gcc
+	@echo "--------------------- gcc --version --------------------------"
+	-gcc --version
+	@echo "--------------------- perl -v --------------------------------"
+	-perl -v
+	@echo "--------------------- perl -V --------------------------------"
+	-perl -V
+ifeq ($(shell uname -s),Linux)	    # Linux follows
+	@echo "--------------------- /etc/redhat-release --------------------"
+	-cat /etc/redhat-release
+	@echo "--------------------- lsb_release --all ----------------------"
+	-lsb_release --all
+	@echo "--------------------- rpm -qa --------------------------------"
+	-rpm -qa | sort
+else				    # Cygwin follows
+	@echo "--------------------- cygcheck -cd ---------------------------"
+	-cygcheck -cd
+endif
+
