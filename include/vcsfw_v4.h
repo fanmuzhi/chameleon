@@ -1433,6 +1433,19 @@
                                                 (VCSFW_STATUS_ERR_FLAG | 609)
 #define VCSFW_STATUS_ERR_MKM_OVERPROG_FAIL                                  \
                                                 (VCSFW_STATUS_ERR_FLAG | 610)
+#define VCSFW_STATUS_ERR_CBCTOOLONG             (VCSFW_STATUS_ERR_FLAG | 611)
+#define VCSFW_STATUS_ERR_FLASHPROG_PROGADDR_INVALID                         \
+                                                (VCSFW_STATUS_ERR_FLAG | 612)
+#define VCSFW_STATUS_ERR_IOTAWRITE_BADCHAIN                                 \
+                                                (VCSFW_STATUS_ERR_FLAG | 613)
+#define VCSFW_STATUS_ERR_IOTAWRITE_NVMUTL_NEED_FAIL                         \
+                                                (VCSFW_STATUS_ERR_FLAG | 614)
+#define VCSFW_STATUS_ERR_IOTAWRITE_FAIL                                     \
+                                                (VCSFW_STATUS_ERR_FLAG | 615)
+#define VCSFW_STATUS_ERR_IOTAWRITE_CHAINCORRUPT                             \
+                                                (VCSFW_STATUS_ERR_FLAG | 616)
+#define VCSFW_STATUS_ERR_IOTAWRITE_TOOLONG                                  \
+                                                (VCSFW_STATUS_ERR_FLAG | 617)
 
 
 
@@ -1547,6 +1560,7 @@ typedef struct VCS_PACKED vcsfw_reply_get_version_s
 /* The following bits are for vcsfw_reply_get_version_t::platform */
 #define VCSFW_PLATFORM_SECURE_MATCH  (1 << 0)
 #define VCSFW_PLATFORM_SECURE_PATCH  (1 << 1)
+#define VCSFW_PLATFORM_HAS_EXTFLASH  (1 << 2) /* Hayes with external flash */
 
 /* The following bits describe security options in
 ** vcsfw_reply_get_version_t::security[1] bit-field */
@@ -6877,6 +6891,7 @@ typedef struct VCS_PACKED vcsfw_frame_tag_s {
 #define VCSFW_FRAME_TAG_EXTFPS_SUNDRYREGS  21   /* alternative register
                                                  * settings for sun/dry
                                                  * finger */
+#define VCSFW_FRAME_TAG_CBC 22 /*CBC baseline RAM (HWDEF_MEMMAP_CBCRAM )*/
 
 /* Development-only tags: */
 
@@ -7368,8 +7383,20 @@ typedef struct VCS_PACKED vcsfw_frame_tag_extfps_sundryregs_s {
 #define VCSFW_IOTA_ITYPE_STELLER_CAL_B_SCALE_COEFFICIENTS   0x0022
 
 
-#define VCSFW_IOTA_ITYPE_CHAINEND       0xFFFF /* end of the chain (internal) */
+/* Specific to Steller: A_OFFSET_COEFFICIENTS_DRC for Dual reference calibration
+  */
+#define VCSFW_IOTA_ITYPE_STELLER_CAL_A_OFFSET_COEFFICIENTS_DRC  0x0023
 
+/* Specific to Steller: B_SCALE_COEFFICIENTS for Dual reference calibration
+  */
+#define VCSFW_IOTA_ITYPE_STELLER_CAL_B_SCALE_COEFFICIENTS_DRC   0x0024
+
+/* Specific to Steller: B_SCALE_COEFFICIENTS for Dual reference calibration
+  */
+#define VCSFW_IOTA_ITYPE_STELLER_CAL_SUNLIGHT_CORRECTION_REFLOW_DRC   0x0025
+
+
+#define VCSFW_IOTA_ITYPE_CHAINEND       0xFFFF /* end of the chain (internal) */
 
 
 /* Specific to CPID: sensor config characteristics, contains different integration
@@ -7607,6 +7634,48 @@ typedef struct VCS_PACKED vcsfw_steller_cal_b_scale_coeffs_header_s {
 } vcsfw_steller_cal_b_scale_coeffs_header_t;
 
 /*
+ * The vcsfw_steller_cal_b_scale_coeffs_header_t is the data header for
+ * VCSFW_IOTA_ITYPE_STELLER_CAL_A_OFFSET_COEFFICIENTS_DRC iota.
+*/
+typedef struct VCS_PACKED vcsfw_steller_cal_a_offset_coeffs_drc_header_s {
+    vcsUint32_t      compressedSize; /* Compressed image size */
+    vcsUint16_t      offset;        /* offset in dwords */
+    vcsUint16_t      npixels;       /* number of pixels in a row, after cropping */
+    vcsUint16_t      nlines;        /* number of rows, after cropping */
+    vcsUint8_t       bitdepth;      /* bit-depth: 16 */
+    vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
+    vcsUint8_t       reserved[4];    
+} vcsfw_steller_cal_a_offset_coeffs_drc_header_t;
+
+/*
+ * The vcsfw_steller_cal_b_scale_coeffs_header_t is the data header for
+ * VCSFW_IOTA_ITYPE_STELLER_CAL_B_SCALE_COEFFICIENTS_DRC iota.
+*/
+typedef struct VCS_PACKED vcsfw_steller_cal_b_scale_coeffs_drc_header_s {
+    vcsUint32_t      compressedSize; /* Compressed image size */
+    vcsUint16_t      offset;        /* offset in dwords */
+    vcsUint16_t      npixels;       /* number of pixels in a row, after cropping */
+    vcsUint16_t      nlines;        /* number of rows, after cropping */
+    vcsUint8_t       bitdepth;      /* bit-depth: 16 */
+    vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
+    vcsUint8_t       reserved[4];    
+} vcsfw_steller_cal_b_scale_coeffs_drc_header_t;
+
+/*
+ * The vcsfw_steller_cal_b_scale_coeffs_header_t is the data header for
+ * VCSFW_IOTA_ITYPE_STELLER_CAL_B_SCALE_COEFFICIENTS_DRC iota.
+*/
+typedef struct VCS_PACKED vcsfw_steller_cal_sunlight_correction_reflow_drc_header_s {
+    vcsUint32_t      compressedSize; /* Compressed image size */
+    vcsUint16_t      offset;        /* offset in dwords */
+    vcsUint16_t      npixels;       /* number of pixels in a row, after cropping */
+    vcsUint16_t      nlines;        /* number of rows, after cropping */
+    vcsUint8_t       bitdepth;      /* bit-depth: 16 */
+    vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
+    vcsUint8_t       reserved[4];    
+} vcsfw_steller_cal_sunlight_correction_reflow_drc_header_t;
+
+/*
  * VCSFW_IOTA_ITYPE_CPID_CAL_DARK_RATE_MAP_1000DPI
 
  * This iota corresponds to the CPID dark rate map
@@ -7667,8 +7736,6 @@ typedef struct VCS_PACKED vcsfw_config_version_s{
  * navigation code
  */
 typedef struct VCS_PACKED vcsfw_config_nav_swipe_s {
-    vcsUint32_t      nav_mode;           /* see NAV_SWIPE_MODE definitions below */
-
     /* parameters for horizontal swipe detection */
     vcsUint8_t       h_regions;         /* number of rcvr or xmtr regions     */
     vcsUint8_t       h_flags;           /* see NAV_SWIPE_FLAGS below          */
@@ -7679,8 +7746,8 @@ typedef struct VCS_PACKED vcsfw_config_nav_swipe_s {
                                         /*   units of regions                 */
     vcsUint16_t      h_min_exit_pos;
     vcsUint16_t      h_max_exit_pos;
-    vcsUint16_t      h_min_vel;         /* minimum allowed finger velocity    */
-                                        /*   for a swipe                      */
+    vcsUint16_t      h_min_fwd_movement;
+    vcsUint16_t      h_max_rev_movement;
     vcsUint16_t      h_threshold;       /* finger detection threshold         */
     vcsUint8_t       h_xstride;         /* stride used for indexing into the  */
     vcsUint8_t       h_ystride;         /*   2D frame                         */
@@ -7692,7 +7759,8 @@ typedef struct VCS_PACKED vcsfw_config_nav_swipe_s {
     vcsUint16_t      v_req_dist_negdir;
     vcsUint16_t      v_min_exit_pos;
     vcsUint16_t      v_max_exit_pos;
-    vcsUint16_t      v_min_vel;
+    vcsUint16_t      v_min_fwd_movement;
+    vcsUint16_t      v_max_rev_movement;
     vcsUint16_t      v_threshold;
     vcsUint8_t       v_xstride;
     vcsUint8_t       v_ystride;
