@@ -10,7 +10,7 @@
  **
  *****************************************************************************
  **
- **  Copyright (c) 2007-2017 Synaptics Incorporated. All rights reserved.
+ **  Copyright (C) 2007-2017 Synaptics Incorporated. All rights reserved.
  **
  **
  ** This file contains information that is proprietary to Synaptics
@@ -39,7 +39,8 @@
  ** JURISDICTION DOES NOT PERMIT THE DISCLAIMER OF DIRECT DAMAGES OR ANY
  ** OTHER DAMAGES, SYNAPTICS' TOTAL CUMULATIVE LIABILITY TO ANY PARTY
  ** SHALL NOT EXCEED ONE HUNDRED U.S. DOLLARS.
- */
+*/
+
 
 #if !defined(__VCSFW_V4PRIV_H)
 #define __VCSFW_V4PRIV_H
