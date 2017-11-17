@@ -8,7 +8,7 @@
  **
  *****************************************************************************
  **
- **  Copyright (c) 2006-2017 Synaptics Incorporated. All rights reserved.
+ **  Copyright (C) 2006-2017 Synaptics Incorporated. All rights reserved.
  **
  **
  ** This file contains information that is proprietary to Synaptics
@@ -37,7 +37,8 @@
  ** JURISDICTION DOES NOT PERMIT THE DISCLAIMER OF DIRECT DAMAGES OR ANY
  ** OTHER DAMAGES, SYNAPTICS' TOTAL CUMULATIVE LIABILITY TO ANY PARTY
  ** SHALL NOT EXCEED ONE HUNDRED U.S. DOLLARS.
- */
+*/
+
 
 /*
  * vcsfw.h -- This file defines the externally accessible command
@@ -221,6 +222,15 @@
 #define VCSFW_CMD_FRAME_STATS_GET               143
 #define VCSFW_CMD_IOTA_INSINUATE                144
 #define VCSFW_CMD_PUBK_GET                      145
+
+/*
+ * Commands for SecurePad.  These are restricted in that they
+ *  don't allow most tags and provide only a low resolution
+ *  image and therefore can be used outside of a secure session.
+ */
+#define VCSFW_CMD_FRAME_READ_RESTRICTED         230
+#define VCSFW_CMD_FRAME_ACQ_RESTRICTED          231
+#define VCSFW_CMD_FRAME_FINISH_RESTRICTED       232
 
 /*
  * These following commands are for ATE, characterization and firmware test
@@ -1409,8 +1419,39 @@
                                                 (VCSFW_STATUS_ERR_FLAG | 597)
 #define VCSFW_STATUS_ERR_FRAME_TAG_XSREG8BLK_TOOSHORT                       \
                                                 (VCSFW_STATUS_ERR_FLAG | 598)
-#define VCSFW_STATUS_ERR_FRAME_STATE_GET_BUSY                               \
-                                                (VCSFW_STATUS_ERR_FLAG | 599)
+#define VCSFW_STATUS_ERR_FRAME_STATE_GET_BUSY   (VCSFW_STATUS_ERR_FLAG | 599)
+#define VCSFW_STATUS_ERR_READING_FIB            (VCSFW_STATUS_ERR_FLAG | 600)
+#define VCSFW_STATUS_ERR_INVALID_SDB_MAGIC      (VCSFW_STATUS_ERR_FLAG | 601)
+#define VCSFW_STATUS_ERR_NVM_UNLOCK             (VCSFW_STATUS_ERR_FLAG | 602)
+#define VCSFW_STATUS_ERR_INVALID_SDB_BLOCK      (VCSFW_STATUS_ERR_FLAG | 603)
+#define VCSFW_STATUS_ERR_INVALID_SEC_STATE      (VCSFW_STATUS_ERR_FLAG | 604)
+#define VCSFW_STATUS_ERR_FRAME_ACQ_BADEXTFPS    (VCSFW_STATUS_ERR_FLAG | 605)
+#define VCSFW_STATUS_ERR_SECLEVEL_READFAIL      (VCSFW_STATUS_ERR_FLAG | 606)
+#define VCSFW_STATUS_ERR_SECLEVEL_CMP_FAIL      (VCSFW_STATUS_ERR_FLAG | 607)
+#define VCSFW_STATUS_ERR_FLASH_SECLEVEL_TOOHIGH (VCSFW_STATUS_ERR_FLAG | 608)
+#define VCSFW_STATUS_ERR_SERIALNO_MISMATCH                                  \
+                                                (VCSFW_STATUS_ERR_FLAG | 609)
+#define VCSFW_STATUS_ERR_MKM_OVERPROG_FAIL                                  \
+                                                (VCSFW_STATUS_ERR_FLAG | 610)
+#define VCSFW_STATUS_ERR_CBCTOOLONG             (VCSFW_STATUS_ERR_FLAG | 611)
+#define VCSFW_STATUS_ERR_FLASHPROG_PROGADDR_INVALID                         \
+                                                (VCSFW_STATUS_ERR_FLAG | 612)
+#define VCSFW_STATUS_ERR_IOTAWRITE_BADCHAIN                                 \
+                                                (VCSFW_STATUS_ERR_FLAG | 613)
+#define VCSFW_STATUS_ERR_IOTAWRITE_NVMUTL_NEED_FAIL                         \
+                                                (VCSFW_STATUS_ERR_FLAG | 614)
+#define VCSFW_STATUS_ERR_IOTAWRITE_FAIL                                     \
+                                                (VCSFW_STATUS_ERR_FLAG | 615)
+#define VCSFW_STATUS_ERR_IOTAWRITE_CHAINCORRUPT                             \
+                                                (VCSFW_STATUS_ERR_FLAG | 616)
+#define VCSFW_STATUS_ERR_IOTAWRITE_TOOLONG                                  \
+                                                (VCSFW_STATUS_ERR_FLAG | 617)
+#define VCSFW_STATUS_ERR_FLASHERASE_IOTA_CHAIN_CORRUPT                      \
+                                                (VCSFW_STATUS_ERR_FLAG | 618)
+#define VCSFW_STATUS_ERR_FLASHERASE_IOTA_BADCHAINNUM                        \
+                                                (VCSFW_STATUS_ERR_FLAG | 619)
+
+
 
 /****************************************************************************/
 /* Every command begins with the following structure.  See the vcsfw_cmd_t  */
@@ -1516,11 +1557,14 @@ typedef struct VCS_PACKED vcsfw_reply_get_version_s
 #define VCSFW_PRODUCT_BYRON         VCSFW_PRODUCT_SC24  /* alias */
 #define VCSFW_PRODUCT_SC24PBL       64  /* Steller controller b2224 (bootldr) */
 #define VCSFW_PRODUCT_BYRONPBL      VCSFW_PRODUCT_SC24PBL   /* alias */
+#define VCSFW_PRODUCT_PROMETHEUS    65  /* Prometheus (b1422) */
+#define VCSFW_PRODUCT_PROMETHEUSPBL 66  /* Prometheus bootldr (b1422) */
 
 
 /* The following bits are for vcsfw_reply_get_version_t::platform */
 #define VCSFW_PLATFORM_SECURE_MATCH  (1 << 0)
 #define VCSFW_PLATFORM_SECURE_PATCH  (1 << 1)
+#define VCSFW_PLATFORM_HAS_EXTFLASH  (1 << 2) /* Hayes with external flash */
 
 /* The following bits describe security options in
 ** vcsfw_reply_get_version_t::security[1] bit-field */
@@ -4812,8 +4856,10 @@ typedef struct VCS_PACKED vcsfw_cmd_otprom_tag_find_s
 #define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_WOVAR_PGAGAIN        0x80000022
 /* WOVAR PGA ratio */
 #define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_WOVAR_PGARATIO       0x80000023
-/* WOVAR threshold */
-#define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_WOVAR_THRESHOLD      0x80000024
+/* WOVAR FD threshold */
+#define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_WOVAR_FDTHRESHOLD    0x80000024
+/* WOVAR FU threshold */
+#define VCSFW_OTPROM_EXTAGTYPE_WINDSOR_CALDATA_WOVAR_FUTHRESHOLD    0x80000025
 
 typedef struct VCS_PACKED vcsfw_reply_otprom_tag_find_s
 {
@@ -5543,6 +5589,33 @@ typedef struct VCS_PACKED vcsfw_cmd_iota_write_s {
      vcsUint8_t      unused[2];
 } vcsfw_cmd_iota_write_t;
 
+/*
+ * Alternate command structure for VCSFW_CMD_IOTA_WRITE.
+ *  Newer implementations of VCSFW_CMD_IOTA_WRITE
+ *  (all implementations for Tudor and implementations
+ *  for Nassau that support dual chains)
+ *  implement an extended command that replaces the
+ *  2-bytes of unused with a 16-bit flags value.
+ *  Rather than change the definition of 
+ *  vcsfw_cmd_iota_write_t (which may break current
+ *  usage) we define this "alternate" and back-compatible
+ *  structure for the newer implementations to use.
+ */
+typedef struct VCS_PACKED vcsfw_cmd_iota_write_alt1_s {
+     vcsUint16_t     itype;
+     vcsUint16_t     flags;
+} vcsfw_cmd_iota_write_alt1_t;
+
+#define VCSFW_CMD_IOTA_WRITE_FLAGS_HIGH_CHAIN  0x0001
+/* 
+ * Note: VCSFW_CMD_IOTA_WRITE_FLAGS_HIGH_CHAIN is a special
+ *  case of the CHAINNUM field, below, where [CHAINNUM]=1.
+ *  So for "dual chain" systems (e.g., Nassau) [CHAINNUM]=0
+ *  is the low chain and [CHAINNUM]=1 is the high chain.
+ */
+#define VCSFW_CMD_IOTA_WRITE_FLAGS_CHAINNUM     0x0007
+#define VCSFW_CMD_IOTA_WRITE_FLAGS_CHAINNUM_B   0
+#define VCSFW_CMD_IOTA_WRITE_FLAGS_CHAINNUM_N   3
 
 /****************************************************************************/
 /* VCSFW_CMD_FLASH_ERASE                                                    */
@@ -5555,6 +5628,25 @@ typedef struct VCS_PACKED vcsfw_cmd_flash_erase_s {
 #define VCSFW_CMD_FLASH_ERASE_IOTA_AREA     0x2  /* erase iota area */
 #define VCSFW_CMD_FLASH_ERASE_FIB           0x4  /* erase flash info block */
 #define VCSFW_CMD_FLASH_ERASE_SDB           0x8  /* erase security database */
+
+/*
+ * Bitfield of iota chains to erase.  Note that if 
+ *  VCSFW_CMD_FLASH_ERASE_IOTA_AREA is set then these
+ *  bits are ignored.  There is one bit for every 
+ *  possible iota chain to erase.  A 1 indicates that
+ *  VCSFW_CMD_FLASH_ERASE should erase the given iota
+ *  chain, a 0 indicates that it should not.
+ * For back compatibility with "dual chain" (e.g., Nassau)
+ *  systems chain 0 refers to the low chain and chain 1
+ *  refers to the high chain.
+ */
+#define VCSFW_CMD_FLASH_ERASE_IOTA_CHAINNUMS    0x00000ff0
+#define VCSFW_CMD_FLASH_ERASE_IOTA_CHAINNUMS_B  4
+#define VCSFW_CMD_FLASH_ERASE_IOTA_CHAINNUMS_N  8
+#define VCSFW_CMD_FLASH_ERASE_IOTA_LOW_CHAIN                                \
+    (1 << (0+VCSFW_CMD_FLASH_ERASE_IOTA_CHAINNUMS_B))
+#define VCSFW_CMD_FLASH_ERASE_IOTA_HIGH_CHAIN                               \
+    (1 << (1+VCSFW_CMD_FLASH_ERASE_IOTA_CHAINNUMS_B))
 
 /****************************************************************************/
 /* VCSFW_CMD_EVENT_CONFIG                                                   */
@@ -6849,6 +6941,7 @@ typedef struct VCS_PACKED vcsfw_frame_tag_s {
 #define VCSFW_FRAME_TAG_EXTFPS_SUNDRYREGS  21   /* alternative register
                                                  * settings for sun/dry
                                                  * finger */
+#define VCSFW_FRAME_TAG_CBC 22 /*CBC baseline RAM (HWDEF_MEMMAP_CBCRAM )*/
 
 /* Development-only tags: */
 
@@ -7331,8 +7424,29 @@ typedef struct VCS_PACKED vcsfw_frame_tag_extfps_sundryregs_s {
 #define VCSFW_IOTA_ITYPE_CPID_CAL_1000DPI_GAIN_MAP_PIXELS   0x0020 /* CPID gain map, saved at 1000 DPI */
 
 
-#define VCSFW_IOTA_ITYPE_CHAINEND       0xFFFF /* end of the chain (internal) */
+/* Specific to Steller: A_OFFSET_COEFFICIENTS for single reference calibration
+  */
+#define VCSFW_IOTA_ITYPE_STELLER_CAL_A_OFFSET_COEFFICIENTS   0x0021
 
+/* Specific to Steller: B_SCALE_COEFFICIENTS for single reference calibration
+  */
+#define VCSFW_IOTA_ITYPE_STELLER_CAL_B_SCALE_COEFFICIENTS   0x0022
+
+
+/* Specific to Steller: A_OFFSET_COEFFICIENTS_DRC for Dual reference calibration
+  */
+#define VCSFW_IOTA_ITYPE_STELLER_CAL_A_OFFSET_COEFFICIENTS_DRC  0x0023
+
+/* Specific to Steller: B_SCALE_COEFFICIENTS for Dual reference calibration
+  */
+#define VCSFW_IOTA_ITYPE_STELLER_CAL_B_SCALE_COEFFICIENTS_DRC   0x0024
+
+/* Specific to Steller: B_SCALE_COEFFICIENTS for Dual reference calibration
+  */
+#define VCSFW_IOTA_ITYPE_STELLER_CAL_SUNLIGHT_CORRECTION_REFLOW_DRC   0x0025
+
+
+#define VCSFW_IOTA_ITYPE_CHAINEND       0xFFFF /* end of the chain (internal) */
 
 
 /* Specific to CPID: sensor config characteristics, contains different integration
@@ -7344,7 +7458,10 @@ typedef struct VCS_PACKED vcsfw_cpid_sensor_cfg_charcteristics_s{
      vcsUint16_t     integTime_normal;   /* This will be the value we pass to temp comp code for MT or normal integration time*/
      vcsUint16_t     integTime_sunlight; /* This will be the value we pass to temp comp code for live image integration time in case of sunlight*/
      vcsUint16_t     integTime_dryfinger; /* This may be the value we pass to temp comp code for live image integration time in case of dry finger*/
-     vcsUint16_t     unused;
+     vcsUint16_t     unused;              /* unused[1] is used for algo DLL cpid_cpid_dll_version_t.major;
+                                                                                and unused[0] can have algo DLL cpid_cpid_dll_version_t.release
+                                                                                algo DLL version 6.0.1 so unused[1] has 6 and unused[0] has 1
+                                                                             */
 } vcsfw_cpid_sensor_cfg_charcteristics_t;
 
 
@@ -7417,6 +7534,7 @@ typedef struct VCS_PACKED vcsfw_config_tag_frame_avg_s{
 #define VCSFW_CONFIG_TAG_WOE_FLAGS_NONE            0x00
 #define VCSFW_CONFIG_TAG_WOE_FLAGS_OFF_DISABLE     0x01
 #define VCSFW_CONFIG_TAG_WOE_FLAGS_WOF_DISABLE     0x02
+#define VCSFW_CONFIG_TAG_WOE_FLAGS_DCA_CAL_DISABLE 0x04
 
 typedef struct VCS_PACKED vcsfw_config_woe_s {
     vcsUint8_t      flags;
@@ -7521,8 +7639,8 @@ typedef struct VCS_PACKED vcsfw_cal_image_mean_and_bad_pix_header_s {
     vcsUint16_t      nlines;        /* number of rows */
     vcsUint8_t       bitdepth;      /* bit-depth: 8,12,16 */
     vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI */
-    vcsUint8_t       dummy1;
-    vcsUint8_t       dummy2;
+    vcsUint8_t       dummy1;        /* Field is used to populate MT version by MT. SDK can refer to this for decision making or logging */
+    vcsUint8_t       dummy2;        /* Field is used to populate IST version by IST. SDK can refer to this for decision making or logging */
 } vcsfw_cal_image_mean_and_bad_pix_header_t;
 
 /*
@@ -7537,6 +7655,75 @@ typedef struct VCS_PACKED vcsfw_cal_image_1000DPI_gain_map_pix_header_s {
     vcsUint8_t       bitdepth;      /* bit-depth: 8,12,16 */
     vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI */
 } vcsfw_cal_image_1000DPI_gain_map_pix_header_t;
+
+/*
+ * The vcsfw_steller_cal_a_offset_coeffs_header_t is the data header for
+ * VCSFW_IOTA_ITYPE_STELLER_CAL_A_OFFSET_COEFFICIENTS iota.
+*/
+typedef struct VCS_PACKED vcsfw_steller_cal_a_offset_coeffs_header_s {
+    vcsUint16_t      offset;        /* offset in dwords */
+    vcsUint16_t      npixels;       /* number of pixels in a row, after cropping */
+    vcsUint16_t      nlines;        /* number of rows, after cropping */
+    vcsInt32_t       quardratic_coef;    
+    vcsUint8_t       bitdepth;      /* bit-depth: 16 */
+    vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
+    vcsUint8_t       reserved[6];
+} vcsfw_steller_cal_a_offset_coeffs_header_t;
+
+/*
+ * The vcsfw_steller_cal_b_scale_coeffs_header_t is the data header for
+ * VCSFW_IOTA_ITYPE_STELLER_CAL_B_SCALE_COEFFICIENTS iota.
+*/
+typedef struct VCS_PACKED vcsfw_steller_cal_b_scale_coeffs_header_s {
+    vcsUint16_t      offset;        /* offset in dwords */
+    vcsUint16_t      npixels;       /* number of pixels in a row, after cropping */
+    vcsUint16_t      nlines;        /* number of rows, after cropping */
+    vcsUint8_t       bitdepth;      /* bit-depth: 16 */
+    vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
+    vcsUint8_t       reserved[4];    
+} vcsfw_steller_cal_b_scale_coeffs_header_t;
+
+/*
+ * The vcsfw_steller_cal_b_scale_coeffs_header_t is the data header for
+ * VCSFW_IOTA_ITYPE_STELLER_CAL_A_OFFSET_COEFFICIENTS_DRC iota.
+*/
+typedef struct VCS_PACKED vcsfw_steller_cal_a_offset_coeffs_drc_header_s {
+    vcsUint32_t      compressedSize; /* Compressed image size */
+    vcsUint16_t      offset;        /* offset in dwords */
+    vcsUint16_t      npixels;       /* number of pixels in a row, after cropping */
+    vcsUint16_t      nlines;        /* number of rows, after cropping */
+    vcsUint8_t       bitdepth;      /* bit-depth: 16 */
+    vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
+    vcsUint8_t       reserved[4];    
+} vcsfw_steller_cal_a_offset_coeffs_drc_header_t;
+
+/*
+ * The vcsfw_steller_cal_b_scale_coeffs_header_t is the data header for
+ * VCSFW_IOTA_ITYPE_STELLER_CAL_B_SCALE_COEFFICIENTS_DRC iota.
+*/
+typedef struct VCS_PACKED vcsfw_steller_cal_b_scale_coeffs_drc_header_s {
+    vcsUint32_t      compressedSize; /* Compressed image size */
+    vcsUint16_t      offset;        /* offset in dwords */
+    vcsUint16_t      npixels;       /* number of pixels in a row, after cropping */
+    vcsUint16_t      nlines;        /* number of rows, after cropping */
+    vcsUint8_t       bitdepth;      /* bit-depth: 16 */
+    vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
+    vcsUint8_t       reserved[4];    
+} vcsfw_steller_cal_b_scale_coeffs_drc_header_t;
+
+/*
+ * The vcsfw_steller_cal_b_scale_coeffs_header_t is the data header for
+ * VCSFW_IOTA_ITYPE_STELLER_CAL_B_SCALE_COEFFICIENTS_DRC iota.
+*/
+typedef struct VCS_PACKED vcsfw_steller_cal_sunlight_correction_reflow_drc_header_s {
+    vcsUint32_t      compressedSize; /* Compressed image size */
+    vcsUint16_t      offset;        /* offset in dwords */
+    vcsUint16_t      npixels;       /* number of pixels in a row, after cropping */
+    vcsUint16_t      nlines;        /* number of rows, after cropping */
+    vcsUint8_t       bitdepth;      /* bit-depth: 16 */
+    vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
+    vcsUint8_t       reserved[4];    
+} vcsfw_steller_cal_sunlight_correction_reflow_drc_header_t;
 
 /*
  * VCSFW_IOTA_ITYPE_CPID_CAL_DARK_RATE_MAP_1000DPI
@@ -7599,8 +7786,6 @@ typedef struct VCS_PACKED vcsfw_config_version_s{
  * navigation code
  */
 typedef struct VCS_PACKED vcsfw_config_nav_swipe_s {
-    vcsUint32_t      nav_mode;           /* see NAV_SWIPE_MODE definitions below */
-
     /* parameters for horizontal swipe detection */
     vcsUint8_t       h_regions;         /* number of rcvr or xmtr regions     */
     vcsUint8_t       h_flags;           /* see NAV_SWIPE_FLAGS below          */
@@ -7611,8 +7796,8 @@ typedef struct VCS_PACKED vcsfw_config_nav_swipe_s {
                                         /*   units of regions                 */
     vcsUint16_t      h_min_exit_pos;
     vcsUint16_t      h_max_exit_pos;
-    vcsUint16_t      h_min_vel;         /* minimum allowed finger velocity    */
-                                        /*   for a swipe                      */
+    vcsUint16_t      h_min_fwd_movement;
+    vcsUint16_t      h_max_rev_movement;
     vcsUint16_t      h_threshold;       /* finger detection threshold         */
     vcsUint8_t       h_xstride;         /* stride used for indexing into the  */
     vcsUint8_t       h_ystride;         /*   2D frame                         */
@@ -7624,7 +7809,8 @@ typedef struct VCS_PACKED vcsfw_config_nav_swipe_s {
     vcsUint16_t      v_req_dist_negdir;
     vcsUint16_t      v_min_exit_pos;
     vcsUint16_t      v_max_exit_pos;
-    vcsUint16_t      v_min_vel;
+    vcsUint16_t      v_min_fwd_movement;
+    vcsUint16_t      v_max_rev_movement;
     vcsUint16_t      v_threshold;
     vcsUint8_t       v_xstride;
     vcsUint8_t       v_ystride;
