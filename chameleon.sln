@@ -61,6 +61,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpModuleTest", "cmlFpSensor
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DotNetTestEngine", "cmlFpTestApp\DotNetTestEngine\msvc\DotNetTestEngine.vcxproj", "{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cmlLogParser", "cmlFpTestApp\cmlLogParser\cmlLogParser.vcxproj", "{939D0442-FC7B-4249-AF52-1F63D2B8D116}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -239,6 +241,15 @@ Global
 		{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}.Release|Win32.Build.0 = Release|Win32
 		{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}.Release|x64.ActiveCfg = Release|x64
 		{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}.Release|x64.Build.0 = Release|x64
+		{939D0442-FC7B-4249-AF52-1F63D2B8D116}.Debug|Win32.ActiveCfg = Debug|Win32
+		{939D0442-FC7B-4249-AF52-1F63D2B8D116}.Debug|Win32.Build.0 = Debug|Win32
+		{939D0442-FC7B-4249-AF52-1F63D2B8D116}.Debug|x64.ActiveCfg = Debug|Win32
+		{939D0442-FC7B-4249-AF52-1F63D2B8D116}.Release_Internal|Win32.ActiveCfg = Release|Win32
+		{939D0442-FC7B-4249-AF52-1F63D2B8D116}.Release_Internal|Win32.Build.0 = Release|Win32
+		{939D0442-FC7B-4249-AF52-1F63D2B8D116}.Release_Internal|x64.ActiveCfg = Release|Win32
+		{939D0442-FC7B-4249-AF52-1F63D2B8D116}.Release|Win32.ActiveCfg = Release|Win32
+		{939D0442-FC7B-4249-AF52-1F63D2B8D116}.Release|Win32.Build.0 = Release|Win32
+		{939D0442-FC7B-4249-AF52-1F63D2B8D116}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
