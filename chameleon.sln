@@ -60,6 +60,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpModuleTest", "cmlFpSensorEngine\FpModule\msvc\FpModuleTest.vcxproj", "{3BACF06A-ABD8-412C-9223-672556F96633}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DotNetTestEngine", "cmlFpTestApp\DotNetTestEngine\msvc\DotNetTestEngine.vcxproj", "{2E3DB774-3FFD-4412-B447-3CD9512C5E4D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C918C13B-F08F-4625-B39F-FBB33828F1CC} = {C918C13B-F08F-4625-B39F-FBB33828F1CC}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cmlLogParser", "cmlFpTestApp\cmlLogParser\cmlLogParser.vcxproj", "{939D0442-FC7B-4249-AF52-1F63D2B8D116}"
 EndProject
