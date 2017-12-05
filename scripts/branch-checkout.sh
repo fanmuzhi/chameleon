@@ -22,5 +22,5 @@ fi
 
 echo "Switching to branch: $1"
 git checkout $1
-git pull -p
-git submodule foreach --recursive 'branch="$(git -C $toplevel symbolic-ref --short HEAD)"; git checkout $branch; git pull -p;'
+git pull
+git submodule foreach --recursive 'branch="$(git -C $toplevel symbolic-ref --short HEAD)"; git checkout $branch; git pull;'
