@@ -222,6 +222,8 @@
 #define VCSFW_CMD_FRAME_STATS_GET               143
 #define VCSFW_CMD_IOTA_INSINUATE                144
 #define VCSFW_CMD_PUBK_GET                      145
+#define VCSFW_CMD_RESET_DEFAULT                 146
+#define VCSFW_CMD_PAIR                          147
 
 /*
  * Commands for SecurePad.  These are restricted in that they
@@ -1433,7 +1435,7 @@
                                                 (VCSFW_STATUS_ERR_FLAG | 609)
 #define VCSFW_STATUS_ERR_MKM_OVERPROG_FAIL                                  \
                                                 (VCSFW_STATUS_ERR_FLAG | 610)
-#define VCSFW_STATUS_ERR_CBCTOOLONG             (VCSFW_STATUS_ERR_FLAG | 611)
+#define VCSFW_STATUS_ERR_GLOBALCBCTOOLONG       (VCSFW_STATUS_ERR_FLAG | 611)
 #define VCSFW_STATUS_ERR_FLASHPROG_PROGADDR_INVALID                         \
                                                 (VCSFW_STATUS_ERR_FLAG | 612)
 #define VCSFW_STATUS_ERR_IOTAWRITE_BADCHAIN                                 \
@@ -1450,8 +1452,13 @@
                                                 (VCSFW_STATUS_ERR_FLAG | 618)
 #define VCSFW_STATUS_ERR_FLASHERASE_IOTA_BADCHAINNUM                        \
                                                 (VCSFW_STATUS_ERR_FLAG | 619)
-
-
+#define VCSFW_STATUS_ERR_INVALID_SDB                                        \
+                                                (VCSFW_STATUS_ERR_FLAG | 620)
+#define VCSFW_STATUS_ERR_LOCALCBC_L_TOOLONG     (VCSFW_STATUS_ERR_FLAG | 621)
+#define VCSFW_STATUS_ERR_LOCALCBC_R_TOOLONG     (VCSFW_STATUS_ERR_FLAG | 622)
+#define VCSFW_STATUS_ERR_GLOBALCBC_NAV_TOOLONG  (VCSFW_STATUS_ERR_FLAG | 623)
+#define VCSFW_STATUS_ERR_BOOTLDR_PATCH_NOPRODKEYS                           \
+                                                (VCSFW_STATUS_ERR_FLAG | 624)
 
 /****************************************************************************/
 /* Every command begins with the following structure.  See the vcsfw_cmd_t  */
@@ -1580,6 +1587,10 @@ typedef struct VCS_PACKED vcsfw_reply_get_version_s
 ** vcsfw_reply_get_version_t::security[0] bit-field */
 #define VCSFW_SECURITY0_PKI_SECCOM       (1 << 0)
 #define VCSFW_SECURITY0_256BIT           (1 << 1)
+#define VCSFW_SECURITY0_MS_SEC_BIO       (1 << 2)
+#define VCSFW_SECURITY0_MIS              (1 << 3)
+
+#define VCSFW_SECURITY0_BAD_SDB          (1 << 7)
 
 /*
  * The following bits are for vcsfw_reply_get_version_t::patchsig.
@@ -2851,6 +2862,8 @@ typedef struct VCS_PACKED vcsfw_reply_dec_verify_template_data_s
 #define VCSFW_CMD_PROVISION_SEC_OPTS_ENFORCE_SECCOM                 0x00000001
 #define VCSFW_CMD_PROVISION_SEC_OPTS_PKI_SECCOM                     0x00000002
 #define VCSFW_CMD_PROVISION_SEC_OPTS_256BIT_SECURITY                0x00000004
+#define VCSFW_CMD_PROVISION_SEC_OPTS_MS_SEC_BIO                     0x00000008
+#define VCSFW_CMD_PROVISION_SEC_OPTS_MIS                            0x00000010
 
 /* The command structure.
  * The command data will be ignored by Metallica/Viper.
@@ -3326,9 +3339,14 @@ typedef struct VCS_PACKED vcsfw_cmd_gen_sec_key_s
 #define VCSFW_LED_EX2_STATES 6
 
 /* Definitions for the active field of led_ex2_led_t and led_ex2_state_t      */
-#define VCSFW_LED_EX2_INACTIVE    0
-#define VCSFW_LED_EX2_ACTIVE      0x01
-#define VCSFW_LED_EX2_WOE_ACTIVE  0x02
+#define VCSFW_LED_EX2_INACTIVE              0
+#define VCSFW_LED_EX2_ACTIVE                0x01
+ /* for LED to glow during woe suspend till FD, host has to set the below bits 
+  * VCSFW_LED_EX2_WOE_ACTIVE */
+#define VCSFW_LED_EX2_WOE_ACTIVE            0x02
+ /* for LED to glow during woe suspend till FD or timeout, host has to set
+  * these bits (VCSFW_LED_EX2_WOE_ACTIVE | VCSFW_LED_EX2_WOE_ACTIVE_TIMEOUT) */
+#define VCSFW_LED_EX2_WOE_ACTIVE_TIMEOUT    0x04
 
 typedef struct VCS_PACKED vcsfw_cmd_led_ex2_led_s {
     vcsUint8_t  maxbrightness;   /* 0-255, current limit for the LED (WOE_LED)*/
@@ -5874,6 +5892,10 @@ typedef struct VCS_PACKED vcsfw_reply_frame_stream_s {
                     /* current state of external finger presence detection */
 #define VCSFW_REPLY_FRAME_STREAM_FLAGS_SUNLIGHT 0x0010
                     /* image was acquired with sunlight settings */
+#define VCSFW_REPLY_FRAME_STREAM_FLAGS_ILLUMLOST    0x0020
+                    /* illumination signal (HBM) lost during acquistion */
+#define VCSFW_REPLY_FRAME_STREAM_FLAGS_EXTFPLOST    0x0040
+                    /* finger signal lost during acquistion */
 
 /****************************************************************************/
 /* VCSFW_CMD_IOTA_FIND                                                      */
@@ -5984,6 +6006,48 @@ typedef struct VCS_PACKED vcsfw_reply_pubk_get_s {
         vcsfw_ecc_pubkey_t ecc_key;
     } key;
 } vcsfw_reply_pubk_get_t;
+
+/****************************************************************************/
+/* VCSFW_CMD_PAIR                                                           */
+/****************************************************************************/
+
+/* The signature types. */
+#define VCSFW_CERTIFICATE_EX_SIGNATURE_TYPE_ECDSA        0
+#define VCSFW_CERTIFICATE_EX_SIGNATURE_TYPE_RSA          1
+#define VCSFW_CERTIFICATE_EX_SIGNATURE_TYPE_HMACSHA256   2
+
+/* ECC Certificate V. 2. */
+#define VCSFW_CERTIFICATE_EX_TYPE2                       0x5F3F
+typedef struct VCS_PACKED vcsfw_ecc_certificate2_s
+{
+    /* === Start data to sign === */
+    vcsUint16_t cert_type;                           /* Certificate Type   */
+    vcsUint16_t curve_iana_id;                       /* Curve ID   */
+    vcsUint8_t  x[VCSFW_TAKEOWN_MAX_ECC_PARAM_LEN];  /* Public key */
+    vcsUint8_t  y[VCSFW_TAKEOWN_MAX_ECC_PARAM_LEN];
+    vcsUint8_t  reserved;
+    vcsUint8_t  signature_type;                      /* Type of the signature. */
+    /* === End data to sign === */
+    vcsUint16_t signature_length;                    /* Length of the signature
+                                                      * in the buffer below. */
+    vcsUint8_t  signature[VCSFW_MAX_RSA_KEY_LENGTH]; /* Signature - big enough
+                                                       buffer to accommodate an 
+                                                       RSA signature in worst 
+                                                       case. */
+} vcsfw_ecc_certificate2_t; /* 400 Bytes total. */
+
+/* Comand. */
+typedef struct VCS_PACKED vcsfw_cmd_pair_s
+{
+    vcsfw_ecc_certificate2_t host_cert;
+} vcsfw_cmd_pair_t;
+
+/* Reply. */
+typedef struct VCS_PACKED vcsfw_reply_pair_s
+{
+    vcsfw_ecc_certificate2_t host_cert;
+    vcsfw_ecc_certificate2_t sensor_cert;
+} vcsfw_reply_pair_t;
 
 /****************************************************************************/
 /* Definitions related to the line structure of the sensor                  */
@@ -6626,6 +6690,8 @@ typedef struct VCS_PACKED vcsfw_ssl_alert_s
 #define VCSFW_TLS_RSA_WITH_AES_256_CBC_SHA256      0x003D
 #define VCSFW_TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA  0xC005
 #define VCSFW_TLS_PSK_WITH_AES_256_CBC_SHA         0x008D /* RFC4279 */
+#define VCSFW_TLS_PSK_WITH_AES_128_GCM_SHA256           0x00A8 /* RFC5487 */
+#define VCSFW_TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384    0xC02E /* RFC5289 */
 
 /* The PSK identities. */
 #define VCSFW_TLS_PSK_IDENTITY0                    0x0000
@@ -6941,7 +7007,17 @@ typedef struct VCS_PACKED vcsfw_frame_tag_s {
 #define VCSFW_FRAME_TAG_EXTFPS_SUNDRYREGS  21   /* alternative register
                                                  * settings for sun/dry
                                                  * finger */
-#define VCSFW_FRAME_TAG_CBC 22 /*CBC baseline RAM (HWDEF_MEMMAP_CBCRAM )*/
+#define VCSFW_FRAME_TAG_GCBC 22               /* Global CBC baseline RAM */
+#define VCSFW_FRAME_TAG_LCBC_L 23             /* Local CBC Left baseline RAM */
+#define VCSFW_FRAME_TAG_LCBC_R 24             /* Local CBC Right baseline RAM*/
+#define VCSFW_FRAME_TAG_GCBC_NAV 25            /* NAV CBC baseline RAM */
+#define VCSFW_FRAME_TAG_EXTFPS_OTP_TEMPCORRECT_V2  26 /* second version of
+                                                    * the temperature
+                                                    * correction
+                                                    * values from
+                                                    * external FPS OTPROM */
+#define VCSFW_FRAME_TAG_EXTFPS_OTP_RAW  27 /* raw OTPROM data from
+                                            * external FPS */
 
 /* Development-only tags: */
 
@@ -7333,6 +7409,41 @@ typedef struct VCS_PACKED vcsfw_frame_tag_extfps_sundryregs_s {
     vcsUint32_t     sunsense_threshold;
 } vcsfw_frame_tag_extfps_sundryregs_t;
 
+/* VCSFW_FRAME_TAG_EXTFPS_OTP_TEMPCORRECT_V2 */
+
+/*
+ * Temperature correction factor stored in external fingerprint
+ *  sensor (Steller Sensor 27) OTPROM.
+ */
+
+typedef struct VCS_PACKED vcsfw_frame_tag_extfps_otp_tempcorrect_v2_s {
+    vcsUint32_t     tempcorrect60;      /* temperature calibration @ 60 degC */
+    vcsUint32_t     tempcorrect25;      /* temperature calibration @ 25 degC */
+} vcsfw_frame_tag_extfps_otp_tempcorrect_v2_t;
+
+/* VCSFW_FRAME_TAG_EXTFPS_OTP_RAW */
+
+/*
+ * Raw OTPROM data from the external sensor's OTPROM.
+ *  Note that this is a variable-length tag
+ */
+
+#define VCSFW_FRAME_TAG_EXTFPS_OTP_RAW_DATA_MAX     256
+typedef struct VCS_PACKED vcsfw_frame_tag_extfps_otp_raw_s {
+    vcsUint32_t     base;
+    vcsUint8_t      data[VCSFW_FRAME_TAG_EXTFPS_OTP_RAW_DATA_MAX];
+} vcsfw_frame_tag_extfps_otp_raw_t;
+
+/* The 'base' value also contains the low 2 bits of the number
+ *  of bytes of register data. */
+#define VCSFW_FRAME_TAG_EXTFPS_OTP_RAW_BASE_ADDR        0x000000ff
+#define VCSFW_FRAME_TAG_EXTFPS_OTP_RAW_BASE_ADDR_B          0
+#define VCSFW_FRAME_TAG_EXTFPS_OTP_RAW_BASE_ADDR_N          8
+#define VCSFW_FRAME_TAG_EXTFPS_OTP_RAW_BASE_NBYTES      0xc0000000
+#define VCSFW_FRAME_TAG_EXTFPS_OTP_RAW_BASE_NBYTES_B        30
+#define VCSFW_FRAME_TAG_EXTFPS_OTP_RAW_BASE_NBYTES_N        2
+
+
 /*
  * iotas are blocks of bytes that are stored in non-volatile
  *  storage in a part.  These are first implemented in the Nassau
@@ -7444,9 +7555,31 @@ typedef struct VCS_PACKED vcsfw_frame_tag_extfps_sundryregs_s {
 /* Specific to Steller: B_SCALE_COEFFICIENTS for Dual reference calibration
   */
 #define VCSFW_IOTA_ITYPE_STELLER_CAL_SUNLIGHT_CORRECTION_REFLOW_DRC   0x0025
+#define VCSFW_IOTA_ITYPE_STELLER_CAL_DRC_ADAPTIVE_CORRECTION  0x0026
 
 
 #define VCSFW_IOTA_ITYPE_CHAINEND       0xFFFF /* end of the chain (internal) */
+
+/*For Steller for DRC
+   Store T0, the integration time for the target DN, DN0 and Tsun0, the sunlight integration time for target DNsun0.  
+   We should also store DN0 and DNsun0 along with T0 and Tsun0 in the integration time iota.
+*/
+typedef struct VCS_PACKED vcsfw_steller_drc_adaptive_correction__s{
+     vcsUint16_t     integTime_normal_t;   /* This will be the value we pass to temp comp code for MT or normal integration time; T0*/
+     vcsUint16_t     integTime_sunlight_sun; /* This will be the value we pass to temp comp code for live image integration time in case of sunlight; Tsun0*/
+     vcsUint16_t     integTime_dryfinger; /* This may be the value we pass to temp comp code for live image integration time in case of dry finger*/
+     vcsUint16_t     steller_algo_dll_version;              /* unused[1] is used for algo DLL cpid_cpid_dll_version_t.major;
+                                                               and unused[0] can have algo DLL cpid_cpid_dll_version_t.release
+                                                               algo DLL version 6.0.1 so unused[1] has 6 and unused[0] has 1
+                                                             */
+     vcsUint16_t     dn_normal;  /* This is the target DN for normal, indoor conditions; DN0 */
+     vcsUint16_t     dn_sunlight;  /* This is the target DN for sunlight conditions; DNsun0 */
+     vcsUint16_t     dn_dryfinger;  /* This is the target DN for dry fingers. Presently same as dn_normal_0*/
+     vcsUint16_t     reserved_1;
+     vcsUint16_t     reserved_2;
+     vcsUint16_t     reserved_3;
+
+} vcsfw_steller_drc_adaptive_correction_t;
 
 
 /* Specific to CPID: sensor config characteristics, contains different integration

@@ -362,6 +362,14 @@ typedef struct WFW_PACKED wfw_cmd_bulk_read_s
 
 
 /****************************************************************************/
+/* WFW_CMD_EVENT_NOTIFY                                                     */
+/****************************************************************************/
+// There is no structure associated with the command.  The command code is followed by a variable
+// number of bytes indicating which events the host wishes to be notified of.
+// See WFW_CMD_EVENT_READ_CONFIG for  the list of supported events.
+
+
+/****************************************************************************/
 /* WFW_CMD_EVENT_READ_CONFIG                                                     */
 /****************************************************************************/
 
@@ -437,10 +445,14 @@ typedef struct WFW_PACKED wfw_reply_event_read_config_s
 /*
  * Event details for specific event occurrences.
  */
+#define WFW_CAL_COMPLETED_TYPE_NONE   0
 #define WFW_CAL_COMPLETED_TYPE_IMAGE  1
 #define WFW_CAL_COMPLETED_TYPE_NAV    2
 #define WFW_CAL_COMPLETED_TYPE_WOF    3
+#define WFW_CAL_COMPLETED_TYPE_SB     4
+#define WFW_CAL_COMPLETED_TYPE_FORCE  5
 
+#define WFW_CAL_COMPLETED_OP_NONE     0x0000
 #define WFW_CAL_COMPLETED_OP_CBC      0x0001
 #define WFW_CAL_COMPLETED_OP_BASELINE 0x0002
 
@@ -451,6 +463,12 @@ typedef struct WFW_PACKED wfw_reply_event_read_config_s
 #define WFW_FINGER_REJECTED_COVERAGE_FAIL 0x01
 #define WFW_FINGER_REJECTED_IMAGE_READY   0x02
 #define WFW_FINGER_REJECTED_SETTLING_FAIL 0x03
+#define WFW_FINGER_REJECTED_FINGERLIFT    0x04
+
+/*
+ * Flags in FRAME_READY event
+ */
+#define WFW_FRAME_READY_FLAGS_FINGERLIFT  0x0001
 
 
 //This union requires some commentary, we have the ability to report the
@@ -490,7 +508,15 @@ typedef union WFW_PACKED wfw_event_details_s
     wfwUint16_t     rej_details;  //Depends on rej_reason:
                                   //- coverage percentage, 
                                   //- number settling frames taken
+                                  //- wofADC value
   } finger_rejected_info;
+
+  //Event details to WFW_EVENT_TYPE_FRAME_READY
+  struct
+  {
+    wfwUint16_t     numSettlingFrames;
+    wfwUint16_t     flags;
+  } frame_ready_info;
 
   //Event details to WFW_EVENT_TYPE_SOFT_RESET
   struct
@@ -546,10 +572,16 @@ typedef struct WFW_PACKED wfw_cmd_stream_raw_data_s {
 #define FRAME_TYPE_WOF                   0x0004  /* Raw ADC values for WOF */
 #define FRAME_TYPE_SOFT_BUTTONS          0x0005  /* Raw ADC values for soft buttons */
 
-#define FRAME_TYPE_CAL_SINGLE_BURST      0x0100  /* Single burst, lsb used to select burst num */
+#define FRAME_TYPE_CAL_SINGLE_BURST      0x0100  /* Single burst for CBC (Img) Local Cal, lsb used to select burst num */
+
 
 #define FRAME_TYPE_CAL_FULL_IMAGE        0x0200  /* Calibration image (CDM & FW BL bypassed) */
 #define FRAME_TYPE_FWBL_FULL_IMAGE       0x0201  /* same as CAL_FULL_IMAGE but keep IMG_AVG_CTRL from IOTA */
+#define FRAME_TYPE_GCAL_SINGLE_BURST     0x0300  /* Single burst for CBC (Img) Global Cal (imgAvgCtrl set 0), lsb used to select burst num */
+
+/* Raw ADC values for WOF captured after a delay */
+#define FRAME_TYPE_WOF_DELAYED           0x0400
+#define IS_FRAME_TYPE_WOF(x)             ((x) == FRAME_TYPE_WOF) || ((x) == FRAME_TYPE_WOF_DELAYED)
 
 /* STREAM_RAW_DATA returns only the generic reply */
 
@@ -729,14 +761,13 @@ typedef struct WFW_PACKED wfw_config_frame_avg_s {
  * algorithm
  */
 typedef struct WFW_PACKED wfw_config_frame_select_s {
+    wfwUint16_t cnt_thresh;
     wfwUint8_t  diff_thresh;
-    wfwUint8_t  cnt_thresh;
     wfwUint8_t  delay_interval_msec;
     wfwUint8_t  max_frames;
     wfwUint8_t  pscan_col_size;
     wfwUint8_t  pscan_row_size;
     wfwUint8_t  pscan_start_row;
-    wfwUint8_t  unused2;
 } wfw_iota_config_frame_select_t;
 
 /* WFW_IOTA_ITYPE_CONFIG_FPPRESENT */
@@ -744,10 +775,13 @@ typedef struct WFW_PACKED wfw_config_frame_select_s {
  * This iota contains configuration settings for the coverage detection
  * algorithm
  */
+#define FPPRESENT_FLAGS_LIFT_CHECK_ENABLED  0x0001
+#define FPPRESENT_FLAGS_LIFT_CHECK_REJECT   0x0002
 typedef struct WFW_PACKED wfw_iota_config_fppresent_s {
     wfwUint32_t variance_thresh;
     wfwUint16_t coverage_thresh;
-    wfwUint16_t unused;
+    wfwUint8_t  wof_delay_ms;
+    wfwUint8_t  flags;
     wfwUint16_t blocksizex;
     wfwUint16_t blocksizey;
     wfwUint16_t marginx;
@@ -812,10 +846,27 @@ typedef struct WFW_PACKED wfw_swipe_parameters_s {
 
     wfwUint8_t   min_movement;     /* the amount a finger needs to be moved to start tracking motion */
     wfwUint8_t   min_backward_movement;  /* the amount a finger needs to be moved in the opposite direction to reverse swipe direction */
-    wfwUint16_t  unused;
+    wfwUint8_t   flags;
+    wfwUint8_t   unused;
 
     wfwUint16_t  finger_threshold;
 } wfw_swipe_parameters_t;
+
+/*
+ * SWIPE_FLAGS.  0x01 and 0x02 are no longer supported
+ */
+/* if this is set for a given axis, report gestures on this axis as the other
+ * axis.  For example, if h_params SWAP_AXIS is set, report anything on the
+ * horizontal axis as UP/DOWN gestures */
+#define SWIPE_FLAGS_SWAP_AXIS       0x04
+
+/* if this is set for a given axis, report gestures on this axis as the
+ * opposite direction.
+ * - In the horizontal axis, LEFT is normally positive, if this bit is set,
+ *   RIGHT shall be positive
+ * - In the vertical axis, DOWN is normally positive, if this bit is set,
+ *   UP shall be positive */
+#define SWIPE_FLAGS_SWAP_DIRECTION  0x08
 
 typedef struct WFW_PACKED wfw_iota_config_swipe {
     wfwUint16_t             nav_first_col;   /* index of the first column that is valid in a NAV frame */
@@ -844,18 +895,46 @@ typedef struct WFW_PACKED wfw_iota_config_swipe {
  *                  check fails or it was determined that the calibration was performed while finger down.
  *             >1 - 1 + recalibrate coarse and fine corrections if temp exceeds 'Recal' threshold,
  *                      recalibrate fine corrections if temp exceeds 'Drift' threshold.
+ *  baselineMgmtFlags:   bit fields for various configurations:
+ *                       bit 0: reCalImgFingerResync
+ *                              0 - Image recalibration is not initiated at FingerResync event.
+ *                              1 - Image recalibration is initiated at FingerResync event.
+ *                              Note: WOF and NAV recalibrations are always initiated at FingerResync event. 
+ *                       bits 1-15: unused
  *  tempCheck_interval:  time interval at the end of which the temperature is checked for drift from
  *                       its value at last image calibration.  Units: milliseconds. Range 1 to (2**32)-1
- *  tempDrift_threshold: temperature drift from most recent calibration at which finest calibration
+ *  tempImg_threshold:   temperature drift from most recent calibration at which Image calibration
  *                       is to be initiated. Units: degrees C. Range 0-65535.
- *  tempRecal_threshold: temperature drift from most recent calibration at which a complete re-calibration
+ *  tempWof_threshold:   temperature drift from most recent calibration at which a WOF calibration
+ *                       is to be initiated. Units: degrees C. Range 0-65535.
+ *  tempNav_threshold:   temperature drift from most recent calibration at which NAV/Swipe calibration
  *                       is to be initiated. Units: degrees C. Range 0-65535.
  *  pixelCalTolerance_ErrMargin: Image global/local additional margin added to calculated ADC code shift
  *                               tolerance for calibration convergence. This value is divided into the
  *                               calculated ADC coded shift tolerance to get a percentage of the tolerance
  *                               that is then added to the tolerance; e.g., a value of 5 will derive a 20%
  *                               additional tolerance. Units: as described. Range 1-65535.
+ *
  */
+  typedef struct WFW_PACKED wfw_iota_config_bl_mgmt {
+    wfwUint16_t modeConfig;
+    wfwUint16_t baselineMgmtFlags;  
+    wfwUint32_t tempCheck_interval;
+    wfwUint16_t tempImg_threshold;
+    wfwUint16_t tempWof_threshold;
+    wfwUint16_t tempNav_threshold;
+    wfwUint16_t pixelCalTolerance_ErrMargin;
+} wfw_iota_config_bl_mgmt_t;
+
+/* the WFW_IOTA_CFG_BLM_FING_RESYNC_NO_IMG_CAL bit applies to the reCalImgFingerResync field
+ * and, when set, a FingerResync report will result in BLM initiating WOF and NAV calibrations
+ * but no Image calibrations.
+ * When the value of the reCalImgFingerResync is 0 (the default) a FingerResync report will
+ * result in BLM initiating WOF, IMG and NAV calibrations.
+ */  
+#define WFW_IOTA_CFG_BLM_FING_RESYNC_NO_IMG_CAL  0x0001
+
+/*
 typedef struct WFW_PACKED wfw_iota_config_bl_mgmt {
     wfwUint16_t modeConfig;
     wfwUint32_t tempCheck_interval;
@@ -863,7 +942,7 @@ typedef struct WFW_PACKED wfw_iota_config_bl_mgmt {
     wfwUint16_t tempRecal_threshold;
     wfwUint16_t pixelCalTolerance_ErrMargin; // Image global/local additional
 } wfw_iota_config_bl_mgmt_t;
-
+*/
 
 /* WFW_IOTA_ITYPE_DIMS */
 /* As is commented above, this actually isn't used by the firmware, but is
@@ -899,8 +978,9 @@ typedef struct WFW_PACKED wfw_reply_get_timestamp_s {
  *  GET_SYS_INFO
  ****************************************************************************/
 typedef struct WFW_PACKED wfw_reply_get_sys_info_s {
-  wfwUint16_t recalTemp;          //temp sense at most recent coarse&fine cal.
-  wfwUint16_t driftTemp;          //temp sense at most recent fine only cal
+  wfwUint16_t wofTemp;            //wof temp sense at most recent cal.
+  wfwUint16_t imgTemp;            //image temp sense at most recent cal
+  wfwUint16_t navTemp;            //nav temp sense at most recent cal
   wfwUint16_t currentTemp;        //most recent temperature sensed
   wfwSint16_t wofFP_Baseline;     //most recent baseline calculated for WOF
   wfwUint16_t wofFP_Cbc;          //most recent CBC from WOF calibration
@@ -916,44 +996,13 @@ typedef struct WFW_PACKED wfw_reply_get_sys_info_s {
   wfwSint16_t Force_CalCbc;       //most recent CalCBC calculated for Force button
   wfwSint16_t wofSB_fuAbsThresh;  //fu threshold used to detect finger up
   wfwSint16_t wofSB_fdAbsThresh;  //fd threshold used to detect finger down
-  wfwUint16_t reset_condition;    //value of the reset condition register
   wfwUint32_t calStatus;          //bit pattern indicating status of all calibrations
   wfwUint16_t calCount;           //Count of calibration occurrences
   wfwSint16_t wofFP_PrevAdc;      //ADC reading from WOF fingerprint sensor
-  wfwUint16_t reserved[2];
+  wfwUint16_t reset_condition;    //value of the reset condition register
+  wfwUint16_t reserved[1];
 } wfw_reply_get_sys_info_t;
 
-
-
-/****************************************************************************
- *  Frame Tag Definitions
- ****************************************************************************/
-/* Iotas of type WFW_IOTA_ITYPE_FRAME_XXXXX consist of a list of frame tags
- * that contain data of specific formats. This section defines the valid frame
- * tag types and each of their structures.
- */
-
-/* Frame Tag Header */
-typedef struct WFW_PACKED wfw_frame_tag_s {
-    wfwUint16_t   nwords;    /* number of 32-bit to follow */
-    wfwUint8_t    flags;
-    wfwUint8_t    tagid;
-} wfw_frame_tag_t;
-
-/* frame tag types */
-#define WFW_FRAME_TAG_DM       3 /* Drive matrix */
-#define WFW_FRAME_TAG_REG16BLK 6 /* A block of 16-bit register values */
-
-/* WFW_FRAME_TAG_DM */
-/* followed by a drive matrix that is numBursts * numTransmitters * 2 bits in
- * length */
-
-/* WFW_FRAME_TAG_REG16BLK */
-typedef struct WFW_PACKED wfw_frame_tag_reg16blk_s {
-    wfwUint16_t  regbase;          /* base address in block of registers */
-    wfwUint16_t  nregs;            /* number of registers */
-} wfw_frame_tag_reg16blk_t;
-/* followed by a list of nregs words specifying register settings */
 
 
 /****************************************************************************
