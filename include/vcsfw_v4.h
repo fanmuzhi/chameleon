@@ -7565,16 +7565,24 @@ typedef struct VCS_PACKED vcsfw_frame_tag_extfps_otp_raw_s {
    We should also store DN0 and DNsun0 along with T0 and Tsun0 in the integration time iota.
 */
 typedef struct VCS_PACKED vcsfw_steller_drc_adaptive_correction__s{
-     vcsUint16_t     integTime_normal_t;   /* This will be the value we pass to temp comp code for MT or normal integration time; T0*/
-     vcsUint16_t     integTime_sunlight_sun; /* This will be the value we pass to temp comp code for live image integration time in case of sunlight; Tsun0*/
-     vcsUint16_t     integTime_dryfinger; /* This may be the value we pass to temp comp code for live image integration time in case of dry finger*/
-     vcsUint16_t     steller_algo_dll_version;              /* unused[1] is used for algo DLL cpid_cpid_dll_version_t.major;
-                                                               and unused[0] can have algo DLL cpid_cpid_dll_version_t.release
-                                                               algo DLL version 6.0.1 so unused[1] has 6 and unused[0] has 1
-                                                             */
-     vcsUint16_t     dn_normal;  /* This is the target DN for normal, indoor conditions; DN0 */
-     vcsUint16_t     dn_sunlight;  /* This is the target DN for sunlight conditions; DNsun0 */
-     vcsUint16_t     dn_dryfinger;  /* This is the target DN for dry fingers. Presently same as dn_normal_0*/
+     vcsUint16_t     integTime_normal_t;   /* This is the normal integration time at calibration time in mSecs; T0 */
+     vcsUint16_t     integTime_sunlight_sun; /* This is the integration time found out for sunlight imaging during calibration in mSecs; Tsun0 */
+     vcsUint16_t     integTime_dryfinger;    /* This is the dry_finger integration time at calibration time in mSecs. Presently same as normal integration time */
+     vcsUint16_t     integTime_sunsense_roi; /*This is the integration time determined at calibration time in mSecs for ROI for sunsense */
+     vcsUint16_t     steller_algo_dll_version_major;   /* This has the stellerAlgo DLL cpid_cpid_dll_version_t.major;   */
+     vcsUint16_t     steller_algo_dll_version_release; /* This has the stellerAlgo DLL cpid_cpid_dll_version_t.release */
+
+     vcsUint16_t     dn_normal;     /* This is the target DN used during calibration for normal, indoor conditions; DN0 */
+     vcsUint16_t     dn_sunlight;   /* This is the target DN used during calibration for sunlight conditions; DNsun0 */
+     vcsUint16_t     dn_dryfinger;  /* This is the target DN used during calibration for dry fingers. Presently same as dn_normal_0 */
+     vcsUint16_t     dn_sunsense_roi;  /* This is the target DN used during calibration for ROI sunsense. */
+
+     vcsUint16_t     gain_normal;    /* This is the gain used during calibration for normal, indoor conditions */
+     vcsUint16_t     gain_sunlight;  /* This is the gain used during calibration for sunlight conditions */
+     vcsUint16_t     gain_dryfinger;  /* This is the gain used during calibration for dry finger conditions. Presently same as normal, indoor */
+     vcsUint16_t     gain_sunsense_roi;  /* This is the gain used during calibration for ROI sunsense*/
+     vcsUint16_t     iota_version;
+
      vcsUint16_t     reserved_1;
      vcsUint16_t     reserved_2;
      vcsUint16_t     reserved_3;
