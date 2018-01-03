@@ -18,6 +18,26 @@ SET REL_PKG_INTERNAL_DIR=Steller_MT_x64_Internal_vX.X.X
 @echo.
 set path=%QT_DIR_X64%;%path%
 path
+@echo. 
+@echo. 
+
+IF EXIST %BUILD_DIR%\iconengines\  (
+@echo. ============================================== 
+@echo. ## Delete previous QT library ##
+@echo. 
+rmdir /s /q %BUILD_DIR%\iconengines
+rmdir /s /q %BUILD_DIR%\imageformats
+rmdir /s /q %BUILD_DIR%\platforms
+rmdir /s /q %BUILD_DIR%\translations
+
+del %BUILD_DIR%\libEGL.dll
+del %BUILD_DIR%\libGLESV2.dll
+del %BUILD_DIR%\opengl32sw.dll
+del %BUILD_DIR%\Qt5Core.dll
+del %BUILD_DIR%\Qt5Gui.dll
+del %BUILD_DIR%\Qt5Svg.dll
+del %BUILD_DIR%\Qt5Widgets.dll
+)
 
 %QT_DIR_X64%\windeployqt.exe %BUILD_DIR%\ChameleonQt.exe
 
