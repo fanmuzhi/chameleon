@@ -59,6 +59,25 @@ rmdir /s /q %REL_PKG_DIR%
 @echo. ======== Internal Release Package x32 ========
 @echo.
 @echo.
+
+IF EXIST %BUILD_DIR_INTERNAL%\iconengines\  (
+@echo. ============================================== 
+@echo. ## Delete previous QT library ##
+@echo. 
+rmdir /s /q %BUILD_DIR_INTERNAL%\iconengines
+rmdir /s /q %BUILD_DIR_INTERNAL%\imageformats
+rmdir /s /q %BUILD_DIR_INTERNAL%\platforms
+rmdir /s /q %BUILD_DIR_INTERNAL%\translations
+
+del %BUILD_DIR_INTERNAL%\libEGL.dll
+del %BUILD_DIR_INTERNAL%\libGLESV2.dll
+del %BUILD_DIR_INTERNAL%\opengl32sw.dll
+del %BUILD_DIR_INTERNAL%\Qt5Core.dll
+del %BUILD_DIR_INTERNAL%\Qt5Gui.dll
+del %BUILD_DIR_INTERNAL%\Qt5Svg.dll
+del %BUILD_DIR_INTERNAL%\Qt5Widgets.dll
+)
+
 %QT_DIR_X32%\windeployqt.exe %BUILD_DIR_INTERNAL%\ChameleonQt_InternalOnly.exe
  
 IF EXIST %REL_PKG_INTERNAL_DIR%\  (
