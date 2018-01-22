@@ -69,6 +69,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDemoConsoleApp", "cml
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpModuleTest", "cmlFpSensorEngine\FpModule\msvc\FpModuleTest.vcxproj", "{3BACF06A-ABD8-412C-9223-672556F96633}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2374867A-3F15-4FC5-8401-41E1A82CF3F5} = {2374867A-3F15-4FC5-8401-41E1A82CF3F5}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpAlgorithmTest", "cmlFpTestEngine\FpImageProcessing\msvc\FpAlgorithmTest.vcxproj", "{4773BAC8-E1FB-4C7B-B9EC-8D7C7F552972}"
 	ProjectSection(ProjectDependencies) = postProject
