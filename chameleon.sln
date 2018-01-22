@@ -58,6 +58,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DotNetTestEngine", "cmlFpTe
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cmlLogParser", "cmlFpTestApp\cmlLogParser\cmlLogParser.vcxproj", "{939D0442-FC7B-4249-AF52-1F63D2B8D116}"
+	ProjectSection(ProjectDependencies) = postProject
+		{587F8203-19C9-46B7-9CE7-468BC24E44C5} = {587F8203-19C9-46B7-9CE7-468BC24E44C5}
+		{7554C18F-FB7A-4C19-A445-C1B6BE59D79C} = {7554C18F-FB7A-4C19-A445-C1B6BE59D79C}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDemoConsoleApp", "cmlFpTestApp\DotNetDemoConsoleApp\DotNetDemoConsoleApp.csproj", "{BC091DC2-46B8-4EFD-9098-2334944AE580}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -70,6 +74,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpModuleTest", "cmlFpSensor
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FpAlgorithmTest", "cmlFpTestEngine\FpImageProcessing\msvc\FpAlgorithmTest.vcxproj", "{4773BAC8-E1FB-4C7B-B9EC-8D7C7F552972}"
+	ProjectSection(ProjectDependencies) = postProject
+		{587F8203-19C9-46B7-9CE7-468BC24E44C5} = {587F8203-19C9-46B7-9CE7-468BC24E44C5}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
