@@ -159,6 +159,8 @@
 #define USBID_SYNA_HAYES        0x0041
 /* Viper3 (b1218): */
 #define USBID_SYNA_VIPER3       0x0042
+/* Prometheus (b1422): */
+#define USBID_SYNA_PROMETHEUS   0x00a9
 
 
 /*

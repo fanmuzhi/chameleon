@@ -701,14 +701,7 @@ our @reply_get_version_htype = (
     [ 'buildnum', \@uint32_primtype, '%04u' ],
     [ 'vmajor', \@uint8_primtype, '%u' ],
     [ 'vminor', \@uint8_primtype, '%u' ],
-    [ 'target', \@uint8_primtype,
-      {
-          $VCSFW_TARGET_ROM => 'ROM',
-          $VCSFW_TARGET_FPGA => 'FPGA',
-          $VCSFW_TARGET_RTLSIM => 'RTLSIM',
-          $VCSFW_TARGET_ISS => 'ISS',
-          $VCSFW_TARGET_FPGADBG => 'FPGADBG'
-      } ],
+    [ 'target', \@uint8_primtype, \%target_by_num ],
     [ 'product', \@uint8_primtype, \%product_by_num ],
     [ 'siliconrev', \@uint8_primtype ],
     [ 'formalrel', \@uint8_primtype, \&bool_format ],
@@ -873,7 +866,7 @@ my @reply_otprom_tag_find_header_htype = (
 
 my @cmd_iota_find_htype = (
     'vcsfw_cmd_iota_find_t',
-    [ 'itype', \@uint16_primtype ],
+    [ 'itype', \@uint16_primtype, \&iota_itype_format ],
     [ 'flags', \@uint16_primtype ],
     [ 'maxniotas', \@uint8_primtype ],
     [ 'firstidx', \@uint8_primtype ],
@@ -890,7 +883,7 @@ my @reply_iota_find_htype = (
 my @reply_iota_find_hdr_htype = (
     'vcsfw_reply_iota_find_hdr_t',
     [ 'nbytes', \@uint16_primtype ],
-    [ 'itype', \@uint16_primtype ]
+    [ 'itype', \@uint16_primtype, \&iota_itype_format ]
 );
 
 
@@ -975,7 +968,7 @@ my @cmd_frame_acq_htype = (
 
 my @cmd_iota_write_htype = (
     'vcsfw_cmd_iota_write_t',
-    [ 'itype', \@uint16_primtype ],
+    [ 'itype', \@uint16_primtype, \&iota_itype_format ],
     [ 'unused', \@uint8_primtype, undef, 2 ]
 );
 
@@ -1383,7 +1376,7 @@ our %cmd_by_num = (
     122 => [ 'TEMPERATURE_READ' ],
     123 => [ 'AUTORESTART_STAT_GET' ],
     124 => [ 'ECHO' ],
-    125 => [ 'BOOTLDR_PATCH' ],
+    125 => [ 'BOOTLDR_PATCH', \&cmd_bootldr_patch_format ],
     126 => [ 'GET_NAV_STATUS_V2', undef, \&reply_get_nav_status_v2_format ],
     127 => [ 'FRAME_READ',
               [ 'vcsfw_cmd_frame_read_t',
@@ -1419,6 +1412,11 @@ our %cmd_by_num = (
              \&reply_iota_find_format  ],
     143 => [ 'FRAME_STATS_GET' ],
     144 => [ 'IOTA_INSINUATE' ],
+    145 => [ 'PUBK_GET' ],
+
+    230 => [ 'FRAME_READ_RESTRICTED' ],
+    231 => [ 'FRAME_ACQ_RESTRICTED' ],
+    232 => [ 'FRAME_FINISH_RESTRICTED' ],
 
     250 => [ 'TEST_PARAMETER_SET' ],
     251 => [ 'TEST_CONTINUE' ],
@@ -2095,6 +2093,7 @@ my %status_by_val = (
     ($VCSFW_STATUS_ERR_FLAG | 596) => [ 'ERR_FRAME_ACQ_NOSUNDRYREGS' ],
     ($VCSFW_STATUS_ERR_FLAG | 597) => [ 'ERR_PRNG_FAILED' ],
     ($VCSFW_STATUS_ERR_FLAG | 598) => [ 'ERR_FRAME_TAG_XSREG8BLK_TOOSHORT' ],
+    ($VCSFW_STATUS_ERR_FLAG | 599) => [ 'ERR_FRAME_STATE_GET_BUSY' ],
 );
 
 
@@ -2204,6 +2203,86 @@ our %get_print_tag_by_val = (
     76 => [ 'SCM_WOF', \@param_scm_wof_htype ],
     77 => [ 'CAL_SCM_WOF' ],
     78 => [ 'PARAM_FDETECT_V2' ]
+);
+
+#
+# IOTA types, by value
+#
+
+our $VCSFW_IOTA_ITYPE_NOP           = 0x0000;
+our $VCSFW_IOTA_ITYPE_FRAME_BASE    = 0x0001;
+our $VCSFW_IOTA_ITYPE_FRAME_NAV     = 0x0002;
+our $VCSFW_IOTA_ITYPE_FRAME_IMAGE   = 0x0003;
+our $VCSFW_IOTA_ITYPE_CONFIG_PSELECT= 0x0004;
+our $VCSFW_IOTA_ITYPE_CONFIG_WOE    = 0x0005;
+our $VCSFW_IOTA_ITYPE_CONFIG_WOF_THRESHOLDS = 0x0006;
+our $VCSFW_IOTA_ITYPE_CAL_REFERENCE = 0x0007;
+our $VCSFW_IOTA_ITYPE_BAD_PIXEL_MAP = 0x0008;
+our $VCSFW_IOTA_ITYPE_CONFIG_VERSION= 0x0009;
+our $VCSFW_IOTA_ITYPE_CONFIG_NAV_SWIPE= 0x000A;
+our $VCSFW_IOTA_ITYPE_CONFIG_NAV_TAP= 0x000B;
+our $VCSFW_IOTA_ITYPE_CONFIG_FRAME_AVG= 0x000C;
+our $VCSFW_IOTA_ITYPE_FPPRESENT_PARAMS= 0x000D;
+our $VCSFW_IOTA_ITYPE_CPID_ATTRIBUTES = 0x000E;
+our $VCSFW_IOTA_ITYPE_CONFIG_BL_MGT   = 0x000F;
+our $VCSFW_IOTA_ITYPE_CAL_GAIN        = 0x0010;
+our $VCSFW_IOTA_ITYPE_CAL_BACKGROUND  = 0x0011;
+our $VCSFW_IOTA_ITYPE_CAL_DARK_CURRENT= 0x0012;
+our $VCSFW_IOTA_ITYPE_CPID_CAL_LONG_INTEGRATION  = 0x0013;
+our $VCSFW_IOTA_ITYPE_CPID_CAL_DARK_RATE_MAP_1000DPI  = 0x0014;
+our $VCSFW_IOTA_ITYPE_CONFIG_TEST_HISTORY= 0x0015;
+our $VCSFW_IOTA_ITYPE_FOREGROUND_IMAGE= 0x0016;
+our $VCSFW_IOTA_ITYPE_MISSION_SHA256  = 0x0017;
+our $VCSFW_IOTA_ITYPE_CPID_CAL_TEMPORAL_STD_DEV_REF_HIGH_FRAMES  = 0x0018;
+our $VCSFW_IOTA_ITYPE_CPID_CAL_MEAN_BGD_BAD_PIXELS  = 0x0019;
+our $VCSFW_IOTA_ITYPE_IPL_PARAM    = 0x001A;
+our $VCSFW_IOTA_ITYPE_IPL_METRIC   = 0x001B;
+our $VCSFW_IOTA_ITYPE_FRAME_BUTTON  = 0x001C;
+our $VCSFW_IOTA_ITYPE_CUSTOMER_DATA = 0x001D;
+our $VCSFW_IOTA_ITYPE_CPID_CONFIG_CHARACTERISTICS = 0x001E;
+our $VCSFW_IOTA_ITYPE_CONFIG_SOFT_BUTTON    = 0x001F;
+our $VCSFW_IOTA_ITYPE_CPID_CAL_1000DPI_GAIN_MAP_PIXELS  = 0x0020;
+
+our %iota_itype_by_val = (
+    $VCSFW_IOTA_ITYPE_NOP => [ 'NOP' ],
+    $VCSFW_IOTA_ITYPE_FRAME_BASE => [ 'FRAME_BASE' ],
+    $VCSFW_IOTA_ITYPE_FRAME_NAV => [ 'FRAME_NAV' ],
+    $VCSFW_IOTA_ITYPE_FRAME_IMAGE => [ 'FRAME_IMAGE' ],
+    $VCSFW_IOTA_ITYPE_CONFIG_PSELECT => [ 'CONFIG_PSELECT' ],
+    $VCSFW_IOTA_ITYPE_CONFIG_WOE => [ 'CONFIG_WOE' ],
+    $VCSFW_IOTA_ITYPE_CONFIG_WOF_THRESHOLDS => [ 'CONFIG_WOF_THRESHOLDS' ],
+    $VCSFW_IOTA_ITYPE_CAL_REFERENCE => [ 'CAL_REFERENCE' ],
+    $VCSFW_IOTA_ITYPE_BAD_PIXEL_MAP => [ 'BAD_PIXEL_MAP' ],
+    $VCSFW_IOTA_ITYPE_CONFIG_VERSION => [ 'CONFIG_VERSION' ],
+    $VCSFW_IOTA_ITYPE_CONFIG_NAV_SWIPE => [ 'CONFIG_NAV_SWIPE' ],
+    $VCSFW_IOTA_ITYPE_CONFIG_NAV_TAP => [ 'CONFIG_NAV_TAP' ],
+    $VCSFW_IOTA_ITYPE_CONFIG_FRAME_AVG => [ 'CONFIG_FRAME_AVG' ],
+    $VCSFW_IOTA_ITYPE_FPPRESENT_PARAMS => [ 'FPPRESENT_PARAMS' ],
+    $VCSFW_IOTA_ITYPE_CPID_ATTRIBUTES => [ 'CPID_ATTRIBUTES' ],
+    $VCSFW_IOTA_ITYPE_CONFIG_BL_MGT => [ 'CONFIG_BL_MGT' ],
+    $VCSFW_IOTA_ITYPE_CAL_GAIN => [ 'CAL_GAIN' ],
+    $VCSFW_IOTA_ITYPE_CAL_BACKGROUND => [ 'CAL_BACKGROUND' ],
+    $VCSFW_IOTA_ITYPE_CAL_DARK_CURRENT => [ 'CAL_DARK_CURRENT' ],
+    $VCSFW_IOTA_ITYPE_CPID_CAL_LONG_INTEGRATION =>
+        [ 'CPID_CAL_LONG_INTEGRATION' ],
+    $VCSFW_IOTA_ITYPE_CPID_CAL_DARK_RATE_MAP_1000DPI =>
+        [ 'CPID_CAL_DARK_RATE_MAP_1000DPI' ],
+    $VCSFW_IOTA_ITYPE_CONFIG_TEST_HISTORY => [ 'CONFIG_TEST_HISTORY' ],
+    $VCSFW_IOTA_ITYPE_FOREGROUND_IMAGE => [ 'FOREGROUND_IMAGE' ],
+    $VCSFW_IOTA_ITYPE_MISSION_SHA256 => [ 'MISSION_SHA256' ],
+    $VCSFW_IOTA_ITYPE_CPID_CAL_TEMPORAL_STD_DEV_REF_HIGH_FRAMES =>
+        [ 'CPID_CAL_TEMPORAL_STD_DEV_REF_HIGH_FRAMES' ],
+    $VCSFW_IOTA_ITYPE_CPID_CAL_MEAN_BGD_BAD_PIXELS =>
+        [ 'CPID_CAL_MEAN_BGD_BAD_PIXELS' ],
+    $VCSFW_IOTA_ITYPE_IPL_PARAM => [ 'IPL_PARAM' ],
+    $VCSFW_IOTA_ITYPE_IPL_METRIC => [ 'IPL_METRIC' ],
+    $VCSFW_IOTA_ITYPE_FRAME_BUTTON => [ 'FRAME_BUTTON' ],
+    $VCSFW_IOTA_ITYPE_CUSTOMER_DATA => [ 'CUSTOMER_DATA' ],
+    $VCSFW_IOTA_ITYPE_CPID_CONFIG_CHARACTERISTICS =>
+        [ 'CPID_CONFIG_CHARACTERISTICS' ],
+    $VCSFW_IOTA_ITYPE_CONFIG_SOFT_BUTTON => [ 'CONFIG_SOFT_BUTTON' ],
+    $VCSFW_IOTA_ITYPE_CPID_CAL_1000DPI_GAIN_MAP_PIXELS =>
+        [ 'CPID_CAL_1000DPI_GAIN_MAP_PIXELS' ]
 );
 
 
@@ -2376,7 +2455,109 @@ my @frame_tag_dims_htype = (
     [ 'unused', \@uint16_primtype ]
 );
 
+# vcsfw_cmd_bootldr_patch_plainhdr_t::flags:
+# payload encrypted:
+our $VCSFW_CMD_BOOTLDR_PATCH_FLAGS_ENCRYPTED=0x00000001;
+# signature follows:
+our $VCSFW_CMD_BOOTLDR_PATCH_FLAGS_SIGNED=0x00000002;
+# patch is encrypted/signed using production keys:
+our $VCSFW_CMD_BOOTLDR_PATCH_FLAGS_PROD=0x00000004;
+# patch contains an NVM (flash) programming payload (payload_* are valid )
+our $VCSFW_CMD_BOOTLDR_PATCH_FLAGS_PAYLOAD=0x00000008;
+# patch is encrypted/signed using customer-injected keys:
+our $VCSFW_CMD_BOOTLDR_PATCH_FLAGS_CUSTKEY=0x00000010;
 
+# A mask to decode what type of plainhdr we have
+our $VCSFW_CMD_BOOTLDR_PATCH_FLAGS_PLAINHDRTYPE=0xf0000000;
+our $VCSFW_CMD_BOOTLDR_PATCH_FLAGS_PLAINHDRTYPE_B=28;
+our $VCSFW_CMD_BOOTLDR_PATCH_FLAGS_PLAINHDRTYPE_N=4;
+
+my @cmd_bootldr_patch_plainhdr_flags_bits = (
+    bits_byname('ENCRYPTED', 'VCSFW_CMD_BOOTLDR_PATCH_FLAGS_'),
+    bits_byname('SIGNED', 'VCSFW_CMD_BOOTLDR_PATCH_FLAGS_'),
+    bits_byname('PROD', 'VCSFW_CMD_BOOTLDR_PATCH_FLAGS_'),
+    bits_byname('PAYLOAD', 'VCSFW_CMD_BOOTLDR_PATCH_FLAGS_'),
+    bits_byname('CUSTKEY', 'VCSFW_CMD_BOOTLDR_PATCH_FLAGS_'),
+    bits_byname('PLAINHDRTYPE', 'VCSFW_CMD_BOOTLDR_PATCH_FLAGS_')
+);
+
+# Structures for VCSFW_CMD_BOOTLDR_PATCH:
+my @cmd_bootldr_patch_plainhdr_type0_htype = (
+    'vcsfw_cmd_bootldr_patch_plainhdr_type0_t',
+    [ 'flags', \@uint32_primtype, \&cmd_bootldr_patch_plainhdr_flags_format ],
+    [ 'id', \@uint32_primtype ],
+    [ 'buildnum', \@uint32_primtype ],
+
+    [ 'payload_id', \@uint32_primtype ],
+    [ 'payload_buildtime', \@uint32_primtype, \&datetime_format ],
+    [ 'payload_buildnum', \@uint32_primtype ],
+    [ 'payload_vmajor', \@uint8_primtype ],
+    [ 'payload_vminor', \@uint8_primtype ],
+    [ 'payload_target', \@uint8_primtype, \%target_by_num ],
+    [ 'payload_product', \@uint8_primtype ],
+    [ 'payload_siliconrev', \@uint8_primtype ],
+    [ 'payload_formalrel', \@uint8_primtype ],
+
+    [ 'seq', \@uint8_primtype ],
+    [ 'vmajor', \@uint8_primtype ],
+    [ 'vminor', \@uint8_primtype ],
+    [ 'unused', \@uint8_primtype, undef, 3 ]
+);
+
+my @cmd_bootldr_patch_plainhdr_type1_htype = (
+    'vcsfw_cmd_bootldr_patch_plainhdr_type1_t',
+    [ 'flags', \@uint32_primtype, \&cmd_bootldr_patch_plainhdr_flags_format ],
+    [ 'id', \@uint32_primtype ],
+    [ 'buildnum', \@uint32_primtype ],
+
+    [ 'restrict_fwflavor', \@uint32_primtype ],
+    [ 'payload_buildtime', \@uint32_primtype, \&datetime_format ],
+    [ 'payload_buildnum', \@uint32_primtype ],
+    [ 'payload_vmajor', \@uint8_primtype ],
+    [ 'payload_vminor', \@uint8_primtype ],
+    [ 'restrict_seclevel', \@uint8_primtype ],
+    [ 'padding', \@uint8_primtype, undef, 3 ],
+
+    [ 'seq', \@uint8_primtype ],
+    [ 'vmajor', \@uint8_primtype ],
+    [ 'vminor', \@uint8_primtype ],
+    [ 'unused', \@uint8_primtype, undef, 3 ]
+);
+
+my @cmd_bootldr_patch_plainhdr_type2_htype = (
+    'vcsfw_cmd_bootldr_patch_plainhdr_type2_t',
+    [ 'flags', \@uint32_primtype, \&cmd_bootldr_patch_plainhdr_flags_format ],
+    [ 'id', \@uint32_primtype ],
+    [ 'buildnum', \@uint32_primtype ],
+
+    [ 'restrict_configid1', \@uint32_primtype ],
+    [ 'restrict_configid2', \@uint32_primtype ],
+    [ 'restrict_configver', \@uint16_primtype ],
+    [ 'padding', \@uint8_primtype, undef, 8 ],
+
+    [ 'seq', \@uint8_primtype ],
+    [ 'vmajor', \@uint8_primtype ],
+    [ 'vminor', \@uint8_primtype ],
+    [ 'unused', \@uint8_primtype, undef, 3 ]
+);
+
+# A map between the header type number (in flags) and the appropriate
+#  htype structure
+my %cmd_bootldr_patch_plainhdr_type_to_htype = (
+    0 => \@cmd_bootldr_patch_plainhdr_type0_htype,
+    1 => \@cmd_bootldr_patch_plainhdr_type1_htype,
+    2 => \@cmd_bootldr_patch_plainhdr_type2_htype
+);
+
+# This header is sometimes transmitted in an encrypted form.
+my @cmd_bootldr_patch_enchdr_htype = (
+    'vcsfw_cmd_bootldr_patch_enchdr_t',
+    [ 'buildtime', \@uint32_primtype, \&datetime_format ],
+    [ 'loadaddr', \@uint32_primtype ],
+    [ 'startaddr', \@uint32_primtype ],
+    [ 'bssaddr', \@uint32_primtype ],
+    [ 'bsslen', \@uint32_primtype ]
+);
 
 #
 # Format up a HWREG16 parameter.
@@ -2920,7 +3101,7 @@ sub byte8pretty_format {
     my $offset = ($startaddr & ~0xf) - $startaddr;   # <= 0
     my $loopend = (($endaddr + 15) & ~0xf) - $startaddr;
     while ($offset < $loopend) {
-        $retstr .= sprintf('%.*x ', $nnibs, $startaddr + $offset);
+        $retstr .= sprintf('%.*x   ', $nnibs, $startaddr + $offset);
         $retstr .= join(' ', map {
             $_ < 0 || $_ >= $nbytes ? '  ' : sprintf('%02x', $bytes[$_]); }
                         ($offset..($offset+15)));
@@ -2982,6 +3163,81 @@ sub cmd_patch_format {
         }
     }
     $retstr .= "\n";
+
+    return $retstr;
+}
+
+# Format up the flags in a VCSFW_CMD_BOOTLDR_PATCH plainhdr
+sub cmd_bootldr_patch_plainhdr_flags_format {
+    return sprintf('0x%08x (%s)', $_[1],
+                   bits_format($_[1], \@cmd_bootldr_patch_plainhdr_flags_bits));
+}
+#
+# Format up a VCSFW_CMD_BOOTLDR_PATCH command
+#
+
+sub cmd_bootldr_patch_format {
+    my ($self, $cmdref, $data) = ($_[0], $_[1], $_[2]);
+    my $retstr = '';
+    my $offset = 1;
+    my $hexmd5 = md5_hex(substr($data, $offset));
+    my $patchlen = length($data) - $offset;
+    $retstr .= "PATCH hash = $hexmd5";
+    if (exists $self->{'patchhashes'} && defined $self->{'patchhashes'}) {
+        if (exists $self->{'patchhashes'}->{$hexmd5}) {
+            $retstr .= ' (' . $self->{'patchhashes'}->{$hexmd5} . ')';
+        }
+    }
+    $retstr .= "\n";
+    $retstr .= sprintf("Total size = %u = 0x%x bytes\n", $patchlen, $patchlen);
+    my $hdrlen = htype_size(\@cmd_bootldr_patch_plainhdr_type0_htype);
+    if ($patchlen < $hdrlen) {
+        printf("ERROR: VCSFW_CMD_BOOTLDR_PATCH too short (%u bytes) to contain plain header (%u bytes)\n",
+               $patchlen, $hdrlen);
+    }
+    else {
+        # Now decode the plaintext header.
+        my $hdrdata = substr($data, $offset, $hdrlen);
+        my ($hdr, $off) = htype_unpack(
+            $hdrdata,
+            \@cmd_bootldr_patch_plainhdr_type0_htype);
+        # Figure out which type of header it is.
+        my $hdrtype = (($hdr->{'flags'}
+                        & $VCSFW_CMD_BOOTLDR_PATCH_FLAGS_PLAINHDRTYPE)
+                       >> $VCSFW_CMD_BOOTLDR_PATCH_FLAGS_PLAINHDRTYPE_B);
+        my $encrypted = ($hdr->{'flags'}
+                         & $VCSFW_CMD_BOOTLDR_PATCH_FLAGS_ENCRYPTED) != 0;
+        if (exists ($cmd_bootldr_patch_plainhdr_type_to_htype{$hdrtype})) {
+            ($hdr, $off) = htype_unpack($hdrdata,
+                                        $cmd_bootldr_patch_plainhdr_type_to_htype{$hdrtype});
+            $retstr .= sprintf('%s = ',
+               $cmd_bootldr_patch_plainhdr_type_to_htype{$hdrtype}->[0]);
+            $retstr .= htype_format($hdr, $cmd_bootldr_patch_plainhdr_type_to_htype{$hdrtype});
+        }
+        else {
+            $retstr .= sprintf('%s = ',
+               $cmd_bootldr_patch_plainhdr_type0_htype[0]);
+            $retstr .= htype_format($hdr,
+                                    \@cmd_bootldr_patch_plainhdr_type0_htype);
+        }
+
+        # Is there enough space left for the encrypted header?
+        $offset += $hdrlen;
+        $patchlen -= $hdrlen;
+        if (! $encrypted) {
+            $hdrlen = htype_size(\@cmd_bootldr_patch_enchdr_htype);
+            if ($patchlen < $hdrlen) {
+                printf("ERROR: VCSFW_CMD_BOOTLDR_PATCH too short to contain encrypted header\n");
+            }
+            else {
+                ($hdr, $off) = htype_unpack(substr($data, $offset, $hdrlen),
+                                            \@cmd_bootldr_patch_enchdr_htype);
+                $retstr .= sprintf('%s = ',
+                   $cmd_bootldr_patch_enchdr_htype[0]);
+                $retstr .= htype_format($hdr, \@cmd_bootldr_patch_enchdr_htype);
+            }
+        }
+    }
 
     return $retstr;
 }
@@ -4337,6 +4593,17 @@ sub cmd_frame_acq_format {
 #
 # Format up a VCSFW_CMD_IOTA_WRITE command
 #
+sub iota_itype_format {
+    my $retstr = sprintf('0x%08x', $_[1]);
+    if (exists $iota_itype_by_val{$_[1]}) {
+        $retstr .= ' (' . $iota_itype_by_val{$_[1]}->[0] . ')';
+    }
+    return $retstr;
+}
+my $iota_write_count = 0;
+my $iota_write_rawsize = 0;
+my $iota_write_cookedsize = 0;
+
 sub cmd_iota_write_format {
     my ($self, $cmdref, $data) = ($_[0], $_[1], $_[2]);
     my $retstr = '';
@@ -4354,6 +4621,17 @@ sub cmd_iota_write_format {
     $retstr .= htype_format($cmdhdr, \@cmd_iota_write_htype);
     $remaining -= $rsize;
     $offset += $rsize;
+    my $cookedsize = int(($remaining + 7) / 8) * 8;
+    $cookedsize += 8;   # for the header
+
+    $retstr .= sprintf("  IOTA_WRITEs so far = %u, payload bytes = %u, header+payload bytes = %u.  This write payload = %u bytes, header+payload = %u bytes.  New prospective total header+payload = %u bytes\n",
+                       $iota_write_count, $iota_write_rawsize,
+                       $iota_write_cookedsize,
+                       $remaining, $cookedsize,
+                       $iota_write_cookedsize + $cookedsize);
+    $iota_write_count++;
+    $iota_write_rawsize += $remaining;
+    $iota_write_cookedsize += $cookedsize;
 
     $retstr .= word32_format(substr($data, $offset));
 
@@ -4606,6 +4884,7 @@ sub reply_format {
     my $statusstr;
     my $cmdbyte;
     my $status;
+    my $extradata;
 
     if (defined $cmd_data) {
         $cmdbyte = unpack('C', $cmd_data);
@@ -4623,6 +4902,11 @@ sub reply_format {
     }
     if (exists $status_by_val{$status}) {
         $statusstr .= " = VCSFW_STATUS_$status_by_val{$status}->[0]";
+    }
+    if (length($reply_data) > 2) {
+        $extradata = sprintf("followed by %u bytes:\n",
+                             length($reply_data) - 2);
+        $extradata .= byte8pretty_format(substr($reply_data, 2), 2);
     }
 
     #
@@ -4653,11 +4937,20 @@ sub reply_format {
                 $retstr .= &$format($self, $cmd_by_num{$cmdbyte},
                                     $reply_data, $cmd_data);
             }
+            elsif (defined($extradata)) {
+                # Just format the bytes.
+                $retstr .= $extradata;
+            }
             $retstr .= "\n";
         }
+        elsif (defined($extradata)) {
+            # Just format the bytes.
+            $retstr .= " $extradata\n";
+        }
     }
-    else {
-        $retstr = $statusstr;
+    elsif (defined($extradata)) {
+        # Just format the bytes.
+        $retstr .= "$extradata\n";
     }
 
     return $retstr;
