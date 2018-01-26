@@ -1,0 +1,78 @@
+# -*- mode: makefile -*-
+#
+# Common makefile contents for the Nassau firmware.
+#
+# Bjoren Davis, September 14, 2010.
+#
+XTENSA_CORE=validity_d212
+CC=xt-xcc
+LD=xt-ld
+NM=xt-nm
+OBJDUMP=xt-objdump
+OBJCOPY=xt-objcopy
+READELF=xt-readelf
+GENLDSCRIPTS=xt-genldscripts
+RANLIB=xt-ranlib
+AR=xt-ar
+
+CFLAGS = -c -g
+
+XTENSA_LD_CMNFLAGS=
+XTENSA_CFLAGS = --xtensa-core=$(XTENSA_CORE)
+XTENSA_ASFLAGS =  --xtensa-core=$(XTENSA_CORE)
+XTENSA_LDFLAGS = $(XTENSA_LD_CMNFLAGS) --xtensa-core=$(XTENSA_CORE)
+
+# Is xt-xcc already in the path?
+ifneq ($(shell if type $(CC) >/dev/null 2>&1; then echo yes;fi),)
+
+# Nothing to do.
+else
+
+# xt-xcc is not already in the path.
+ifeq ($(shell uname -s),Linux)
+
+#
+# The Linux environment
+#
+XTTOOLBUILD=RF-2014.1
+XTROOT=/tools/tensilica/$(XTTOOLBUILD)/XtDevTools
+XTTOOLS=$(XTROOT)/install/tools/$(XTTOOLBUILD)-linux
+XTENSA_SYSTEM=$(XTROOT)/install/builds/$(XTTOOLBUILD)-linux/$(XTENSA_CORE)/config
+export PATH:=$(XTTOOLS)/XtensaTools/bin/:$(XTTOOLS)/XtensaTools/lib/iss:$(PATH)
+XTENSA_STDLIBDIR=$(XTROOT)/install/builds/$(XTTOOLBUILD)-linux/$(XTENSA_CORE)/xtensa-elf/lib
+
+
+else
+#
+# The Cygwin/Windows environment
+#
+XTTOOLBUILD=RF-2014.1-win32
+XTROOT_DOS=C:\\usr\\xtensa\\XtDevTools
+XTENSA_SYSTEM=$(XTROOT_DOS)\\XtensaRegistry\\$(XTTOOLBUILD)
+XTTOOLS_DOS=$(XTROOT_DOS)\\install\\tools\\$(XTTOOLBUILD)\\XtensaTools
+export PATH:=$(PATH):$(shell cygpath -u $(XTTOOLS_DOS)\\bin):$(shell cygpath -u $(XTTOOLS_DOS)\\lib\\iss)
+XTENSA_STDLIBDIR=$(XTROOT_DOS)\\install\\builds\\$(XTTOOLBUILD)\\$(XTENSA_CORE)\\xtensa-elf\\lib
+
+endif
+
+endif
+comma=,
+
+%.o: %.s
+	$(CC) -c -x assembler-with-cpp $(filter -D% -U% -I%,$(ASFLAGS)) $(XTENSA_ASFLAGS) $(patsubst %,-Wa$(comma)%,$(filter-out -D% -U% -I%,$(ASFLAGS))) -o $@ $<
+
+%.lst: %.o
+	-($(OBJDUMP) $(XTENSA_CFLAGS) -S -s -x -d -t -r $< ; $(READELF) -a -w $< ) > $@
+
+%.o: %.c
+	$(CC) $(CFLAGS) $(XTENSA_CFLAGS) -c -o $@ $<
+
+%.s: %.c
+	$(CC) $(CFLAGS) $(XTENSA_CFLAGS) -S -o $@ $<
+
+%.i: %.c
+	$(CC) $(CFLAGS) $(XTENSA_CFLAGS) -E -o $@ $<
+
+%.i: %.s
+	$(CC) -x assembler-with-cpp $(filter -D% -U% -I%,$(ASFLAGS)) $(XTENSA_ASFLAGS) $(patsubst %,-Wa$(comma)%,$(filter-out -D% -U% -I%,$(ASFLAGS))) -E -o $@ $<
+
