@@ -23,4 +23,6 @@ if [ "$cwd" != "chameleon" ]; then
 fi
 
 git submodule foreach --recursive "git merge --no-ff $1"
-git merge --no-ff $1
+
+# ignore the space and tabs difference
+git merge -s recursive -Xignore-space-change --no-ff $1 
