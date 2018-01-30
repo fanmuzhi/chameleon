@@ -22,5 +22,5 @@ if [ "$cwd" != "chameleon" ]; then
 	exit
 fi
 
-git pull
-git submodule foreach --recursive 'git pull;'
+git pull -p
+git submodule foreach --recursive 'git pull -p;'
