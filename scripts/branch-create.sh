@@ -8,7 +8,7 @@ if [ "$1" == "" ]; then
     echo "Create a new branch from the current working tree"
     echo "USAGE  : $0 <branch_name>"
     echo "example: $0 mt/feature/new_work_20170601"
-	exit
+    exit
 fi
 
 # make sure current working directory is chameleon
@@ -16,8 +16,8 @@ cwd=$(basename $(pwd))
 
 if [ "$cwd" != "chameleon" ]; then
     echo "Please run the scrip from chameleon directory"
-	echo "Current working directory: $cwd"
-	exit
+    echo "Current working directory: $cwd"
+    exit
 fi
 
 pause(){
