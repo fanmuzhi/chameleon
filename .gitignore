@@ -35,6 +35,7 @@ Thumbs.db
 obj/
 #[Rr]elease/
 [Ww]in32/
+x64/
 [Rr]elease.win32/
 _ReSharper*/
 [Tt]est[Rr]esult*
