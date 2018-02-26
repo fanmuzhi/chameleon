@@ -10,7 +10,7 @@
  **
  *****************************************************************************
  **
- **  Copyright (C) 2007-2017 Synaptics Incorporated. All rights reserved.
+ **  Copyright (c) 2007-2018 Synaptics Incorporated. All rights reserved.
  **
  **
  ** This file contains information that is proprietary to Synaptics
@@ -89,22 +89,23 @@ typedef struct VCS_PACKED vcsfw_cmd_woe_priv_s
  * Validity private GET_PRINT parameter tags:
  */
 
+/*
+ * Please leave this comment in place and put all
+ *  GET_PRINT parameter type number definitions below it.
+ *
+ * BEGIN:PARAM
+ */
 #define VCSFW_PARAM_KEEP_XLTRACE    0x8000
+
+/* VCSFW_PARAM_KEEP_XLTRACE -- This has no data.  THIS MUST BE
+ *  THE FIRST TAG IN ORDER TO BE EFFECTIVE!
+ */
 
 // Definitions added calibration in USDK
 #define VCSFW_PARAM_CF1ARRAY       0x8001
 #define VCSFW_PARAM_CF2ARRAY       0x8002
 #define VCSFW_PARAM_TIMESLOTRANGES 0x8003
 
-/* Register sweep types */
-#define VCSFW_SWEEPTYPE_TWOREGS    1    /* Sweep 2 regs with offset during print   */
-#define VCSFW_SWEEPTYPE_TWORANGES  2    /* Sweep 1 register thru 2 ranges during print */
-#define VCSFW_SWEEPTYPE_LIST       3    /* Sweep thru a list of registers/values */
-#define VCSFW_SWEEPTYPE_SWAP       4    /* Swap a list of registers/values */
-
-/* VCSFW_PARAM_KEEP_XLTRACE -- This has no data.  THIS MUST BE
- *  THE FIRST TAG IN ORDER TO BE EFFECTIVE!
- */
 /*************************************************************************************/
 /* GetPrint Parameter Defines                                                        */
 /*************************************************************************************/
@@ -206,6 +207,19 @@ typedef struct VCS_PACKED vcsfw_cmd_woe_priv_s
 /*
  * Parameters in the range of 0x8000 - 0xffff are Validity private.
  */
+
+/*
+ * END:PARAM
+ *
+ * Please leave this comment in place and put all
+ *  GET_PRINT parameter type number definitions above it.
+ */
+
+/* Register sweep types */
+#define VCSFW_SWEEPTYPE_TWOREGS    1    /* Sweep 2 regs with offset during print   */
+#define VCSFW_SWEEPTYPE_TWORANGES  2    /* Sweep 1 register thru 2 ranges during print */
+#define VCSFW_SWEEPTYPE_LIST       3    /* Sweep thru a list of registers/values */
+#define VCSFW_SWEEPTYPE_SWAP       4    /* Swap a list of registers/values */
 
 /* Parameter Structure      */
 //typedef struct VCS_PACKED vcsfw_param_s
