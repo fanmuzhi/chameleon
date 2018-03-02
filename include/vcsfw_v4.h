@@ -8,7 +8,7 @@
  **
  *****************************************************************************
  **
- **  Copyright (C) 2006-2017 Synaptics Incorporated. All rights reserved.
+ **  Copyright (c) 2006-2018 Synaptics Incorporated. All rights reserved.
  **
  **
  ** This file contains information that is proprietary to Synaptics
@@ -224,6 +224,33 @@
 #define VCSFW_CMD_PUBK_GET                      145
 #define VCSFW_CMD_RESET_DEFAULT                 146
 #define VCSFW_CMD_PAIR                          147
+#define VCSFW_CMD_SELFTEST_RUN                  148
+#define VCSFW_CMD_SELFTEST_QUERY                149
+
+/* Host Specific Enrollment                                                 */
+/*#define VCSFW_CMD_ENROLL_SIMPLE                 149*/
+#define VCSFW_CMD_ENROLL_WBF                    150
+#define VCSFW_CMD_ENROLL_ANDROID                151
+
+#define VCSFW_CMD_IDENTIFY                      152
+#define VCSFW_CMD_IDENTIFY_WBF                  153
+#define VCSFW_CMD_IDENTIFY_ANDROID              154
+
+/* Generic MIS commands                                                    */
+#define VCSFW_CMD_MIS_STOP                      155   /* Abort enrollment / Identify     */
+#define VCSFW_CMD_MIS_STATUS                    156   /* Status of the MIS operation     */
+#define VCSFW_CMD_IMAGE_METRICS                 157
+/* For SSFS access commands                                                */
+#define VCSFW_CMD_DB2_GET_DB_INFO               158
+#define VCSFW_CMD_DB2_GET_OBJECT_LIST           159
+#define VCSFW_CMD_DB2_GET_OBJECT_INFO           160
+#define VCSFW_CMD_DB2_GET_OBJECT_DATA           161
+#define VCSFW_CMD_DB2_WRITE_OBJECT              162
+#define VCSFW_CMD_DB2_DELETE_OBJECT             163
+#define VCSFW_CMD_DB2_CLEANUP                   164
+#define VCSFW_CMD_DB2_FORMAT                    165
+
+#define VCSFW_CMD_MSBM_CONNECT                  166
 
 /*
  * Commands for SecurePad.  These are restricted in that they
@@ -1459,6 +1486,53 @@
 #define VCSFW_STATUS_ERR_GLOBALCBC_NAV_TOOLONG  (VCSFW_STATUS_ERR_FLAG | 623)
 #define VCSFW_STATUS_ERR_BOOTLDR_PATCH_NOPRODKEYS                           \
                                                 (VCSFW_STATUS_ERR_FLAG | 624)
+#define VCSFW_STATUS_ERR_BOOTLDR_PATCH_FIPSFAIL                             \
+                                                (VCSFW_STATUS_ERR_FLAG | 625)
+#define VCSFW_STATUS_ERR_FRAME_TAG_BURSTCFG_TOOSHORT                        \
+                                                (VCSFW_STATUS_ERR_FLAG | 626)
+#define VCSFW_STATUS_ERR_FRAME_TAG_BURSTCFG_TOOLONG                         \
+                                                (VCSFW_STATUS_ERR_FLAG | 627)
+#define VCSFW_STATUS_ERR_FRAME_TAG_BURSTCFG_NSTEPSZERO                      \
+                                                (VCSFW_STATUS_ERR_FLAG | 628)
+#define VCSFW_STATUS_ERR_FRAME_TAG_BURSTCFG_NSTEPSTOOBIG                    \
+                                                (VCSFW_STATUS_ERR_FLAG | 629)
+#define VCSFW_STATUS_ERR_FRAME_TAG_BURSTCFG_LOOPTOPTOOBIG                   \
+                                                (VCSFW_STATUS_ERR_FLAG | 630)
+#define VCSFW_STATUS_ERR_FRAME_TAG_BURSTCFG_BURSTSIZEZERO                   \
+                                                (VCSFW_STATUS_ERR_FLAG | 631)
+#define VCSFW_STATUS_ERR_FRAME_TAG_BURSTCFG_BURSTSIZETOOBIG                 \
+                                                (VCSFW_STATUS_ERR_FLAG | 632)
+#define VCSFW_STATUS_ERR_FRAME_TAG_BURSTCFG_NFRAMESZERO                     \
+                                                (VCSFW_STATUS_ERR_FLAG | 633)
+#define VCSFW_STATUS_ERR_FRAME_ACQ_BURST_NOT12BIT                           \
+                                                (VCSFW_STATUS_ERR_FLAG | 634)
+#define VCSFW_STATUS_ERR_FRAME_ACQ_BURST_PRESENT                            \
+                                                (VCSFW_STATUS_ERR_FLAG | 635)
+#define VCSFW_STATUS_ERR_FRAME_ACQ_BURST_IMGTOOBIG                          \
+                                                (VCSFW_STATUS_ERR_FLAG | 636)
+
+#define VCSFW_STATUS_ERR_SSFS_FAIL_ACCESS_DB                                \
+                                                (VCSFW_STATUS_ERR_FLAG | 637)
+#define VCSFW_STATUS_ERR_SSFS_FAIL_TO_BACKUP                                \
+                                                (VCSFW_STATUS_ERR_FLAG | 638)
+#define VCSFW_STATUS_ERR_SSFS_FAIL_TO_DO_SECURITY_PROCESSING                \
+                                                (VCSFW_STATUS_ERR_FLAG | 639)
+#define VCSFW_STATUS_ERR_SSFS_PARTITION_FULL                                \
+                                                (VCSFW_STATUS_ERR_FLAG | 640)
+#define VCSFW_STATUS_ERR_SSFS_INPUT_DATA_OVER_CAPACITY                      \
+                                                (VCSFW_STATUS_ERR_FLAG | 641)
+#define VCSFW_STATUS_ERR_SSFS_CANT_FIND_PARENT                              \
+                                                (VCSFW_STATUS_ERR_FLAG | 642)
+#define VCSFW_STATUS_ERR_SSFS_CANT_FIND_TARGET                              \
+                                                (VCSFW_STATUS_ERR_FLAG | 643)
+#define VCSFW_STATUS_ERR_SSFS_SECURITY_CHECK_FAIL                           \
+                                                (VCSFW_STATUS_ERR_FLAG | 644)
+#define VCSFW_STATUS_ERR_SSFS_OUTPUT_BUFFER_SIZE_NOT_ENOUGH                 \
+                                                (VCSFW_STATUS_ERR_FLAG | 645)
+#define VCSFW_STATUS_ERR_SSFS_NOT_READY                                     \
+                                                (VCSFW_STATUS_ERR_FLAG | 646)
+#define VCSFW_STATUS_ERR_SSFS_OBJECT_ACCESS_DENIED                          \
+                                                (VCSFW_STATUS_ERR_FLAG | 647)
 
 /****************************************************************************/
 /* Every command begins with the following structure.  See the vcsfw_cmd_t  */
@@ -1566,6 +1640,8 @@ typedef struct VCS_PACKED vcsfw_reply_get_version_s
 #define VCSFW_PRODUCT_BYRONPBL      VCSFW_PRODUCT_SC24PBL   /* alias */
 #define VCSFW_PRODUCT_PROMETHEUS    65  /* Prometheus (b1422) */
 #define VCSFW_PRODUCT_PROMETHEUSPBL 66  /* Prometheus bootldr (b1422) */
+#define VCSFW_PRODUCT_PROMETHEUSMSBL 67 /* Prometheus Microsoft secure
+                                         *  boot loader (b1422) */
 
 
 /* The following bits are for vcsfw_reply_get_version_t::platform */
@@ -1589,6 +1665,7 @@ typedef struct VCS_PACKED vcsfw_reply_get_version_s
 #define VCSFW_SECURITY0_256BIT           (1 << 1)
 #define VCSFW_SECURITY0_MS_SEC_BIO       (1 << 2)
 #define VCSFW_SECURITY0_MIS              (1 << 3)
+#define VCSFW_SECURITY0_FIPS             (1 << 4)
 
 #define VCSFW_SECURITY0_BAD_SDB          (1 << 7)
 
@@ -1680,6 +1757,12 @@ typedef struct VCS_PACKED vcsfw_cmd_get_print_s
 /*****************************************************************************/
 /*                                                                           */
 /* List of parameter types                                                   */
+/*
+ * Please leave this comment in place and put all
+ *  GET_PRINT parameter type number definitions below it.
+ *
+ * BEGIN:PARAM
+ */
 #define VCSFW_PARAM_SECURITY       6    /* Security Parameters for print (VFS4x1) */
 #define VCSFW_PARAM_MOTION_2      11    /* Motion Detect Algorithm 2 control */
 #define VCSFW_PARAM_BW_REDUCTION  21    /* Bandwidth Reduction parameters    */
@@ -1699,6 +1782,12 @@ typedef struct VCS_PACKED vcsfw_cmd_get_print_s
 #define VCSFW_PARAM_NAV           57    /* Nav params */
 #define VCSFW_PARAM_DATA_ENCODER  66    /* Data encoder parameter */
 #define VCSFW_PARAM_LINEUPD_INTERLEAVE  68  /* lineupdate interleave factor */
+/*
+ * END:PARAM
+ *
+ * Please leave this comment in place and put all
+ *  GET_PRINT parameter type number definitions above it.
+ */
 
 /*
  * Parameters in the range of 0x8000 - 0xffff are Validity private.
@@ -2864,6 +2953,8 @@ typedef struct VCS_PACKED vcsfw_reply_dec_verify_template_data_s
 #define VCSFW_CMD_PROVISION_SEC_OPTS_256BIT_SECURITY                0x00000004
 #define VCSFW_CMD_PROVISION_SEC_OPTS_MS_SEC_BIO                     0x00000008
 #define VCSFW_CMD_PROVISION_SEC_OPTS_MIS                            0x00000010
+#define VCSFW_CMD_PROVISION_SEC_OPTS_FIPS                           0x00000020
+
 
 /* The command structure.
  * The command data will be ignored by Metallica/Viper.
@@ -3341,7 +3432,7 @@ typedef struct VCS_PACKED vcsfw_cmd_gen_sec_key_s
 /* Definitions for the active field of led_ex2_led_t and led_ex2_state_t      */
 #define VCSFW_LED_EX2_INACTIVE              0
 #define VCSFW_LED_EX2_ACTIVE                0x01
- /* for LED to glow during woe suspend till FD, host has to set the below bits 
+ /* for LED to glow during woe suspend till FD, host has to set the below bits
   * VCSFW_LED_EX2_WOE_ACTIVE */
 #define VCSFW_LED_EX2_WOE_ACTIVE            0x02
  /* for LED to glow during woe suspend till FD or timeout, host has to set
@@ -5517,8 +5608,15 @@ typedef struct VCS_PACKED vcsfw_cmd_frame_acq_s {
     vcsUint32_t nframes;  /* 0 means that no frame is to be acquired. */
 } vcsfw_cmd_frame_acq_t;
 
-#define VCSFW_CMD_FRAME_ACQ_FLAGS_INFINITE      0x00000001  /* ignore nframes */
-#define VCSFW_CMD_FRAME_ACQ_FLAGS_CAL_BL        0x00000002  /* baseline cal */
+#define VCSFW_CMD_FRAME_ACQ_FLAGS_INFINITE                0x00000001  /* ignore nframes */
+#define VCSFW_CMD_FRAME_ACQ_FLAGS_CAL_BL                  0x00000002  /* baseline cal */
+#define VCSFW_CMD_FRAME_ACQ_FLAGS_PROCESS_IMG             0x00000004  /* process image */
+#define VCSFW_CMD_FRAME_ACQ_FLAGS_CAPTURE_PURPOSE_MASK    0x00000018  
+#define VCSFW_CMD_FRAME_ACQ_FLAGS_CAPTURE_PURPOSE_MOH         0
+#define VCSFW_CMD_FRAME_ACQ_FLAGS_CAPTURE_PURPOSE_ENROLL      1
+#define VCSFW_CMD_FRAME_ACQ_FLAGS_CAPTURE_PURPOSE_IDENTIFY    2
+#define VCSFW_CMD_FRAME_ACQ_FLAGS_PIXEL_TEST              0x00000020
+#define VCSFW_CMD_FRAME_ACQ_FLAGS_RXSHORTS_TEST           0x00000040
 
 /*
  * The reply.  Note that VCSFW_CMD_FRAME_ACQ can return one of
@@ -5614,7 +5712,7 @@ typedef struct VCS_PACKED vcsfw_cmd_iota_write_s {
  *  for Nassau that support dual chains)
  *  implement an extended command that replaces the
  *  2-bytes of unused with a 16-bit flags value.
- *  Rather than change the definition of 
+ *  Rather than change the definition of
  *  vcsfw_cmd_iota_write_t (which may break current
  *  usage) we define this "alternate" and back-compatible
  *  structure for the newer implementations to use.
@@ -5625,7 +5723,7 @@ typedef struct VCS_PACKED vcsfw_cmd_iota_write_alt1_s {
 } vcsfw_cmd_iota_write_alt1_t;
 
 #define VCSFW_CMD_IOTA_WRITE_FLAGS_HIGH_CHAIN  0x0001
-/* 
+/*
  * Note: VCSFW_CMD_IOTA_WRITE_FLAGS_HIGH_CHAIN is a special
  *  case of the CHAINNUM field, below, where [CHAINNUM]=1.
  *  So for "dual chain" systems (e.g., Nassau) [CHAINNUM]=0
@@ -5648,9 +5746,9 @@ typedef struct VCS_PACKED vcsfw_cmd_flash_erase_s {
 #define VCSFW_CMD_FLASH_ERASE_SDB           0x8  /* erase security database */
 
 /*
- * Bitfield of iota chains to erase.  Note that if 
+ * Bitfield of iota chains to erase.  Note that if
  *  VCSFW_CMD_FLASH_ERASE_IOTA_AREA is set then these
- *  bits are ignored.  There is one bit for every 
+ *  bits are ignored.  There is one bit for every
  *  possible iota chain to erase.  A 1 indicates that
  *  VCSFW_CMD_FLASH_ERASE should erase the given iota
  *  chain, a 0 indicates that it should not.
@@ -5666,9 +5764,17 @@ typedef struct VCS_PACKED vcsfw_cmd_flash_erase_s {
 #define VCSFW_CMD_FLASH_ERASE_IOTA_HIGH_CHAIN                               \
     (1 << (1+VCSFW_CMD_FLASH_ERASE_IOTA_CHAINNUMS_B))
 
+#define VCSFW_CMD_FLASH_ERASE_SBL           0x10000000  /* 2dary boot loader */
+
 /****************************************************************************/
 /* VCSFW_CMD_EVENT_CONFIG                                                   */
 /****************************************************************************/
+/*
+ * Please leave this comment in place and put all
+ *  event type number definitions below it.
+ *
+ * BEGIN:EVENT_TYPE
+ */
 #define VCSFW_EVENT_TYPE_NOOP               0x00
 #define VCSFW_EVENT_TYPE_FINGERDOWN         0x01
 #define VCSFW_EVENT_TYPE_FINGERUP           0x02
@@ -5693,6 +5799,14 @@ typedef struct VCS_PACKED vcsfw_cmd_flash_erase_s {
 #define VCSFW_EVENT_TYPE_SOFT_BUTTON2_PRESS     0x15
 #define VCSFW_EVENT_TYPE_SOFT_BUTTON2_RELEASE   0x16
 #define VCSFW_EVENT_TYPE_FINGERHIGH         0x17
+#define VCSFW_EVENT_TYPE_PROCESS_IMG_RDY    0x18
+#define VCSFW_EVENT_TYPE_TEMPERATURE_CHANGE 0x19
+/*
+ * END:EVENT_TYPE
+ *
+ * Please leave this comment in place and put all
+ *  event type number definitions above it.
+ */
 /* NOTE: When a new event is added here, the EVENT_SUPPORTED_MASK and
  * EVENT_NEVENTTYPES need to be updated in fw/nassau/mission/event.h.
  */
@@ -5784,6 +5898,37 @@ typedef struct VCS_PACKED vcsfw_reply_fmno_get_s {
     vcsUint32_t     fmno;     /* bits 31:30 unused, 29:10=main, 9:0=dash */
 } vcsfw_reply_fmno_get_t;
 
+/****************************************************************************/
+/* VCSFW_CMD_SELFTEST_QUERY -- Request last device self-test results        */
+/****************************************************************************/
+/* COMMAND                                                                  */
+/* Command uses the vcsfw_generic_command_t structure */
+
+typedef struct VCS_PACKED vcsfw_reply_selftest_query_s
+{
+        vcsUint8_t  ran;         /* For each bit, 1=Test ran; 0=Test did not run */
+        vcsUint8_t  result;      /* For each bit, if ran=1, 1=PASS; 0=FAIL */
+        vcsUint8_t  reserved[2];
+} vcsfw_reply_selftest_query_t;
+
+/* for vcsfw_reply_selftest_query_t::result, above */
+
+#define VCSFW_SELFTEST_QUERY_RAN_ROM                  0x01
+#define VCSFW_SELFTEST_QUERY_RAN_FLASH                0x02
+#define VCSFW_SELFTEST_QUERY_RAN_SECURITY_ALG         0x04
+
+#define VCSFW_SELFTEST_QUERY_RAN_ROM_B                0
+#define VCSFW_SELFTEST_QUERY_RAN_FLASH_B              1
+#define VCSFW_SELFTEST_QUERY_RAN_SECURITY_ALG_B       2
+
+#define VCSFW_SELFTEST_QUERY_RESULT_ROM               0x01
+#define VCSFW_SELFTEST_QUERY_RESULT_FLASH             0x02
+#define VCSFW_SELFTEST_QUERY_RESULT_SECURITY_ALG      0x04
+
+#define VCSFW_SELFTEST_QUERY_RESULT_ROM_B             0
+#define VCSFW_SELFTEST_QUERY_RESULT_FLASH_B           1
+#define VCSFW_SELFTEST_QUERY_RESULT_SECURITY_ALG_B    2
+
 /* Finally, the generic forms of commands and replies.                      */
 /****************************************************************************/
 typedef struct VCS_PACKED vcsfw_cmd_s
@@ -5841,6 +5986,7 @@ typedef struct VCS_PACKED vcsfw_reply_s
         vcsfw_reply_get_auth_data_t         get_auth_data;
         vcsfw_reply_gen_vck_t               gen_vck;
         vcsfw_reply_fmno_get_t              fmno_get;
+        vcsfw_reply_selftest_query_t        selftest_query;
     } details;
 } vcsfw_reply_t;
 
@@ -6031,8 +6177,8 @@ typedef struct VCS_PACKED vcsfw_ecc_certificate2_s
     vcsUint16_t signature_length;                    /* Length of the signature
                                                       * in the buffer below. */
     vcsUint8_t  signature[VCSFW_MAX_RSA_KEY_LENGTH]; /* Signature - big enough
-                                                       buffer to accommodate an 
-                                                       RSA signature in worst 
+                                                       buffer to accommodate an
+                                                       RSA signature in worst
                                                        case. */
 } vcsfw_ecc_certificate2_t; /* 400 Bytes total. */
 
@@ -6048,6 +6194,259 @@ typedef struct VCS_PACKED vcsfw_reply_pair_s
     vcsfw_ecc_certificate2_t host_cert;
     vcsfw_ecc_certificate2_t sensor_cert;
 } vcsfw_reply_pair_t;
+/****************************************************************************/
+/* VCSFW_CMD_DB2_GET_DB_INFO                                                */
+/****************************************************************************/
+typedef struct VCS_PACKED vcsfw_cmd_get_db_info_s {
+    vcsUint8_t     type;             //Type = 1:  File System Info, Type = 2: File System Slot Info(only for engineer mode)
+} vcsfw_cmd_get_db_info_t;
+
+//For SSFS reply structure, there is no definition in fwcmd.h.
+//type 1
+typedef struct VCS_PACKED vcsfw_reply_get_db_sys_info_s {
+    vcsUint16_t dummy;                  //for alignment
+    vcsUint16_t version_major;          //The major version of SSFS (=1)
+    vcsUint16_t version_minor;          //The minor version of SSFS (=0)
+    vcsUint32_t pversion;               //Version of the partition. Starts with 0. Incremented every time when the partition is erased and re-programmed back.
+    vcsUint16_t UOP_len;                //Length of the UOP in Kbytes
+    vcsUint16_t TOP_len;                //Length of the TOP in Kbytes
+    vcsUint16_t POP_len;                //Length of the POP in Kbytes
+    vcsUint16_t Template_obj_slot_size; //Template object slot Ksize
+    vcsUint16_t Payload_obj_slot_size;  //Payload object slot Ksize
+    vcsUint16_t NumCurrentUsers;
+    vcsUint16_t NumDeletedUsers;
+    vcsUint16_t NumAvailableUserSlots;
+    vcsUint16_t NumCurrentTemplates;
+    vcsUint16_t NumDeletedTemplates;
+    vcsUint16_t NumAvailableTemplateSlots;
+    vcsUint16_t NumCurrentPayloads;
+    vcsUint16_t NumDeletedPayloads;
+    vcsUint16_t NumAvailablePayloadSlots;
+}vcsfw_reply_get_db_sys_info_t;
+
+//type 2
+typedef struct VCS_PACKED vcsfw_reply_get_db_slot_info_s {
+    vcsUint16_t slots_info_len;
+    //vcsUint8_t slots_info [slots_info_len]; The reply after slots_info_len will show slots_info, the counts of slots_info is slots_info_len.
+} vcsfw_reply_get_db_slot_info_t;
+
+/****************************************************************************/
+/* VCSFW_CMD_DB2_GET_OBJECT_LIST                                            */
+/****************************************************************************/
+typedef struct VCS_PACKED vcsfw_cmd_get_object_list_s {
+    vcsUint8_t     type;             //(1 = User, 2 = Template, 3 = Payload)
+    vcsUint8_t     dummy[3];         //for alignment
+    vcsUint128_t   parent_id;        //only for Type 2, 3
+} vcsfw_cmd_get_object_list_t;
+
+typedef struct VCS_PACKED vcsfw_reply_get_object_list_s {
+    vcsUint16_t IDs_len;
+    //vcsUint128_t IDs[IDs_len];  The reply after IDs_len will show IDs, the counts of IDs is IDs_len.
+} vcsfw_reply_object_list_t;
+
+/****************************************************************************/
+/* VCSFW_CMD_DB2_GET_OBJECT_INFO                                            */
+/****************************************************************************/
+typedef struct VCS_PACKED vcsfw_cmd_get_object_info_s {
+    vcsUint8_t     type;             //(1 = User, 2 = Template, 3 = Payload)
+    vcsUint8_t     dummy[3];         //for alignment
+    vcsUint128_t   id;               //uuid / tuid / puid
+} vcsfw_cmd_get_object_info_t;
+
+//type 1
+typedef struct VCS_PACKED vcsfw_reply_get_object_info_user_s {
+    vcsUint16_t    dummy;    //for alignment
+    vcsUint32_t    gid;
+    vcsUint32_t    attributes;
+}vcsfw_reply_get_object_info_user_t;
+
+//type 2
+typedef struct VCS_PACKED vcsfw_reply_get_object_info_template_s {
+    vcsUint16_t    dummy;    //for alignment
+    vcsUint128_t   owner_id;
+    vcsUint128_t   parent_id;
+    vcsUint32_t    attributes;
+    vcsUint32_t    version;
+    vcsUint32_t    fingerIndex;
+    vcsUint32_t    TemplateSize;
+}vcsfw_reply_get_object_info_template_t;
+
+//type 3
+typedef struct VCS_PACKED vcsfw_reply_get_object_info_payload_s {
+    vcsUint16_t    dummy;    //for alignment
+    vcsUint128_t   owner_id;
+    vcsUint128_t   parent_id;
+    vcsUint32_t    attributes;
+    vcsUint32_t    version;
+    vcsUint32_t    type;
+    vcsUint32_t    PayloadSize;
+}vcsfw_reply_get_object_info_payload_t;
+
+/****************************************************************************/
+/* VCSFW_CMD_DB2_GET_OBJECT_DATA                                            */
+/****************************************************************************/
+typedef struct VCS_PACKED vcsfw_cmd_get_object_data_s {
+    vcsUint8_t     type;             //(2 = Template, 3 = Payload)
+    vcsUint8_t     dummy[3];         //for alignment
+    vcsUint128_t   id;               //tuid / puid
+} vcsfw_cmd_get_object_data_t;
+
+typedef struct VCS_PACKED vcsfw_reply_get_object_data_s {
+    vcsUint16_t    dummy;    //for alignment
+    vcsUint32_t    data_len;
+    //vcsUint8_t    data[data_len];  The reply after data_len will show data, the size of data is data_len.
+}vcsfw_reply_get_object_data_t;
+
+/****************************************************************************/
+/* VCSFW_CMD_DB2_WRITE_OBJECT                                               */
+/****************************************************************************/
+typedef struct VCS_PACKED vcsfw_cmd_write_object_s {
+   vcsUint8_t     type;             //(1 = Add User, 2 = Add Template, 3 = Add Payload, 18 = Update Template)
+   vcsUint8_t     Flag;             //Bit[0] = 1 to indicate if host specific object and only valid for type 2 and typ3 3 command
+   vcsUint8_t     dummy[2];         //for alignment
+   union {
+    struct {
+        vcsUint32_t    gid;              //group id for type1
+        vcsUint32_t    attributes;       //for type 1,2,3
+    }cmd_type1;
+    struct {
+        vcsUint128_t   parent_id;        //for type 2,3
+        vcsUint32_t    attributes;       //for type 1,2,3
+        vcsUint32_t    fingerIndex;      //for type 2
+        vcsUint32_t    data_len;         //for type 2,3,18
+        vcsUint8_t     data[4];          //for type 2,3,18
+    }cmd_type2;
+    struct {
+        vcsUint128_t   parent_id;        //for type 2,3
+        vcsUint32_t    attributes;       //for type 1,2,3
+        vcsUint32_t    payloadtype;      //for type 3
+        vcsUint32_t    data_len;         //for type 2,3,18
+        vcsUint8_t     data[4];          //for type 2,3,18
+    }cmd_type3;
+    struct {
+        vcsUint128_t   tuid;             //for type 18
+        vcsUint32_t    data_len;         //for type 2,3,18
+        vcsUint8_t     data[4];          //for type 2,3,18
+    }cmd_type18;
+   }details;
+} vcsfw_cmd_write_object_t;
+
+//For type1,2,3
+typedef struct VCS_PACKED vcsfw_reply_write_object_add_s {
+    vcsUint16_t    dummy;        //for alignment
+    vcsUint128_t   id;
+}vcsfw_reply_write_object_add_t;
+
+//For type18
+typedef struct VCS_PACKED vcsfw_reply_write_object_update_s {
+    vcsUint16_t    dummy;        //for alignment
+    vcsUint32_t    version;
+}vcsfw_reply_write_object_update_t;
+
+/****************************************************************************/
+/* VCSFW_CMD_DB2_DELETE_OBJECT                                              */
+/****************************************************************************/
+typedef struct VCS_PACKED vcsfw_cmd_delete_object_s {
+    vcsUint8_t     type;             //(1 = Add User, 2 = Add Template, 3 = Add Payload)
+    vcsUint8_t     dummy[3];         //for alignment
+    vcsUint128_t   id;               //uuid / tuid / puid
+}vcsfw_cmd_delete_object_t;
+
+typedef struct VCS_PACKED vcsfw_reply_delete_object_s {
+    vcsUint16_t numObjDeleted;
+}vcsfw_reply_delete_object_t;
+
+/****************************************************************************/
+/* VCSFW_CMD_DB2_CLEANUP                                                    */
+/****************************************************************************/
+typedef struct VCS_PACKED vcsfw_cmd_cleanup_s {
+    vcsUint8_t     type;             //(1 = Add User, 2 = Add Template, 3 = Add Payload)
+}vcsfw_cmd_cleanup_t;
+
+typedef struct VCS_PACKED vcsfw_reply_cleanup_s {
+    vcsUint16_t numSlotsErased;
+    vcsUint32_t newPartitionVersion;
+}vcsfw_reply_cleanup_t;
+
+/****************************************************************************/
+/* VCSFW_CMD_DB2_FORMAT                                                     */
+/****************************************************************************/
+typedef struct VCS_PACKED vcsfw_cmd_format_s {
+    vcsUint8_t  type;                   //(1 = Format with Default sizes, 2 = Format with supplied sizes)
+    vcsUint8_t  dummy;                  //for alignment
+    vcsUint16_t UOP_len;                //Length of the UOP in Kbytes
+    vcsUint16_t TOP_len;                //Length of the TOP in Kbytes
+    vcsUint16_t POP_len;                //Length of the POP in Kbytes
+    vcsUint16_t Template_obj_slot_size; //Template object slot Ksize
+    vcsUint16_t Payload_obj_slot_size;  //Payload object slot Ksize
+}vcsfw_cmd_format_t;
+
+typedef struct VCS_PACKED vcsfw_reply_format_s {
+    vcsUint16_t dummy;    //for alignment
+    vcsUint32_t newPartitionVersion;
+}vcsfw_reply_format_t;
+
+/****************************************************************************/
+/* VCSFW_CMD_MSBM_CONNECT                                                   */
+/****************************************************************************/
+
+/* Various lengths for the command/reply structures. */
+#define VCSFW_CMD_MSBM_RANDOM_LEN           32
+#define VCSFW_CMD_MSBM_ECC_PUBK_BUF_LEN     140
+#define VCSFW_CMD_MSBM_ECDSA_SIGN_BUF_LEN   148
+#define VCSFW_CMD_MSBM_CERT_M_MAXLEN        1536
+
+/* The command structure. */
+typedef struct VCS_PACKED vcsfw_cmd_msbm_connect_s
+{
+    vcsUint8_t   r_h[VCSFW_CMD_MSBM_RANDOM_LEN];
+    vcsUint32_t  pkh_len;                             /* =0 means re-connect */
+    vcsUint8_t   pk_h[VCSFW_CMD_MSBM_ECC_PUBK_BUF_LEN]; /* OCT string format */
+} vcsfw_cmd_msbm_connect_t;
+
+/* The reply structure. */
+typedef struct VCS_PACKED vcsfw_reply_msbm_connect_s
+{
+    vcsUint16_t status;
+    vcsUint16_t payload_size; /* The size of the payload coming after 
+                               * this stucture.
+                               * =0 means reconnect. */
+    vcsUint8_t  m[VCSFW_SHA256_HASH_SIZE];
+} vcsfw_reply_msbm_connect_t;
+/* Optionally followed by an instance of vcsfw_reply_msbm_connect_paytload_s. */
+
+/* The payload returned on successful connect. */
+typedef struct VCS_PACKED vcsfw_reply_msbm_connect_payload_s
+{
+    vcsUint8_t   r_d[VCSFW_CMD_MSBM_RANDOM_LEN];
+    vcsUint32_t  cert_m_len;
+    vcsUint8_t   cert_m[VCSFW_CMD_MSBM_CERT_M_MAXLEN];
+    vcsUint32_t  pkd_len;
+    vcsUint8_t   pk_d[VCSFW_CMD_MSBM_ECC_PUBK_BUF_LEN]; /* OCT string fmt */
+    vcsUint32_t  pkf_len;
+    vcsUint8_t   pk_f[VCSFW_CMD_MSBM_ECC_PUBK_BUF_LEN]; /* OCT string fmt */
+    vcsUint8_t   h_f[VCSFW_SHA256_HASH_SIZE];
+    vcsUint32_t  sm_len;
+    vcsUint8_t   s_m[VCSFW_CMD_MSBM_ECDSA_SIGN_BUF_LEN];
+    vcsUint32_t  sd_len;
+    vcsUint8_t   s_d[VCSFW_CMD_MSBM_ECDSA_SIGN_BUF_LEN];
+} vcsfw_reply_msbm_connect_paytload_t;
+/****************************************************************************/
+/* VCSFW_CMD_SELFTEST_RUN -- Request device self-testing                    */
+/****************************************************************************/
+/* COMMAND                                                                  */
+typedef struct VCS_PACKED vcsfw_cmd_selftest_run_s
+{
+        vcsUint8_t     flags;               /* what test to run */
+        vcsUint8_t     reserved[3];
+} vcsfw_cmd_selftest_run_t;
+
+#define VCSFW_CMD_SELFTEST_FLAGS_ROM                  0x01
+#define VCSFW_CMD_SELFTEST_FLAGS_FLASH                0x02
+#define VCSFW_CMD_SELFTEST_FLAGS_SECURITY_ALG         0x04
+
+/* REPLY                                                                    */
+/*   - Reply uses the vcsfw_generic_reply_t structure                       */
 
 /****************************************************************************/
 /* Definitions related to the line structure of the sensor                  */
@@ -6723,6 +7122,7 @@ typedef struct VCS_PACKED vcsfw_ssl_alert_s
 #define VCSFW_TLS_ALERT_CLOSE_NOTIFY            0
 #define VCSFW_TLS_ALERT_UNEXPECTED_MESSAGE      10  /* fatal */
 #define VCSFW_TLS_ALERT_BAD_RECORD_MAC          20  /* fatal */
+#define VCSFW_TLS_ALERT_DECRYPTION_FAILED       21  /* fatal */
 #define VCSFW_TLS_ALERT_HANDSHAKE_FAILURE       40  /* fatal */
 #define VCSFW_TLS_ALERT_NO_CERTIFICATE          41
 #define VCSFW_TLS_ALERT_BAD_CERTIFICATE         42
@@ -6969,6 +7369,13 @@ typedef struct VCS_PACKED vcsfw_frame_tag_s {
 #define VCSFW_FRAME_TAG_FLAG_INSTSPEC           0x20
 
 
+/*
+ * Please leave this comment in place and put all
+ *  frame tag type number definitions below it.
+ *
+ * BEGIN:FRAME_TAG
+ */
+
 /* frame tags  */
 #define VCSFW_FRAME_TAG_FW_BL    1 /* "Firmware" baseline RAM
                                      (HWDEF_MEMMAP_FW_BL_RAM) */
@@ -7018,9 +7425,24 @@ typedef struct VCS_PACKED vcsfw_frame_tag_s {
                                                     * external FPS OTPROM */
 #define VCSFW_FRAME_TAG_EXTFPS_OTP_RAW  27 /* raw OTPROM data from
                                             * external FPS */
+#define VCSFW_FRAME_TAG_BURSTCFG        28  /* burst (frame averaging) config */
+/*
+ * WARNING: Right now we use a 32-bit bitfield in the firmware to
+ *  keep track of the tag types we've seen.  Once the number of
+ *  frame tag types hits 32 (highest index value = 31) we have
+ *  to change the firmware pretty significantly, and we'd like
+ *  to avoid that.  So please only add new tag types if it's
+ *  necessary.
+ */
 
 /* Development-only tags: */
 
+/*
+ * END:FRAME_TAG
+ *
+ * Please leave this comment in place and put all
+ *  frame tag type number definitions above it.
+ */
 
 /* VCSFW_FRAME_TAG_REG32BLK */
 typedef struct VCS_PACKED vcsfw_frame_tag_reg32blk_s {
@@ -7078,6 +7500,10 @@ typedef struct VCS_PACKED vcsfw_frame_tag_acqopt_s {
 #define VCSFW_FRAME_TAG_ACQOPT_MODE_BUTTON      0x03
 #define VCSFW_FRAME_TAG_ACQOPT_MODE_SUNSENSE    0x04
 #define VCSFW_FRAME_TAG_ACQOPT_MODE_DRYFINGER   0x05
+#define VCSFW_FRAME_TAG_ACQOPT_MODE_PARTIAL     0x06
+#define VCSFW_FRAME_TAG_ACQOPT_MODE_EKG         0x07
+#define VCSFW_FRAME_TAG_ACQOPT_MODE_WOF         0x08
+#define VCSFW_FRAME_TAG_ACQOPT_MODE_PIXEL_TEST  0x09
 
 #define VCSFW_FRAME_TAG_ACQOPT_TRIGGER_NONE     0x00
 #define VCSFW_FRAME_TAG_ACQOPT_TRIGGER_NORMAL   0x01
@@ -7443,6 +7869,75 @@ typedef struct VCS_PACKED vcsfw_frame_tag_extfps_otp_raw_s {
 #define VCSFW_FRAME_TAG_EXTFPS_OTP_RAW_BASE_NBYTES_B        30
 #define VCSFW_FRAME_TAG_EXTFPS_OTP_RAW_BASE_NBYTES_N        2
 
+/* VCSFW_FRAME_TAG_BURSTCFG */
+/*
+ * Burst configuration a/k/a frame averaging.
+ *
+ * Terminology, courtesy of Adam:
+ *  + burst = single frame or set of frames sent from the sensor
+ *            (e.g., Diamond Peak, SS27) to the controller (e.g.,
+ *            Hayes or SC24).
+ *  + frame = single frame sent from the controller to the host.
+ *  + step =  a set of 1 or more frames to be sent to the host
+ *            which each comprise the averaging of 1 or more bursts.
+ *
+ * We maintain a small script indicating what we should be assembling
+ *  and sending to the host.  There can be up to
+ *  VCSFW_FRAME_TAG_BURSTCFG_NSTEPSMAX = 5 valid steps in the script,
+ *  and at the end the script will loop back to the step number
+ *  provided in vcsfw_frame_tag_burstcfg_t::looptop.
+ *
+ * Note that the VCSFW_FRAME_TAG_BURSTCFG tag is like the
+ *  VCSFW_FRAME_TAG_ACQOPT in that the tag is not "sticky".  That is:
+ *  unlike all other tags except VCSFW_FRAME_TAG_ACQOPT, the host
+ *  must send down a new copy of VCSFW_FRAME_TAG_BURSTCFG with every
+ *  VCSFW_CMD_FRAME_ACQ command.
+ */
+#define VCSFW_FRAME_TAG_BURSTCFG_NSTEPSMAX      5
+typedef struct VCS_PACKED vcsfw_frame_tag_burstcfg_step_s {
+    vcsUint8_t  burstsize;  /* number of bursts averaged together to
+                             *  make a frame.  Minimum value is 1,
+                             *  maximum value is 16. */
+    vcsUint8_t  nframes;    /* number of frames to send to the
+                             *  host with this step before
+                             *  moving to the next or, if this is the
+                             *  final step, moving to looptop. */
+} vcsfw_frame_tag_burstcfg_step_t;
+
+typedef struct VCS_PACKED vcsfw_frame_tag_burstcfg_s {
+    vcsUint8_t  nsteps;     /* how many valid steps there are in
+                             *  the array that follows.  Must be
+                             *  [1, VCSFW_FRAME_TAG_BURSTCFG_NSTEPSMAX] */
+    vcsUint8_t  looptop;    /* when we're done this is the step
+                             *  number to go back to.
+                             *  Must be = [0, nsteps-1]. */
+    vcsfw_frame_tag_burstcfg_step_t steps[VCSFW_FRAME_TAG_BURSTCFG_NSTEPSMAX];
+} vcsfw_frame_tag_burstcfg_t;
+
+/*
+ * Here are some example setups:
+ *
+ * vcsfw_frame_tag_burstcfg_t myexample1 = {
+ *     .nsteps = 1, .looptop = 0,
+ *     .steps[0] = { .burstsize = 2, .nframes = 1 }
+ * };
+ *
+ * This first example will deliver an unlimited stream of frames that
+ *  are each comprised of the average of two bursts, and it will
+ *  keep doing that forever.
+ *
+ * vcsfw_frame_tag_burstcfg_t myexample2 = {
+ *     .nsteps = 3, .looptop = 2,
+ *     .steps[0] = { .burstsize = 1, .nframes = 1 },
+ *     .steps[1] = { .burstsize = 2, .nframes = 1 },
+ *     .steps[2] = { .burstsize = 4, .nframes = 1 }
+ * };
+ *
+ * This second example will deliver a first frame that is not averaged
+ *  at all (it will be sent directly as the sensor delivered it to the
+ *  controller), followed by 1 frame averaging two bursts, followed by
+ *  an endless stream of frames averaging four bursts.
+ */
 
 /*
  * iotas are blocks of bytes that are stored in non-volatile
@@ -7557,11 +8052,34 @@ typedef struct VCS_PACKED vcsfw_frame_tag_extfps_otp_raw_s {
 #define VCSFW_IOTA_ITYPE_STELLER_CAL_SUNLIGHT_CORRECTION_REFLOW_DRC   0x0025
 #define VCSFW_IOTA_ITYPE_STELLER_CAL_DRC_ADAPTIVE_CORRECTION  0x0026
 
+/* Specific to Prometheus: WOF config (register) settings
+  */
+#define VCSFW_IOTA_ITYPE_FRAME_PROMETHEUS_WOF_CONFIG   0x0027
+
+/* Specific to Prometheus: WOF Threshold settings
+  */
+#define VCSFW_IOTA_ITYPE_PROMETHEUS_WOF_THRESH   0x0028
+
+/* Frame slection settings */
+#define VCSFW_IOTA_ITYPE_CONFIG_FRAME_SELECT    0x0029
+
+/* Baseline Management */
+#define VCSFW_IOTA_ITYPE_CONFIG_BLM             0x002A
+
+/* WOF EKG mode */
+#define VCSFW_IOTA_ITYPE_FRAME_EKG              0x002B
+
+/* Temperature Sensor threshold */
+#define VCSFW_IOTA_ITYPE_CONFIG_TEMP_SENSE      0x002C
+
+/* Dynamic Threshold Management Configuration */
+#define VCSFW_IOTA_ITYPE_CONFIG_DTM      0x002D
+
 
 #define VCSFW_IOTA_ITYPE_CHAINEND       0xFFFF /* end of the chain (internal) */
 
 /*For Steller for DRC
-   Store T0, the integration time for the target DN, DN0 and Tsun0, the sunlight integration time for target DNsun0.  
+   Store T0, the integration time for the target DN, DN0 and Tsun0, the sunlight integration time for target DNsun0.
    We should also store DN0 and DNsun0 along with T0 and Tsun0 in the integration time iota.
 */
 typedef struct VCS_PACKED vcsfw_steller_drc_adaptive_correction__s{
@@ -7641,6 +8159,27 @@ typedef struct VCS_PACKED vcsfw_cpid_attributes_s{
 } vcsfw_cpid_attributes_t;
 
 
+/* VCSFW_IOTA_ITYPE_CONFIG_FRAME_SELECT */
+/*
+ * This tag contains configuration settings for the Partial Scan
+ * Frame Selection algorithm. It replaces/supersedes the pselect iota
+ * definition.
+ */
+typedef struct VCS_PACKED vcsfw_config_frame_select_s{
+    vcsUint16_t  cnt_thresh;
+    vcsUint8_t   diff_thresh;
+    vcsUint8_t   delay_interval_msec;
+    vcsUint8_t   max_frames;
+    vcsUint8_t   pscan_col_size;
+    vcsUint8_t   pscan_row_size;
+    vcsUint8_t   pscan_start_row;
+    vcsUint8_t   state_check_delay_msec;
+    vcsUint8_t   flags;
+#define VCSFW_CONFIG_TAG_FRAME_SELECT_FLAGS_REARM_ON_FINGERLIFT     0x01
+    vcsUint8_t   unused[2];
+} vcsfw_config_frame_select_t;
+
+
 /* VCSFW_IOTA_ITYPE_CONFIG_PSELECT */
 /*
  * This tag contains configuration settings for the Partial Scan
@@ -7657,6 +8196,7 @@ typedef struct VCS_PACKED vcsfw_config_tag_pselect_s{
     vcsUint8_t  flags;
 #define VCSFW_CONFIG_TAG_PSELECT_FLAGS_REARM_ON_FINGERLIFT     0x01
 } vcsfw_config_tag_pselect_t;
+
 
 /* VCSFW_IOTA_ITYPE_CONFIG_FRAME_AVG*/
 /*
@@ -7711,6 +8251,24 @@ typedef struct VCS_PACKED vcsfw_config_wof_thresholds_s {
 } vcsfw_config_wof_thresholds_t;
 
 
+/*VCSFW_IOTA_ITYPE_PROMETHEUS_WOF_THRESH */
+
+typedef struct VCS_PACKED  vcsfw_config_prometheus_wof_thresholds_s {
+    vcsInt16_t     fp_fu_abs_thresh;
+    vcsInt16_t     fp_fd_abs_thresh;
+    vcsInt16_t     fp_fu_deriv_thresh;
+    vcsInt16_t     fp_fd_deriv_thresh;
+    vcsInt16_t     sb_fu_abs_thresh;
+    vcsInt16_t     sb_fd_abs_thresh;
+    vcsInt16_t     sb_fu_deriv_thresh;
+    vcsInt16_t     sb_fd_deriv_thresh;
+    vcsInt8_t     fp_globalCbcCalTolerance;
+    vcsInt8_t      sbforce_calCbcCalTolerance;
+    vcsUint16_t    unused;
+} vcsfw_config_prometheus_wof_thresholds_t;
+
+
+
 /* VCSFW_IOTA_ITYPE_CONFIG_BL_MGT */
 /*
  * This iota contains configuration settings for the dynamic baseline
@@ -7752,6 +8310,79 @@ typedef struct VCS_PACKED vcsfw_config_bl_mgt_s{
 } vcsfw_config_bl_mgt_t;
 
 
+/* VCSFW_IOTA_ITYPE_CONFIG_BLM */
+
+typedef struct VCS_PACKED vcsfw_config_blm_s {
+  vcsUint16_t mode;
+#define  VCSFW_BLM_MODE_DISABLED 0
+#define  VCSFW_BLM_MODE_ENABLED  1
+  vcsUint16_t img_temp_threshold;
+  vcsUint16_t wof_temp_threshold;
+  vcsUint16_t nav_temp_threshold;
+  vcsUint16_t pixel_cal_err_tol;
+  vcsUint16_t activity_delay_ms;
+  vcsUint32_t wof_fast_sample_rate;
+  vcsUint32_t  unused;
+} vcsfw_config_blm_t;
+
+typedef struct VCS_PACKED vcsfw_config_dtm_s {
+  /* Valid Flags DTM_FLAG_ENABLED. */
+#define VCSFW_DTM_FLAG_ENABLED (1 << 0)
+  vcsUint16_t flags;
+    
+  /* When the finger is on the sensor and the sensor is 
+     hot the sensor can cool very quickly.  Ths variable
+     defines the cycle time in ms of the DTM while the
+     finger is on the sensor. */
+  vcsUint16_t fd_cycle_rate;
+
+  /* With finger/fingerdown or on cal we run DTM quickly
+     in order to get ADC values close to the finger
+     down finger up and cal events.  This value is expressed 
+     in ms and defines how fast we run.  By default it is
+     set to 128 ms. */
+  vcsUint16_t fast_cycle_rate;
+
+  /* The DTM use this value to help limit the rate at
+     which we adjust the WOF threshold by correlating
+     ADC readings with changes in temperature and rate
+     limiting adjustments accordingly.  Though the 
+     relationship between WOF ADC and temperature is 
+     not linear this rate limiting ensures that finger
+     information does not get into the adjustment.*/
+  vcsUint16_t nom_cnts_per_degree_c;
+  
+  /* A corner case brought out in customer testing of Whitney
+     exists where the sensor is hot and the user is tapping
+     the sensor.  This prevents adjustments from being made
+     since DTM does not use samples adjacent to finger up/down
+     activity.  If the DTM is running and unable to adjust 
+     the threshold due to finger activity and the temperature
+     change since the last adjustment exceeds this threshold,
+     the DTM will run fast cycles in an attempt to sneak an
+     adjustment between finger up/down events. */
+  vcsUint16_t fast_cycle_temperature;
+
+  /* The DTM starts running fast cycles on finger up/down events.
+     The following configuration variable cause the DTM to ignore
+     ADC counts for the specified number of fast cycles after the 
+     finger event.  Again, this is used to help ensure that 
+     lingering finger information is not introduced into the 
+     adjustment. */
+  vcsUint16_t fu_defer_count;
+  vcsUint16_t fd_defer_count;
+  vcsUint16_t reserved;
+} vcsfw_config_dtm_t;
+
+
+/* VCSFW_IOTA_ITYPE_CONFIG_TEMP_SENSE */
+
+typedef struct VCS_PACKED vcsfw_config_temp_sense_s {
+  vcsUint16_t  interval_ms;
+  vcsUint8_t   threshold;
+  vcsUint8_t   hw_sample_period;
+  vcsUint32_t  unused;
+} vcsfw_config_temp_sense_t;
 /*
  * VCSFW_IOTA_ITYPE_CAL_REFERENCE
  * VCSFW_IOTA_ITYPE_CPID_CAL_LONG_INTEGRATION
@@ -7805,7 +8436,7 @@ typedef struct VCS_PACKED vcsfw_steller_cal_a_offset_coeffs_header_s {
     vcsUint16_t      offset;        /* offset in dwords */
     vcsUint16_t      npixels;       /* number of pixels in a row, after cropping */
     vcsUint16_t      nlines;        /* number of rows, after cropping */
-    vcsInt32_t       quardratic_coef;    
+    vcsInt32_t       quardratic_coef;
     vcsUint8_t       bitdepth;      /* bit-depth: 16 */
     vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
     vcsUint8_t       reserved[6];
@@ -7821,7 +8452,7 @@ typedef struct VCS_PACKED vcsfw_steller_cal_b_scale_coeffs_header_s {
     vcsUint16_t      nlines;        /* number of rows, after cropping */
     vcsUint8_t       bitdepth;      /* bit-depth: 16 */
     vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
-    vcsUint8_t       reserved[4];    
+    vcsUint8_t       reserved[4];
 } vcsfw_steller_cal_b_scale_coeffs_header_t;
 
 /*
@@ -7835,7 +8466,7 @@ typedef struct VCS_PACKED vcsfw_steller_cal_a_offset_coeffs_drc_header_s {
     vcsUint16_t      nlines;        /* number of rows, after cropping */
     vcsUint8_t       bitdepth;      /* bit-depth: 16 */
     vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
-    vcsUint8_t       reserved[4];    
+    vcsUint8_t       reserved[4];
 } vcsfw_steller_cal_a_offset_coeffs_drc_header_t;
 
 /*
@@ -7849,7 +8480,7 @@ typedef struct VCS_PACKED vcsfw_steller_cal_b_scale_coeffs_drc_header_s {
     vcsUint16_t      nlines;        /* number of rows, after cropping */
     vcsUint8_t       bitdepth;      /* bit-depth: 16 */
     vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
-    vcsUint8_t       reserved[4];    
+    vcsUint8_t       reserved[4];
 } vcsfw_steller_cal_b_scale_coeffs_drc_header_t;
 
 /*
@@ -7863,7 +8494,7 @@ typedef struct VCS_PACKED vcsfw_steller_cal_sunlight_correction_reflow_drc_heade
     vcsUint16_t      nlines;        /* number of rows, after cropping */
     vcsUint8_t       bitdepth;      /* bit-depth: 16 */
     vcsUint8_t       dpi;           /* DPI: 1 - 500 DPI, 2 - 1000 DPI, 3 - 800 DPI */
-    vcsUint8_t       reserved[4];    
+    vcsUint8_t       reserved[4];
 } vcsfw_steller_cal_sunlight_correction_reflow_drc_header_t;
 
 /*
@@ -7981,6 +8612,37 @@ typedef struct VCS_PACKED vcsfw_config_nav_tap_s {
     vcsUint32_t      quiescent_time3;  /* response time for Dtap              */
 } vcsfw_config_nav_tap_t;
 
+/****************************************************************************/
+/* VCSFW_CMD_TEST_SPIFLASH_OP                                               */
+/****************************************************************************/
+
+/* NOTE: this command must not be implemented in moduletest patch ever. */
+
+/* Flash operations. */
+#define VCSFW_TEST_SPIFLASH_OPID_READ         0x01
+#define VCSFW_TEST_SPIFLASH_OPID_PROG         0x02
+#define VCSFW_TEST_SPIFLASH_OPID_BLCK_ERASE   0x03 /* 64KB block */
+#define VCSFW_TEST_SPIFLASH_OPID_BULK_ERASE   0x04
+#define VCSFW_TEST_SPIFLASH_OPID_SECTOR_ERASE 0x05
+
+#define VCSFW_TEST_SPIFLASH_MODE_NODMA		0x0
+#define VCSFW_TEST_SPIFLASH_MODE_DMA		0x1
+/* COMMAND                                                                  */
+typedef struct VCS_PACKED vcsfw_cmd_test_spiflash_op_s
+{
+    vcsUint8_t  opid;             /* Operation ID (see definitions above)  */
+    vcsUint8_t  mode;             /* mode: 0-NODMA 1-DMA                   */
+    vcsUint16_t data_size;        /* Read/Prog/erase data size.            */
+    vcsUint32_t address;          /* Flash memory address.                 */
+} vcsfw_cmd_test_spiflash_op_t;
+/* Followed by 'data_size'-byte data. */
+
+/* REPLY                                                                    */
+typedef struct VCS_PACKED vcsfw_reply_test_spiflash_op_s
+{
+    vcsUint16_t data_size;        /* Returned back data size.               */
+} vcsfw_reply_test_spiflash_op_t;
+
 
 typedef struct VCS_PACKED vcsfw_fppresent_params_s {
     vcsUint32_t variance_thresh;
@@ -8041,6 +8703,196 @@ typedef struct VCS_PACKED vcsfw_soft_button_config_s {
     vcsInt16_t  recal_threshold;    /* When exceeded, forces button recalibration (a la FINGER_HIGH in WOF) */
     vcsUint16_t reserved[3];
 } vcsfw_soft_button_config_t;
+
+
+
+/****************************************************************************/
+/* VCSFW_CMD_ENROLL                                                         */
+/****************************************************************************/
+/* COMMAND                                                                  */
+typedef struct vcsfw_cmd_enroll_s
+{
+  vcsUint32_t SubCommand;
+} vcsfw_cmd_enroll_t;
+/* Followed by a sub command structure as follows:                          */
+#define VCSFW_CMD_ENROLL_BEGIN	 1
+#define VCSFW_CMD_ENROLL_FINISH  2
+
+/* VCSFW_CMD_ENROLL_BEGIN				                                    */
+typedef struct vcsfw_cmd_enroll_begin_s
+{
+  vcsUint32_t Flags;
+  vcsUint8_t UserID[16];     /* Required                                    */
+  vcsUint32_t PayloadType;   /*                                             */
+  vcsUint32_t PayloadSize;
+} vcsfw_cmd_enroll_begin_t;
+/* Followed by PayloadSize bytes of payload                                 */
+
+/* REPLY                                                                    */
+/* Uses vcsfw_reply_generic reply                                           */
+
+/* VCSFW_CMD_ENROLL_FINISH                                                  */
+typedef struct vcsfw_cmd_enroll_finish_s
+{
+    vcsUint32_t Discard;            /* 1=discard enrollment,0=Store it      */
+    vcsUint8_t IPLStatus[32];       /* Opaque blob for IPL debug            */
+    vcsUint8_t MatcherStatus[32];   /* Opaque blob for Matcher debug        */
+} vcsfw_cmd_enroll_finish_t;
+
+/* REPLY                                                                    */
+typedef struct vcsfw_reply_enroll_finish_s
+{
+   vcsUint32_t Status;
+   vcsUint8_t UserID[16];     /*                                            */
+   vcsUint8_t TemplateID[16]; /* Sensor generated Template ID               */
+   vcsUint8_t PayloadID[16];  /* Sensor generated Payload ID                */
+} vcsfw_reply_enroll_finish_t;
+
+
+/****************************************************************************/
+/* VCSFW_CMD_IDENTIFY                                                       */
+/****************************************************************************/
+/* COMMAND                                                                  */
+typedef struct vcsfw_cmd_identify_s
+{
+  vcsUint32_t SubCommand;
+} vcsfw_cmd_identify_s;
+/* Followed by a sub command structure as follows:                          */
+
+/* SubCommand definitions						                            */
+#define VCSFW_CMD_IDENTIFY_BEGIN     1
+#define VCSFW_CMD_IDENTIFY_FINISH    2
+
+/* VCSFW_CMD_IDENTIFY_BEGIN                                                 */
+typedef struct vcsfw_cmd_identify_begin_s
+{
+  vcsUint32_t Flags;
+  vcsUint8_t UserID[16];     /* If non-zero, this is a VERIFY operation     */
+  vcsUint32_t ChallengeSize;
+} vcsfw_cmd_identify_begin_t;
+/* Followed by ChallengeSize bytes of data                                  */
+
+/* REPLY                                                                    */
+/* -  uses vcsfw_reply_generic reply                                        */
+
+/* VCSFW_CMD_IDENTIFY_FINISH                                                */
+/*   - Uses vcsfw_generic_command_t                                         */
+/* REPLY                                                                    */
+typedef struct vcsfw_reply_identify_finish_s
+{
+   vcsUint32_t Status;
+   vcsUint8_t UserID[16];     /* Sensor generated Template ID               */
+   vcsUint8_t TemplateID[16]; /* Sensor generated Template ID               */
+   vcsUint8_t PayloadID[16];  /* Sensor generated Payload ID                */
+   vcsUint32_t score;         /* Match score.                  		        */
+   vcsUint32_t PayloadSize;   /* Size in Bytes of the payload  		        */
+} vcsfw_reply_identify_finish_t;
+/* Followed by PayloadSize bytes of data                                    */
+
+
+
+/****************************************************************************/
+/* VCSFW_CMD_ENROLL_WBF                                                     */
+/****************************************************************************/
+/* COMMAND                                                                  */
+typedef struct vcsfw_cmd_enroll_wbf_s
+{
+  vcsUint32_t SubCommand;
+} vcsfw_cmd_enroll_wbf_t;
+
+/* Followed by a sub command structure as follows:                          */
+#define VCSFW_CMD_ENROLL_WBF_BEGIN     1
+#define VCSFW_CMD_ENROLL_WBF_UPDATE    2
+#define VCSFW_CMD_ENROLL_WBF_COMMIT    3
+#define VCSFW_CMD_ENROLL_WBF_FINISH    4
+
+
+/* VCSFW_CMD_ENROLL_WBF_BEGIN                                               */
+#define vcsfw_flags_enroll_wbf_begin_SCPV1  0x00000001  /* 0=standard WBF, 1=SCP V1 */
+
+typedef struct vcsfw_cmd_enroll_wbf_begin_s
+{
+  vcsUint32_t Flags;
+  vcsUint32_t NonceSize;     /* How big should the returned Nonce be (bytes)? */
+} vcsfw_cmd_enroll_wbf_begin_t;
+
+/* REPLY                                                                    */
+typedef struct vcsfw_reply_enroll_wbf_begin_s
+{
+  vcsUint32_t NonceSize;
+} vcsfw_reply_enroll_wbf_begin_t;
+/* Followed by NonceSize bytes of data                                      */
+
+
+/* VCSFW_CMD_ENROLL_WBF_UPDATE                                              */
+/* Adds the current view into the template (Template Update)                */
+/*   - Uses vcsfw_generic_command_t                                         */
+
+/* REPLY                                                                    */
+
+typedef struct vcsfw_reply_enroll_wbf_update_s
+{
+     vcsUint8_t TemplateID[16];
+    vcsUint32_t EnrollStatSize;
+} vcsfw_reply_enroll_wbf_update_t;
+/* Followed by EnrollStatSize bytes of data                                      */
+
+
+/* VCSFW_CMD_ENROLL_WBF_COMMIT                                              */
+typedef struct vcsfw_cmd_enroll_wbf_commit_s
+{
+    vcsUint32_t Flags;
+    vcsUint32_t payloadSize;
+} vcsfw_cmd_enroll_wbf_commit_t;
+/* Followed by payloadSize bytes of data     */
+
+/* REPLY                                                                    */
+/* -  uses vcsfw_reply_generic reply                                        */
+
+
+/* VCSFW_CMD_ENROLL_WBF_FINISH                                              */
+/*   - Uses vcsfw_generic_command_t                                         */
+/* REPLY                                                                    */
+/* -  uses vcsfw_reply_generic reply                                        */
+
+
+/****************************************************************************/
+/* VCSFW_CMD_IDENTIFY_WBF                                                   */
+/****************************************************************************/
+/* COMMAND                                                                  */
+typedef struct vcsfw_cmd_identify_wbf_s
+{
+  vcsUint32_t SubCommand;
+} vcsfw_cmd_identify_wbf_t;
+
+/* Followed by a sub command structure as follows:                          */
+#define VCSFW_CMD_IDENTIFY_WBF_MATCH     1
+
+
+
+/* VCSFW_CMD_IDENTIFY_WBF_MATCH                                             */
+typedef struct vcsfw_cmd_identify_wbf_match_s
+{
+  vcsUint32_t   TuidSize;
+  vcsUint32_t   NonceSize;
+} vcsfw_cmd_identify_wbf_match_t;
+/* Followed by tuidSize + NonceSize  bytes of data                          */
+
+/* REPLY                                                                    */
+typedef struct vcsfw_reply_identify_wbf_match_s
+{
+	vcsUint8_t tuid[16];
+    vcsUint32_t matchStatSize;
+	vcsUint32_t NonceSize;
+	vcsUint32_t PayloadSize;
+} vcsfw_reply_identify_wbf_match_t;
+/* Followed by matchStatSize bytes of data  + NonceSize + PayloadSize  bytes of data  */
+
+/* VCSFW_CMD_IDENTIFY_WBF_FINISH                                            */
+/*   - Uses vcsfw_generic_command_t                                         */
+
+/* REPLY                                                                    */
+/* -  uses vcsfw_reply_generic reply                                        */
 
 #include "vcsPopPack.h"
 
