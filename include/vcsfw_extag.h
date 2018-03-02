@@ -8,7 +8,7 @@
  **
  *****************************************************************************
  **
- **  Copyright (c) 2015-2017 Synaptics Incorporated. All rights reserved.
+ **  Copyright (c) 2015-2018 Synaptics Incorporated. All rights reserved.
  **
  **
  ** This file contains information that is proprietary to Synaptics
