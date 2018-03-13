@@ -1,0 +1,13 @@
+ssh://gitms@git.synaptics.com/git/biometrics/b1210/common.git be6fc82252ecdcc6274049a756bcee47efa2480b
+ssh://gitms@git.synaptics.com/git/biometrics/b1210/tools.git e7210883964e0b12034990f7ddb8154111918e04
+ssh://gitms@git.synaptics.com/git/biometrics/b1212/common.git fbb8e9e165c3922e61f0dacdec87fbfd7386f631
+ssh://gitms@git.synaptics.com/git/biometrics/b1212/tools.git ca554f10f18cc8fbd6cd2e39cf4beb2ee0b5f209
+ssh://gitms@git.synaptics.com/git/biometrics/b1216/common.git cb2823646f910fc7a74540fe3640123dd6005369
+ssh://gitms@git.synaptics.com/git/biometrics/b1216/tools.git 8eeac70f65b98fbed34b26f4fdbc35dd0cad7906
+ssh://gitms@git.synaptics.com/git/biometrics/b2224/common.git 1daef7a6831a5f96864748bf6ba28ee5bfdb032b
+ssh://gitms@git.synaptics.com/git/biometrics/b2224/tools.git ded4337bf24b2017c522952b780428f9644c4e28
+ssh://gitms@git.synaptics.com/git/biometrics/fw/include.git c83af48672dcc3a73e728d6f59360b558138726c
+ssh://gitms@git.synaptics.com/git/biometrics/fw/nassau/common.git 7b9cc2b051c6fbb308deb57f199d4af7f704228e
+ssh://gitms@git.synaptics.com/git/biometrics/fw/nassau/patch/bootldr.git 0a3d3f5ce33dd291493d535b63a439237405c285
+ssh://gitms@git.synaptics.com/git/biometrics/include.git fea97225ab3f5effe6852814a2b3dcc12844f7b5
+ssh://gitms@git.synaptics.com/git/biometrics/tools.git 42e70abefcff5c5750d65567706e610b0b6d1424

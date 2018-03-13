@@ -1,0 +1,16 @@
+# -*- mode: makefile -*-
+#
+# Common definitions for RAM test patches.
+#
+# Bjoren Davis, March 5, 2018.
+#
+PATCH_VMAJOR=1
+PATCH_VMINOR=0
+PATCH_BUILDNUM=2
+RAMTEST_ALGORITHM=a1
+RAMCOMMON=$(PATCH_SRCDIR)/../common
+RAMTEST_CFLAGS=-DRAMTEST_NPASSES=1 -DPATCH_RAMTEST=ramtest_$(RAMTEST_ALGORITHM)
+RAMTEST_INCLUDES=-I$(RAMCOMMON)
+
+vpath ramtest_$(RAMTEST_ALGORITHM).c $(RAMCOMMON)
+

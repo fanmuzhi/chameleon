@@ -1,0 +1,58 @@
+#
+# This is the minimal list of files needed to build the
+#  RAM diagnostic test patches for Denali (b1210), Hayes (b1212),
+#  Shasta (b1216), and the Steller Controller SC24 (b2224)
+#
+# To test build:
+# cd nassau/../..    # Go to the top of the Nassau hierarchy
+# mkdir /tmp/trialbuild
+# cp --parent `sed -e 's/#.*$//' -e '/^$/d' fw/nassau/patch/bootldr/test/ram/filelist.txt` /tmp/trialbuild
+# cd /tmp/trialbuild/fw/nassau/patch/bootldr/test/ram
+# make
+#
+# Bjoren Davis, June 27, 2017
+#
+b1210/common/include/b1210hwdef.h
+b1210/tools/hexlist.pl
+b1212/common/include/b1212hwdef.h
+b1212/tools/hexlist.pl
+b1216/common/include/b1216hwdef.h
+b1216/tools/hexlist.pl
+b2224/common/include/b2224hwdef.h
+b2224/tools/hexlist.pl
+fw/include/basetypes.h
+fw/include/fwcmd.h
+fw/include/vcsPopPack.h
+fw/include/vcsPushPack1.h
+fw/nassau/common/include/bootldr.h
+fw/nassau/common/include/hwdef.h
+fw/nassau/common/makefile.common
+fw/nassau/common/makefile.envid
+fw/nassau/patch/bootldr/bootldrpatch.x
+fw/nassau/patch/bootldr/makefile.bootldrpatch
+fw/nassau/patch/bootldr/test/ram/common/ramtest.h
+fw/nassau/patch/bootldr/test/ram/common/ramtest_a1.c
+fw/nassau/patch/bootldr/test/ram/dcd/dcdsetup.s
+fw/nassau/patch/bootldr/test/ram/dcd/makefile
+fw/nassau/patch/bootldr/test/ram/dcd/patch_start.c
+fw/nassau/patch/bootldr/test/ram/dct/dctsetup.s
+fw/nassau/patch/bootldr/test/ram/dct/makefile
+fw/nassau/patch/bootldr/test/ram/dct/patch_start.c
+fw/nassau/patch/bootldr/test/ram/dev/makefile
+fw/nassau/patch/bootldr/test/ram/dev/patch_start.c
+fw/nassau/patch/bootldr/test/ram/filelist.txt
+fw/nassau/patch/bootldr/test/ram/icd/makefile
+fw/nassau/patch/bootldr/test/ram/icd/patch_start.c
+fw/nassau/patch/bootldr/test/ram/ict/makefile
+fw/nassau/patch/bootldr/test/ram/ict/patch_start.c
+fw/nassau/patch/bootldr/test/ram/makefile
+fw/nassau/patch/bootldr/test/ram/makefile.common
+fw/nassau/patch/bootldr/test/ram/readme.txt
+fw/nassau/patch/bootldr/test/ram/sys/makefile
+fw/nassau/patch/bootldr/test/ram/sys/patch_start.c
+fw/nassau/patch/bootldr/test/ram/sys/sysramtest.s
+fw/nassau/patch/bootldr/tools/denali_bootldr_1.0_eng_vpsk.pem
+fw/nassau/patch/bootldr/tools/genbootldrpatch.pl
+include/vcsfw_v4.h
+include/vcsfw_v4priv.h
+tools/elfio.pm
