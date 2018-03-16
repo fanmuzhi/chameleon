@@ -1,0 +1,16 @@
+# Host specific makefile definitions
+
+# various tools that we need
+export NUL   = /dev/null
+export CP    = cp
+export MV    = mv
+export RM    = rm
+export SED   = sed
+export ZIP   = zip
+export TAR   = tar
+export ECHO  = echo
+export FIND  = find
+export GREP  = grep
+export MKDIR = mkdir -p
+export RMDIR = rmdir
+export CMAKE = $(TOOLS)/cmake-3.4.3/bin/cmake

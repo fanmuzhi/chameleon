@@ -1,0 +1,18 @@
+# Host specific makefile definitions
+# Use quoted .exe to distinguish UnixUtils from built-in commands
+
+# various tools that we need
+export NUL   = /nul
+export CP    = "cp.exe"
+export MV    = "mv.exe"
+export RM    = "rm.exe"
+export SED   = "sed.exe"
+export ZIP   = "zip.exe"
+export TAR   = "tar.exe"
+export ECHO  = "echo.exe"
+export FIND  = "find.exe"
+export GREP  = "grep.exe"
+export MKDIR = "mkdir.exe" -p
+export RMDIR = "rmdir.exe"
+export CON   = /con:
+export CMAKE = "$(TOOLS)\CMake-3.4.3\bin\cmake.exe"

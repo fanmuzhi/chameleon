@@ -1,0 +1,102 @@
+#
+# Command CMake definitions for all Windows platforms
+#
+
+# Define target specific settings here
+
+MESSAGE(STATUS "PATH=$ENV{PATH}")
+MESSAGE(STATUS "INCLUDE=$ENV{INCLUDE}")
+MESSAGE(STATUS "LIB=$ENV{LIB}")
+
+# Add flag definitions
+#ADD_DEFINITIONS(-DVCS_OS_WINDOWS)
+#ADD_DEFINITIONS(-DSTRICT)
+#ADD_DEFINITIONS(-D_MBCS)
+
+#ADD_DEFINITIONS(-DRTCL)
+ADD_DEFINITIONS(-DUNICODE)
+ADD_DEFINITIONS(-D_UNICODE)
+#ADD_DEFINITIONS(-RTC1)
+ADD_DEFINITIONS(-EHsc)
+ADD_DEFINITIONS(-Gm)
+ADD_DEFINITIONS(-wd"4251")
+
+#
+# Compiler specific definitions
+#
+SET (vcs_tmp_c_flags "/DWIN32 /D_WINDOWS /W3")
+SET (vcs_tmp_c_flags "${vcs_tmp_c_flags} /WX-")
+
+IF (${BUILDTYPE} STREQUAL "Debug")
+    SET (vcs_tmp_c_flags "${vcs_tmp_c_flags} /MDd /Zi /Od")
+#    ADD_DEFINITIONS (-DNISE_DBG)
+ELSE(${BUILDTYPE} STREQUAL "Debug")
+    SET (vcs_tmp_c_flags "${vcs_tmp_c_flags} /MT")
+ENDIF(${BUILDTYPE} STREQUAL "Debug")
+
+
+IF (USE_VS2015)
+    MESSAGE(STATUS "Using Visual Studio 2015...")
+
+    # /Wv:18 Disable warnings introduced in compiler versions newer than version 18 (VS 2013)
+    # Added for VS 2015 migration. Should be reviewed for compiler later versions.
+    SET (vcs_tmp_c_flags "${vcs_tmp_c_flags} /D_NO_CRT_STDIO_INLINE /Wv:18")
+ELSE (USE_VS2015)
+    MESSAGE(STATUS "Using Visual Studio 2013...")
+ENDIF (USE_VS2015)
+
+# Use static code analyzer by specifying compiler flag.
+#IF(USE_CODE_ANALYZER)
+#    MESSAGE("Using static code analyzer")
+#    SET(vcs_tmp_c_flags    "${vcs_tmp_c_flags} /analyze")
+#ENDIF(USE_CODE_ANALYZER)
+
+SET (CMAKE_C_FLAGS ${vcs_tmp_c_flags} CACHE STRING "Flags used by the compiler during all build types." FORCE)
+SET (CMAKE_C_FLAGS_DEBUG ${vcs_tmp_c_flags} CACHE STRING "C_FLAGS_DEBUG used by the compiler." FORCE)
+SET (CMAKE_C_FLAGS_RELEASE ${vcs_tmp_c_flags} CACHE STRING "C_FLAGS_RELEASE used by the compiler." FORCE)
+SET (CMAKE_CXX_FLAGS ${vcs_tmp_c_flags} CACHE STRING "CXX_FLAGS used by the compiler." FORCE)
+SET (CMAKE_CXX_FLAGS_DEBUG ${vcs_tmp_c_flags} CACHE STRING "CXX_FLAGS_DEBUG used by the compiler." FORCE)
+SET (CMAKE_CXX_FLAGS_RELEASE ${vcs_tmp_c_flags} CACHE STRING "CXX_FLAGS_RELEASE used by the compiler." FORCE)
+SET (CMAKE_C_FLAGS_MINSIZEREL ${vcs_tmp_c_flags} CACHE STRING "C_FLAGS_MINSIZEREL used by the compiler." FORCE)
+SET (CMAKE_CXX_FLAGS_MINSIZEREL ${vcs_tmp_c_flags} CACHE STRING "CXX_FLAGS_MINSIZEREL used by the compiler." FORCE)
+SET (CMAKE_CXX_FLAGS_RELWITHDEBINFO ${vcs_tmp_c_flags} CACHE STRING "CXX_FLAGS_RELWITHDEBINFO used by the compiler." FORCE)
+SET (CMAKE_C_FLAGS_RELWITHDEBINFO ${vcs_tmp_c_flags} CACHE STRING "C_FLAGS_RELWITHDEBINFO used by the compiler." FORCE)
+
+MESSAGE(STATUS "***************************************************************************")
+MESSAGE(STATUS "CMAKE_C_FLAGS=${CMAKE_C_FLAGS}")
+MESSAGE(STATUS "CMAKE_C_FLAGS_DEBUG=${CMAKE_C_FLAGS_DEBUG}")
+MESSAGE(STATUS "CMAKE_C_FLAGS=${CMAKE_CXX_FLAGS}")
+MESSAGE(STATUS "CMAKE_C_FLAGS_DEBUG=${CMAKE_CXX_FLAGS_DEBUG}")
+MESSAGE(STATUS "***************************************************************************")
+
+
+# Setup path to DDK
+IF (USE_VS2015)
+    # Setup path to Windows kit 10
+    SET(NTDDK  "${TOOLS}/WindowsKit_10")
+    SET(SDK_VER 10.0.15063.0)
+    INCLUDE_DIRECTORIES(SYSTEM ${NTDDK}/INCLUDE ${NTDDK}/INCLUDE/${SDK_VER}/shared)
+    SET(WINSDK  "${TOOLS}/WindowsKit_10")
+    LINK_LIBRARIES(legacy_stdio_definitions.lib)
+ELSE (USE_VS2015)
+    SET(NTDDK  "${TOOLS}/WindowsKit_8_1")
+    INCLUDE_DIRECTORIES(SYSTEM ${NTDDK}/INCLUDE ${NTDDK}/INCLUDE/Shared)
+    SET(WINSDK  "${TOOLS}/WindowsKit_8_1")
+    INCLUDE_DIRECTORIES(SYSTEM ${WINSDK}/INCLUDE ${WINSDK}/INCLUDE/Shared)
+ENDIF (USE_VS2015)
+
+SET(WINSOCK ws2_32)
+LINK_LIBRARIES(version.lib Psapi.lib shlwapi.lib rpcrt4.lib
+               cfgmgr32.lib Crypt32.lib bcrypt.lib ${WINSOCK})
+
+# Override the assembly source rule to generate interleaved C source
+#SET(CMAKE_C_CREATE_ASSEMBLY_SOURCE
+#    "<CMAKE_C_COMPILER> ${CMAKE_START_TEMP_FILE} ${CMAKE_CL_NOLOGO} <FLAGS> /FAc /FoNUL /Fa<ASSEMBLY_SOURCE> /c <SOURCE>${CMAKE_END_TEMP_FILE}")
+
+#SET(CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
+#    "<CMAKE_CXX_COMPILER> ${CMAKE_START_TEMP_FILE} ${CMAKE_CL_NOLOGO} <FLAGS> /TP /FAc /FoNUL /Fa<ASSEMBLY_SOURCE> /c <SOURCE>${CMAKE_END_TEMP_FILE}")
+
+# Generate map file
+SET(CMAKE_EXE_LINKER_FLAGS_INIT     "${CMAKE_EXE_LINKER_FLAGS_INIT} /WX /MAP /SAFESEH:NO /ignore:4099")
+SET(CMAKE_SHARED_LINKER_FLAGS_INIT  "${CMAKE_SHARED_LINKER_FLAGS_INIT} /WX /MAP /SAFESEH:NO /ignore:4099 /ignore:4251")
+SET(CMAKE_MODULE_LINKER_FLAGS_INIT  "${CMAKE_MODULE_LINKER_FLAGS_INIT} /WX /MAP /SAFESEH:NO /ignore:4099")

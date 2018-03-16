@@ -1,0 +1,46 @@
+#
+# NISE feature selections for Windows platform
+#
+
+# Enable SPI sensor support
+#IF (COMIFACE STREQUAL "SPI")
+#    SET(NISE_FEATURE_SPI_DRIVER      1)
+#ENDIF (COMIFACE STREQUAL "SPI")
+
+# Enable USB sensor support
+#IF (COMIFACE STREQUAL "USB")
+#    SET(NISE_FEATURE_USB_DRIVER      1)
+#ENDIF (COMIFACE STREQUAL "USB")
+
+# Enable MPC04 support
+#IF (ENABLE_MPC04 EQUAL 1)
+#    SET(NISE_FEATURE_MPC04_DRIVER      1)
+#ENDIF (ENABLE_MPC04 EQUAL 1)
+
+# Enable M5 support
+#IF (ENABLE_M5 EQUAL 1)
+#    SET(NISE_FEATURE_M5_DRIVER         1)
+#ENDIF (ENABLE_M5 EQUAL 1)
+
+# Enable Google Test and Unit Tests
+#SET(NISE_BUILD_UNIT_TESTS    1)
+#SET(NISE_BUILD_GTEST         1)
+#SET(NISE_BUILD_CPPUTEST      0)
+#SET(NISE_BUILD_UNITY         0)
+
+#SET(NISE_FEATURE_ENABLE_ASP  0)
+
+# Enable niseEngTest build
+#SET(NISE_BUILD_ENG_TEST      1)
+
+# Enavle AS tool build
+#SET(NISE_BUILD_AS_TEST       1)
+
+# Enavle vfmEngTest build
+#SET(NISE_BUILD_VFM_ENG_TEST  1)
+
+# Enavle vfm build
+#SET (NISE_BUILD_VFM            1)
+
+# Enavle vfm Util build
+#SET (NISE_BUILD_VFM_UTIL       1)
