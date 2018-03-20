@@ -1,0 +1,597 @@
+ cmlLogging
+
+ Timestamp is 5ab07706 (Tue Mar 20 10:50:46 2018)
+
+ Preferred load address is 10000000
+
+ Start         Length     Name                   Class
+ 0001:00000000 00001449H .text$di                CODE
+ 0001:00001450 00005d5aH .text$mn                CODE
+ 0001:000071b0 00001404H .text$x                 CODE
+ 0001:000085c0 0000105bH .text$yd                CODE
+ 0002:00000000 00000104H .CRT$XCA                DATA
+ 0002:00000104 00000125H .CRT$XCU                DATA
+ 0002:0000022c 00000104H .CRT$XCZ                DATA
+ 0002:00000330 00000104H .CRT$XIA                DATA
+ 0002:00000434 00000104H .CRT$XIAA               DATA
+ 0002:00000538 00000104H .CRT$XIC                DATA
+ 0002:0000063c 00000104H .CRT$XIZ                DATA
+ 0002:00000740 00000959H .rdata                  DATA
+ 0002:0000109c 00000178H .rdata$debug            DATA
+ 0002:00001214 000002d4H .rdata$r                DATA
+ 0002:000014e8 00000104H .rtc$IAA                DATA
+ 0002:000015ec 00000104H .rtc$IZZ                DATA
+ 0002:000016f0 00000104H .rtc$TAA                DATA
+ 0002:000017f4 00000104H .rtc$TZZ                DATA
+ 0002:000018f8 000006a2H .xdata$x                DATA
+ 0002:00001fa0 000003b9H .edata                  DATA
+ 0003:00000000 00000118H .data                   DATA
+ 0003:00000118 000001e4H .data$r                 DATA
+ 0003:00000300 0000037cH .bss                    DATA
+ 0004:00000000 00000200H .idata$5                DATA
+ 0004:00000200 00000050H .idata$2                DATA
+ 0004:00000250 00000014H .idata$3                DATA
+ 0004:00000264 00000200H .idata$4                DATA
+ 0004:00000464 00000a41H .idata$6                DATA
+ 0005:00000000 00000169H .rsrc$01                DATA
+ 0005:00000170 000002ccH .rsrc$02                DATA
+
+  Address         Publics by Value              Rva+Base       Lib:Object
+
+ 0000:00000000       ___guard_fids_table        00000000     <absolute>
+ 0000:00000000       __except_list              00000000     <absolute>
+ 0000:00000000       ___guard_fids_count        00000000     <absolute>
+ 0000:00000000       ___safe_se_handler_table   00000000     <absolute>
+ 0000:00000000       ___safe_se_handler_count   00000000     <absolute>
+ 0000:00000000       ___guard_flags             00000000     <absolute>
+ 0000:00009876       __ldused                   00009876     <absolute>
+ 0000:00009876       __fltused                  00009876     <absolute>
+ 0000:00000000       ___ImageBase               10000000     <linker-defined>
+ 0001:00001450       ?GetLogger@cmlLogging@@SAPAV1@XZ 10002450 f   cmlLogging.obj
+ 0001:000014e0       ?GetLogger@cmlLogging@@SAPAV1@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z 100024e0 f   cmlLogging.obj
+ 0001:00001570       ?Log@cmlLogging@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z 10002570 f   cmlLogging.obj
+ 0001:000015f0       ?Log@cmlLogging@@QAAXPADZZ 100025f0 f   cmlLogging.obj
+ 0001:000016e0       ?LogPack@cmlLogging@@QAEXPBEI@Z 100026e0 f   cmlLogging.obj
+ 0001:00001910       ??0cmlLogging@@IAE@XZ      10002910 f   cmlLogging.obj
+ 0001:00001a40       ??0cmlLogging@@IAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z 10002a40 f   cmlLogging.obj
+ 0001:00001b80       ??1cmlLogging@@IAE@XZ      10002b80 f   cmlLogging.obj
+ 0001:00001d70       ??$?6DU?$char_traits@D@std@@V?$allocator@D@1@@std@@YAAAV?$basic_ostream@DU?$char_traits@D@std@@@0@AAV10@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@@Z 10002d70 f i cmlLogging.obj
+ 0001:00002100       ??$?6U?$char_traits@D@std@@@std@@YAAAV?$basic_ostream@DU?$char_traits@D@std@@@0@AAV10@PBD@Z 10003100 f i cmlLogging.obj
+ 0001:00002500       ??$?HDU?$char_traits@D@std@@V?$allocator@D@1@@std@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@PBD$$QAV10@@Z 10003500 f i cmlLogging.obj
+ 0001:00002550       ??$?HDU?$char_traits@D@std@@V?$allocator@D@1@@std@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@PBDABV10@@Z 10003550 f i cmlLogging.obj
+ 0001:00002640       ??$_Allocate@D@std@@YAPADIPAD@Z 10003640 f i cmlLogging.obj
+ 0001:00002690       ??$_Allocate@U_Container_proxy@std@@@std@@YAPAU_Container_proxy@0@IPAU10@@Z 10003690 f i cmlLogging.obj
+ 0001:000026f0       ??$_Debug_pointer@D@std@@YAXPBDPB_WI@Z 100036f0 f i cmlLogging.obj
+ 0001:00002720       ??$addressof@D@std@@YAPADAAD@Z 10003720 f i cmlLogging.obj
+ 0001:00002730       ??$construct@PADAAPAD@?$_Wrap_alloc@V?$allocator@D@std@@@std@@QAEXPAPADAAPAD@Z 10003730 f i cmlLogging.obj
+ 0001:00002770       ??$construct@PADAAPAD@?$allocator@D@std@@QAEXPAPADAAPAD@Z 10003770 f i cmlLogging.obj
+ 0001:00002820       ??$construct@PADAAPAD@?$allocator_traits@V?$allocator@D@std@@@std@@SAXAAV?$allocator@D@1@PAPADAAPAD@Z 10003820 f i cmlLogging.obj
+ 0001:00002850       ??$construct@U_Container_proxy@std@@U12@@?$allocator@U_Container_proxy@std@@@std@@QAEXPAU_Container_proxy@1@$$QAU21@@Z 10003850 f i cmlLogging.obj
+ 0001:00002900       ??$destroy@PAD@?$_Wrap_alloc@V?$allocator@D@std@@@std@@QAEXPAPAD@Z 10003900 f i cmlLogging.obj
+ 0001:00002930       ??$destroy@PAD@?$allocator@D@std@@QAEXPAPAD@Z 10003930 f i cmlLogging.obj
+ 0001:00002940       ??$destroy@PAD@?$allocator_traits@V?$allocator@D@std@@@std@@SAXAAV?$allocator@D@1@PAPAD@Z 10003940 f i cmlLogging.obj
+ 0001:00002960       ??$destroy@U_Container_proxy@std@@@?$allocator@U_Container_proxy@std@@@std@@QAEXPAU_Container_proxy@1@@Z 10003960 f i cmlLogging.obj
+ 0001:00002970       ??$forward@AAPAD@std@@YAAAPADAAPAD@Z 10003970 f i cmlLogging.obj
+ 0001:00002980       ??$forward@U_Container_proxy@std@@@std@@YA$$QAU_Container_proxy@0@AAU10@@Z 10003980 f i cmlLogging.obj
+ 0001:00002990       ??$forward@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YA$$QAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@AAV10@@Z 10003990 f i cmlLogging.obj
+ 0001:000029a0       ??$move@AAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YA$$QAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@AAV10@@Z 100039a0 f i cmlLogging.obj
+ 0001:000029b0       ??$vsprintf_s@$0BDII@@@YAHAAY0BDII@DPBDPAD@Z 100039b0 f i cmlLogging.obj
+ 0001:000029e0       ??0?$_String_alloc@$0A@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QAE@ABV?$allocator@D@1@@Z 100039e0 f i cmlLogging.obj
+ 0001:00002a50       ??0?$_String_val@U?$_Simple_types@D@std@@@std@@QAE@XZ 10003a50 f i cmlLogging.obj
+ 0001:00002a90       ??0?$_Wrap_alloc@V?$allocator@D@std@@@std@@QAE@XZ 10003a90 f i cmlLogging.obj
+ 0001:00002ab0       ??0?$allocator@D@std@@QAE@XZ 10003ab0 f i cmlLogging.obj
+ 0001:00002ad0       ??0?$allocator@U_Container_proxy@std@@@std@@QAE@XZ 10003ad0 f i cmlLogging.obj
+ 0001:00002af0       ??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@$$QAV01@@Z 10003af0 f i cmlLogging.obj
+ 0001:00002b50       ??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@PBD@Z 10003b50 f i cmlLogging.obj
+ 0001:00002be0       ??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@XZ 10003be0 f i cmlLogging.obj
+ 0001:00002c60       ??0_Container_proxy@std@@QAE@XZ 10003c60 f i cmlLogging.obj
+ 0001:00002c90       ??0_Generic_error_category@std@@QAE@XZ 10003c90 f i cmlLogging.obj
+ 0001:00002cc0       ??0_Iostream_error_category@std@@QAE@XZ 10003cc0 f i cmlLogging.obj
+ 0001:00002cf0       ??0_Sentry_base@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAE@AAV12@@Z 10003cf0 f i cmlLogging.obj
+ 0001:00002d70       ??0_System_error_category@std@@QAE@XZ 10003d70 f i cmlLogging.obj
+ 0001:00002da0       ??0error_category@std@@QAE@XZ 10003da0 f i cmlLogging.obj
+ 0001:00002dc0       ??0error_condition@std@@QAE@HABVerror_category@1@@Z 10003dc0 f i cmlLogging.obj
+ 0001:00002df0       ??0sentry@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAE@AAV12@@Z 10003df0 f i cmlLogging.obj
+ 0001:00002ef0       ??1?$_String_alloc@$0A@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QAE@XZ 10003ef0 f i cmlLogging.obj
+ 0001:00002f20       ??1?$_String_val@U?$_Simple_types@D@std@@@std@@QAE@XZ 10003f20 f i cmlLogging.obj
+ 0001:00002f40       ??1?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@XZ 10003f40 f i cmlLogging.obj
+ 0001:00002f70       ??1_Generic_error_category@std@@UAE@XZ 10003f70 f i cmlLogging.obj
+ 0001:00002f90       ??1_Iostream_error_category@std@@UAE@XZ 10003f90 f i cmlLogging.obj
+ 0001:00002fb0       ??1_Sentry_base@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAE@XZ 10003fb0 f i cmlLogging.obj
+ 0001:00003020       ??1_System_error_category@std@@UAE@XZ 10004020 f i cmlLogging.obj
+ 0001:00003040       ??1error_category@std@@UAE@XZ 10004040 f i cmlLogging.obj
+ 0001:00003060       ??1sentry@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAE@XZ 10004060 f i cmlLogging.obj
+ 0001:000030a0       ??2@YAPAXIPAX@Z            100040a0 f i cmlLogging.obj
+ 0001:000030b0       ??3@YAXPAX0@Z              100040b0 f i cmlLogging.obj
+ 0001:000030c0       ??4?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@PBD@Z 100040c0 f i cmlLogging.obj
+ 0001:000030e0       ??8error_category@std@@QBE_NABV01@@Z 100040e0 f i cmlLogging.obj
+ 0001:00003120       ??8error_condition@std@@QBE_NABV01@@Z 10004120 f i cmlLogging.obj
+ 0001:00003190       ??Bsentry@?$basic_ostream@DU?$char_traits@D@std@@@std@@QBE_NXZ 10004190 f i cmlLogging.obj
+ 0001:000031b0       ??Y?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@ABV01@@Z 100041b0 f i cmlLogging.obj
+ 0001:000031d0       ??Y?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@PBD@Z 100041d0 f i cmlLogging.obj
+ 0001:000031f0       ??_E_Generic_error_category@std@@UAEPAXI@Z 100041f0 f i cmlLogging.obj
+ 0001:000031f0       ??_G_Generic_error_category@std@@UAEPAXI@Z 100041f0 f i cmlLogging.obj
+ 0001:00003230       ??_E_Iostream_error_category@std@@UAEPAXI@Z 10004230 f i cmlLogging.obj
+ 0001:00003230       ??_G_Iostream_error_category@std@@UAEPAXI@Z 10004230 f i cmlLogging.obj
+ 0001:00003270       ??_G_System_error_category@std@@UAEPAXI@Z 10004270 f i cmlLogging.obj
+ 0001:00003270       ??_E_System_error_category@std@@UAEPAXI@Z 10004270 f i cmlLogging.obj
+ 0001:000032b0       ??_Gerror_category@std@@UAEPAXI@Z 100042b0 f i cmlLogging.obj
+ 0001:000032b0       ??_Eerror_category@std@@UAEPAXI@Z 100042b0 f i cmlLogging.obj
+ 0001:000032f0       ?_Alloc_proxy@?$_String_alloc@$0A@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QAEXXZ 100042f0 f i cmlLogging.obj
+ 0001:00003350       ?_Assign_rv@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEX$$QAV12@@Z 10004350 f i cmlLogging.obj
+ 0001:00003400       ?_Copy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXII@Z 10004400 f i cmlLogging.obj
+ 0001:00003630       ?_Eos@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXI@Z 10004630 f i cmlLogging.obj
+ 0001:00003680       ?_Free_proxy@?$_String_alloc@$0A@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QAEXXZ 10004680 f i cmlLogging.obj
+ 0001:000036e0       ?_Getal@?$_String_alloc@$0A@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QBE?AU?$_Wrap_alloc@V?$allocator@D@std@@@2@XZ 100046e0 f i cmlLogging.obj
+ 0001:00003700       ?_Grow@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE_NI_N@Z 10004700 f i cmlLogging.obj
+ 0001:000037d0       ?_Inside@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE_NPBD@Z 100047d0 f i cmlLogging.obj
+ 0001:00003820       ?_Myptr@?$_String_val@U?$_Simple_types@D@std@@@std@@QAEPADXZ 10004820 f i cmlLogging.obj
+ 0001:00003870       ?_Myptr@?$_String_val@U?$_Simple_types@D@std@@@std@@QBEPBDXZ 10004870 f i cmlLogging.obj
+ 0001:000038c0       ?_Tidy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEX_NI@Z 100048c0 f i cmlLogging.obj
+ 0001:00003990       ?_Xlen@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEXXZ 10004990 f i cmlLogging.obj
+ 0001:000039b0       ?_Xran@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEXXZ 100049b0 f i cmlLogging.obj
+ 0001:000039d0       ?allocate@?$_Wrap_alloc@V?$allocator@D@std@@@std@@QAEPADI@Z 100049d0 f i cmlLogging.obj
+ 0001:000039f0       ?allocate@?$allocator@D@std@@QAEPADI@Z 100049f0 f i cmlLogging.obj
+ 0001:00003a20       ?allocate@?$allocator@U_Container_proxy@std@@@std@@QAEPAU_Container_proxy@2@I@Z 10004a20 f i cmlLogging.obj
+ 0001:00003a50       ?append@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@ABV12@@Z 10004a50 f i cmlLogging.obj
+ 0001:00003a80       ?append@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@ABV12@II@Z 10004a80 f i cmlLogging.obj
+ 0001:00003b70       ?append@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@PBD@Z 10004b70 f i cmlLogging.obj
+ 0001:00003bc0       ?append@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@PBDI@Z 10004bc0 f i cmlLogging.obj
+ 0001:00003cc0       ?assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@ABV12@II@Z 10004cc0 f i cmlLogging.obj
+ 0001:00003da0       ?assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@PBD@Z 10004da0 f i cmlLogging.obj
+ 0001:00003df0       ?assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@PBDI@Z 10004df0 f i cmlLogging.obj
+ 0001:00003eb0       ?assign@?$char_traits@D@std@@SAXAADABD@Z 10004eb0 f i cmlLogging.obj
+ 0001:00003ed0       ?c_str@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEPBDXZ 10004ed0 f i cmlLogging.obj
+ 0001:00003ef0       ?category@error_code@std@@QBEABVerror_category@2@XZ 10004ef0 f i cmlLogging.obj
+ 0001:00003f10       ?category@error_condition@std@@QBEABVerror_category@2@XZ 10004f10 f i cmlLogging.obj
+ 0001:00003f30       ?copy@?$char_traits@D@std@@SAPADPADPBDI@Z 10004f30 f i cmlLogging.obj
+ 0001:00003f70       ?deallocate@?$_Wrap_alloc@V?$allocator@D@std@@@std@@QAEXPADI@Z 10004f70 f i cmlLogging.obj
+ 0001:00003fa0       ?deallocate@?$allocator@D@std@@QAEXPADI@Z 10004fa0 f i cmlLogging.obj
+ 0001:00003fc0       ?deallocate@?$allocator@U_Container_proxy@std@@@std@@QAEXPAU_Container_proxy@2@I@Z 10004fc0 f i cmlLogging.obj
+ 0001:00003fe0       ?default_error_condition@_System_error_category@std@@UBE?AVerror_condition@2@H@Z 10004fe0 f i cmlLogging.obj
+ 0001:00004040       ?default_error_condition@error_category@std@@UBE?AVerror_condition@2@H@Z 10005040 f i cmlLogging.obj
+ 0001:00004070       ?eof@?$char_traits@D@std@@SAHXZ 10005070 f i cmlLogging.obj
+ 0001:00004080       ?eq_int_type@?$char_traits@D@std@@SA_NABH0@Z 10005080 f i cmlLogging.obj
+ 0001:000040b0       ?equivalent@error_category@std@@UBE_NABVerror_code@2@H@Z 100050b0 f i cmlLogging.obj
+ 0001:00004110       ?equivalent@error_category@std@@UBE_NHABVerror_condition@2@@Z 10005110 f i cmlLogging.obj
+ 0001:00004150       ?erase@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@I@Z 10005150 f i cmlLogging.obj
+ 0001:00004190       ?erase@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@II@Z 10005190 f i cmlLogging.obj
+ 0001:00004240       ?generic_category@std@@YAABVerror_category@1@XZ 10005240 f i cmlLogging.obj
+ 0001:00004250       ?insert@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@IABV12@II@Z 10005250 f i cmlLogging.obj
+ 0001:000043e0       ?insert@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@IPBD@Z 100053e0 f i cmlLogging.obj
+ 0001:00004430       ?insert@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@IPBDI@Z 10005430 f i cmlLogging.obj
+ 0001:00004580       ?length@?$char_traits@D@std@@SAIPBD@Z 10005580 f i cmlLogging.obj
+ 0001:000045c0       ?max_size@?$_Wrap_alloc@V?$allocator@D@std@@@std@@QBEIXZ 100055c0 f i cmlLogging.obj
+ 0001:000045e0       ?max_size@?$allocator@D@std@@QBEIXZ 100055e0 f i cmlLogging.obj
+ 0001:00004600       ?max_size@?$allocator_traits@V?$allocator@D@std@@@std@@SAIABV?$allocator@D@2@@Z 10005600 f i cmlLogging.obj
+ 0001:00004610       ?max_size@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIXZ 10005610 f i cmlLogging.obj
+ 0001:00004660       ?message@_Generic_error_category@std@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@H@Z 10005660 f i cmlLogging.obj
+ 0001:000046d0       ?message@_Iostream_error_category@std@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@H@Z 100056d0 f i cmlLogging.obj
+ 0001:00004740       ?message@_System_error_category@std@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@H@Z 10005740 f i cmlLogging.obj
+ 0001:000047b0       ?move@?$char_traits@D@std@@SAPADPADPBDI@Z 100057b0 f i cmlLogging.obj
+ 0001:000047f0       ?name@_Generic_error_category@std@@UBEPBDXZ 100057f0 f i cmlLogging.obj
+ 0001:00004810       ?name@_Iostream_error_category@std@@UBEPBDXZ 10005810 f i cmlLogging.obj
+ 0001:00004830       ?name@_System_error_category@std@@UBEPBDXZ 10005830 f i cmlLogging.obj
+ 0001:00004850       ?reserve@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXI@Z 10005850 f i cmlLogging.obj
+ 0001:000048c0       ?size@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIXZ 100058c0 f i cmlLogging.obj
+ 0001:000048e0       ?system_category@std@@YAABVerror_category@1@XZ 100058e0 f i cmlLogging.obj
+ 0001:000048f0       ?value@error_code@std@@QBEHXZ 100058f0 f i cmlLogging.obj
+ 0001:00004910       ?value@error_condition@std@@QBEHXZ 10005910 f i cmlLogging.obj
+ 0001:00004930       _hypot                     10005930 f i cmlLogging.obj
+ 0001:00004962       ?InitGoogleLogging@google@@YAXPBD@Z 10005962 f   libglog:libglog.dll
+ 0001:00004968       ??0LogMessage@google@@QAE@PBDH@Z 10005968 f   libglog:libglog.dll
+ 0001:0000496e       ??1LogMessage@google@@QAE@XZ 1000596e f   libglog:libglog.dll
+ 0001:00004974       ?stream@LogMessage@google@@QAEAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@XZ 10005974 f   libglog:libglog.dll
+ 0001:0000497a       ?SetLogDestination@google@@YAXHPBD@Z 1000597a f   libglog:libglog.dll
+ 0001:00004980       ?SetLogFilenameExtension@google@@YAXPBD@Z 10005980 f   libglog:libglog.dll
+ 0001:00004986       ?uncaught_exception@std@@YA_NXZ 10005986 f   msvcprtd:MSVCP120D.dll
+ 0001:0000498c       ?_Debug_message@std@@YAXPB_W0I@Z 1000598c f   msvcprtd:MSVCP120D.dll
+ 0001:00004992       ??0_Container_base12@std@@QAE@XZ 10005992 f   msvcprtd:MSVCP120D.dll
+ 0001:00004998       ??1_Container_base12@std@@QAE@XZ 10005998 f   msvcprtd:MSVCP120D.dll
+ 0001:0000499e       ?_Orphan_all@_Container_base12@std@@QAEXXZ 1000599e f   msvcprtd:MSVCP120D.dll
+ 0001:000049a4       ?_Xbad_alloc@std@@YAXXZ    100059a4 f   msvcprtd:MSVCP120D.dll
+ 0001:000049aa       ?_Xlength_error@std@@YAXPBD@Z 100059aa f   msvcprtd:MSVCP120D.dll
+ 0001:000049b0       ?_Xout_of_range@std@@YAXPBD@Z 100059b0 f   msvcprtd:MSVCP120D.dll
+ 0001:000049b6       ??0id@locale@std@@QAE@I@Z  100059b6 f   msvcprtd:MSVCP120D.dll
+ 0001:000049bc       ?_Syserror_map@std@@YAPBDH@Z 100059bc f   msvcprtd:MSVCP120D.dll
+ 0001:000049c2       ?_Winerror_map@std@@YAPBDH@Z 100059c2 f   msvcprtd:MSVCP120D.dll
+ 0001:000049c8       ?good@ios_base@std@@QBE_NXZ 100059c8 f   msvcprtd:MSVCP120D.dll
+ 0001:000049ce       ?flags@ios_base@std@@QBEHXZ 100059ce f   msvcprtd:MSVCP120D.dll
+ 0001:000049d4       ?width@ios_base@std@@QBE_JXZ 100059d4 f   msvcprtd:MSVCP120D.dll
+ 0001:000049da       ?width@ios_base@std@@QAE_J_J@Z 100059da f   msvcprtd:MSVCP120D.dll
+ 0001:000049e0       ?sputc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHD@Z 100059e0 f   msvcprtd:MSVCP120D.dll
+ 0001:000049e6       ?sputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAE_JPBD_J@Z 100059e6 f   msvcprtd:MSVCP120D.dll
+ 0001:000049ec       ?setstate@?$basic_ios@DU?$char_traits@D@std@@@std@@QAEXH_N@Z 100059ec f   msvcprtd:MSVCP120D.dll
+ 0001:000049f2       ?tie@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEPAV?$basic_ostream@DU?$char_traits@D@std@@@2@XZ 100059f2 f   msvcprtd:MSVCP120D.dll
+ 0001:000049f8       ?rdbuf@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEPAV?$basic_streambuf@DU?$char_traits@D@std@@@2@XZ 100059f8 f   msvcprtd:MSVCP120D.dll
+ 0001:000049fe       ?fill@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEDXZ 100059fe f   msvcprtd:MSVCP120D.dll
+ 0001:00004a04       ?_Osfx@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEXXZ 10005a04 f   msvcprtd:MSVCP120D.dll
+ 0001:00004a0a       ?flush@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@XZ 10005a0a f   msvcprtd:MSVCP120D.dll
+ 0001:00004a10       __purecall                 10005a10 f   MSVCRTD:MSVCR120D.dll
+ 0001:00004a16       ??2@YAPAXI@Z               10005a16 f   MSVCRTD:MSVCR120D.dll
+ 0001:00004a1c       ??3@YAXPAX@Z               10005a1c f   MSVCRTD:MSVCR120D.dll
+ 0001:00004a30       ___atonexitinit            10005a30 f   MSVCRTD:atonexit.obj
+ 0001:00004ae0       __onexit                   10005ae0 f   MSVCRTD:atonexit.obj
+ 0001:00004be0       _atexit                    10005be0 f   MSVCRTD:atonexit.obj
+ 0001:00004c0c       __hypot                    10005c0c f   MSVCRTD:MSVCR120D.dll
+ 0001:00004c12       _sprintf_s                 10005c12 f   MSVCRTD:MSVCR120D.dll
+ 0001:00004c18       _vsprintf_s                10005c18 f   MSVCRTD:MSVCR120D.dll
+ 0001:00004c1e       _memcpy                    10005c1e f   MSVCRTD:MSVCR120D.dll
+ 0001:00004c24       _strlen                    10005c24 f   MSVCRTD:MSVCR120D.dll
+ 0001:00004c2a       _memmove                   10005c2a f   MSVCRTD:MSVCR120D.dll
+ 0001:00004c30       __access                   10005c30 f   MSVCRTD:MSVCR120D.dll
+ 0001:00004c36       __mkdir                    10005c36 f   MSVCRTD:MSVCR120D.dll
+ 0001:00004c40       @__security_check_cookie@4 10005c40 f   MSVCRTD:secchk.obj
+ 0001:00004c50       __CxxThrowException@8      10005c50 f   MSVCRTD:MSVCR120D.dll
+ 0001:00004c56       ___CxxFrameHandler3        10005c56 f   MSVCRTD:MSVCR120D.dll
+ 0001:00004c60       __alloca_probe             10005c60 f   MSVCRTD:chkstk.obj
+ 0001:00004c60       __chkstk                   10005c60 f   MSVCRTD:chkstk.obj
+ 0001:00004c8c       _memset                    10005c8c f   MSVCRTD:MSVCR120D.dll
+ 0001:00004ca0       ??0type_info@@AAE@ABV0@@Z  10005ca0 f   MSVCRTD:ti_inst.obj
+ 0001:00004cc0       ??4type_info@@AAEAAV0@ABV0@@Z 10005cc0 f   MSVCRTD:ti_inst.obj
+ 0001:00004cd0       ??_Etype_info@@UAEPAXI@Z   10005cd0 f i MSVCRTD:ti_inst.obj
+ 0001:00004dc0       _NtCurrentTeb              10005dc0 f i MSVCRTD:crtdll.obj
+ 0001:00004dd0       __CRT_INIT@12              10005dd0 f   MSVCRTD:crtdll.obj
+ 0001:000050b0       __DllMainCRTStartup@12     100060b0 f   MSVCRTD:crtdll.obj
+ 0001:000052a0       __lock                     100062a0 f   MSVCRTD:MSVCR120D.dll
+ 0001:000052a6       __unlock                   100062a6 f   MSVCRTD:MSVCR120D.dll
+ 0001:000052ac       __CrtDbgReportW            100062ac f   MSVCRTD:MSVCR120D.dll
+ 0001:000052b2       __calloc_dbg               100062b2 f   MSVCRTD:MSVCR120D.dll
+ 0001:000052b8       ___dllonexit               100062b8 f   MSVCRTD:MSVCR120D.dll
+ 0001:000052c0       __except_handler4          100062c0 f   MSVCRTD:chandler4gs.obj
+ 0001:000052f0       ___raise_securityfailure   100062f0 f   MSVCRTD:gs_report.obj
+ 0001:00005340       ___report_gsfailure        10006340 f   MSVCRTD:gs_report.obj
+ 0001:00005450       ___report_rangecheckfailure 10006450 f   MSVCRTD:gs_report.obj
+ 0001:00005460       ___report_securityfailure  10006460 f   MSVCRTD:gs_report.obj
+ 0001:00005540       ___report_securityfailureEx 10006540 f   MSVCRTD:gs_report.obj
+ 0001:00005670       ??_M@YGXPAXIHP6EX0@Z@Z     10006670 f   MSVCRTD:ehvecdtr.obj
+ 0001:00005750       ?__ArrayUnwind@@YGXPAXIHP6EX0@Z@Z 10006750 f   MSVCRTD:ehvecdtr.obj
+ 0001:000057da       ??1type_info@@UAE@XZ       100067da f   MSVCRTD:MSVCR120D.dll
+ 0001:000057e0       ___CppXcptFilter           100067e0 f   MSVCRTD:MSVCR120D.dll
+ 0001:000057e6       __amsg_exit                100067e6 f   MSVCRTD:MSVCR120D.dll
+ 0001:000057ec       __malloc_dbg               100067ec f   MSVCRTD:MSVCR120D.dll
+ 0001:000057f2       __free_dbg                 100067f2 f   MSVCRTD:MSVCR120D.dll
+ 0001:000057f8       __CrtSetCheckCount         100067f8 f   MSVCRTD:MSVCR120D.dll
+ 0001:00005800       __FindPESection            10006800 f   MSVCRTD:pesect.obj
+ 0001:00005880       __IsNonwritableInCurrentImage 10006880 f   MSVCRTD:pesect.obj
+ 0001:000059b0       __ValidateImageBase        100069b0 f   MSVCRTD:pesect.obj
+ 0001:00005a10       ___security_init_cookie    10006a10 f   MSVCRTD:gs_support.obj
+ 0001:00005af0       _DllMain@12                10006af0 f   MSVCRTD:dllmain.obj
+ 0001:00005b20       __RTC_Initialize           10006b20 f   MSVCRTD:initsect.obj
+ 0001:00005b50       __RTC_Terminate            10006b50 f   MSVCRTD:initsect.obj
+ 0001:00005b76       __initterm                 10006b76 f   MSVCRTD:MSVCR120D.dll
+ 0001:00005b7c       __initterm_e               10006b7c f   MSVCRTD:MSVCR120D.dll
+ 0001:00005b90       ___clean_type_info_names   10006b90 f   MSVCRTD:tncleanup.obj
+ 0001:00005ba2       __except_handler4_common   10006ba2 f   MSVCRTD:MSVCR120D.dll
+ 0001:00005ba8       __crt_debugger_hook        10006ba8 f   MSVCRTD:MSVCR120D.dll
+ 0001:00005bae       ___crtUnhandledException   10006bae f   MSVCRTD:MSVCR120D.dll
+ 0001:00005bb4       ___crtTerminateProcess     10006bb4 f   MSVCRTD:MSVCR120D.dll
+ 0001:00005bba       ?terminate@@YAXXZ          10006bba f   MSVCRTD:MSVCR120D.dll
+ 0001:00005bc0       ___clean_type_info_names_internal 10006bc0 f   MSVCRTD:MSVCR120D.dll
+ 0001:00005bc6       _EncodePointer@4           10006bc6 f   kernel32:KERNEL32.dll
+ 0001:00005bcc       _DecodePointer@4           10006bcc f   kernel32:KERNEL32.dll
+ 0001:00005bd2       _IsDebuggerPresent@0       10006bd2 f   kernel32:KERNEL32.dll
+ 0001:00005bd8       _IsProcessorFeaturePresent@4 10006bd8 f   kernel32:KERNEL32.dll
+ 0001:00005bde       _QueryPerformanceCounter@4 10006bde f   kernel32:KERNEL32.dll
+ 0001:00005be4       _GetCurrentProcessId@0     10006be4 f   kernel32:KERNEL32.dll
+ 0001:00005bea       _GetCurrentThreadId@0      10006bea f   kernel32:KERNEL32.dll
+ 0001:00005bf0       _GetSystemTimeAsFileTime@4 10006bf0 f   kernel32:KERNEL32.dll
+ 0001:00005bf6       _DisableThreadLibraryCalls@4 10006bf6 f   kernel32:KERNEL32.dll
+ 0002:00000000       ___xc_a                    1000b000     MSVCRTD:cinitexe.obj
+ 0002:0000022c       ___xc_z                    1000b22c     MSVCRTD:cinitexe.obj
+ 0002:00000330       ___xi_a                    1000b330     MSVCRTD:cinitexe.obj
+ 0002:0000063c       ___xi_z                    1000b63c     MSVCRTD:cinitexe.obj
+ 0002:000008fe       ?is_signed@?$numeric_limits@H@std@@2_NB 1000b8fe     cmlLogging.obj
+ 0002:00000900       ?digits@?$numeric_limits@H@std@@2HB 1000b900     cmlLogging.obj
+ 0002:00000904       ?digits10@?$numeric_limits@H@std@@2HB 1000b904     cmlLogging.obj
+ 0002:00000908       ?is_signed@?$numeric_limits@I@std@@2_NB 1000b908     cmlLogging.obj
+ 0002:0000090c       ?digits@?$numeric_limits@I@std@@2HB 1000b90c     cmlLogging.obj
+ 0002:00000910       ?digits10@?$numeric_limits@I@std@@2HB 1000b910     cmlLogging.obj
+ 0002:00000914       ?value@?$integral_constant@_N$0A@@std@@2_NB 1000b914     cmlLogging.obj
+ 0002:00000915       ?is_signed@?$numeric_limits@J@std@@2_NB 1000b915     cmlLogging.obj
+ 0002:00000918       ?digits@?$numeric_limits@J@std@@2HB 1000b918     cmlLogging.obj
+ 0002:0000091c       ?digits10@?$numeric_limits@J@std@@2HB 1000b91c     cmlLogging.obj
+ 0002:00000920       ?value@?$integral_constant@I$07@std@@2IB 1000b920     cmlLogging.obj
+ 0002:00000924       ?value@?$integral_constant@_N$00@std@@2_NB 1000b924     cmlLogging.obj
+ 0002:00000925       ?is_signed@?$numeric_limits@K@std@@2_NB 1000b925     cmlLogging.obj
+ 0002:00000928       ?digits@?$numeric_limits@K@std@@2HB 1000b928     cmlLogging.obj
+ 0002:0000092c       ?digits10@?$numeric_limits@K@std@@2HB 1000b92c     cmlLogging.obj
+ 0002:00000930       ?value@?$integral_constant@I$03@std@@2IB 1000b930     cmlLogging.obj
+ 0002:00000934       ?is_signed@?$numeric_limits@_J@std@@2_NB 1000b934     cmlLogging.obj
+ 0002:00000938       ?digits@?$numeric_limits@_J@std@@2HB 1000b938     cmlLogging.obj
+ 0002:0000093c       ?digits10@?$numeric_limits@_J@std@@2HB 1000b93c     cmlLogging.obj
+ 0002:00000940       ?is_signed@?$numeric_limits@_K@std@@2_NB 1000b940     cmlLogging.obj
+ 0002:00000944       ?digits@?$numeric_limits@_K@std@@2HB 1000b944     cmlLogging.obj
+ 0002:00000948       ?digits10@?$numeric_limits@_K@std@@2HB 1000b948     cmlLogging.obj
+ 0002:0000094c       ?value@?$integral_constant@I$01@std@@2IB 1000b94c     cmlLogging.obj
+ 0002:00000950       ?digits@?$numeric_limits@M@std@@2HB 1000b950     cmlLogging.obj
+ 0002:00000954       ?digits10@?$numeric_limits@M@std@@2HB 1000b954     cmlLogging.obj
+ 0002:00000958       ?max_digits10@?$numeric_limits@M@std@@2HB 1000b958     cmlLogging.obj
+ 0002:0000095c       ?max_exponent@?$numeric_limits@M@std@@2HB 1000b95c     cmlLogging.obj
+ 0002:00000960       ?max_exponent10@?$numeric_limits@M@std@@2HB 1000b960     cmlLogging.obj
+ 0002:00000964       ?min_exponent@?$numeric_limits@M@std@@2HB 1000b964     cmlLogging.obj
+ 0002:00000968       ?min_exponent10@?$numeric_limits@M@std@@2HB 1000b968     cmlLogging.obj
+ 0002:0000096c       ?value@?$integral_constant@I$00@std@@2IB 1000b96c     cmlLogging.obj
+ 0002:00000970       ?digits@?$numeric_limits@N@std@@2HB 1000b970     cmlLogging.obj
+ 0002:00000974       ?digits10@?$numeric_limits@N@std@@2HB 1000b974     cmlLogging.obj
+ 0002:00000978       ?max_digits10@?$numeric_limits@N@std@@2HB 1000b978     cmlLogging.obj
+ 0002:0000097c       ?max_exponent@?$numeric_limits@N@std@@2HB 1000b97c     cmlLogging.obj
+ 0002:00000980       ?max_exponent10@?$numeric_limits@N@std@@2HB 1000b980     cmlLogging.obj
+ 0002:00000984       ?value@?$_Maximum@$S@std@@2IB 1000b984     cmlLogging.obj
+ 0002:00000988       ?min_exponent@?$numeric_limits@N@std@@2HB 1000b988     cmlLogging.obj
+ 0002:0000098c       ?min_exponent10@?$numeric_limits@N@std@@2HB 1000b98c     cmlLogging.obj
+ 0002:00000990       ?value@?$integral_constant@I$0A@@std@@2IB 1000b990     cmlLogging.obj
+ 0002:00000994       ?digits@?$numeric_limits@O@std@@2HB 1000b994     cmlLogging.obj
+ 0002:00000998       ?digits10@?$numeric_limits@O@std@@2HB 1000b998     cmlLogging.obj
+ 0002:0000099c       ?max_digits10@?$numeric_limits@O@std@@2HB 1000b99c     cmlLogging.obj
+ 0002:000009a0       ?max_exponent@?$numeric_limits@O@std@@2HB 1000b9a0     cmlLogging.obj
+ 0002:000009a4       ?max_exponent10@?$numeric_limits@O@std@@2HB 1000b9a4     cmlLogging.obj
+ 0002:000009a8       ?skipws@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9a8     cmlLogging.obj
+ 0002:000009ac       ?min_exponent@?$numeric_limits@O@std@@2HB 1000b9ac     cmlLogging.obj
+ 0002:000009b0       ?unitbuf@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9b0     cmlLogging.obj
+ 0002:000009b4       ?min_exponent10@?$numeric_limits@O@std@@2HB 1000b9b4     cmlLogging.obj
+ 0002:000009b8       ?uppercase@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9b8     cmlLogging.obj
+ 0002:000009bc       ?showbase@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9bc     cmlLogging.obj
+ 0002:000009c0       ?showpoint@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9c0     cmlLogging.obj
+ 0002:000009c4       ?showpos@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9c4     cmlLogging.obj
+ 0002:000009c8       ?left@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9c8     cmlLogging.obj
+ 0002:000009cc       ?right@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9cc     cmlLogging.obj
+ 0002:000009d0       ?internal@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9d0     cmlLogging.obj
+ 0002:000009d4       ?dec@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9d4     cmlLogging.obj
+ 0002:000009d8       ?oct@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9d8     cmlLogging.obj
+ 0002:000009dc       ?hex@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9dc     cmlLogging.obj
+ 0002:000009e0       ?scientific@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9e0     cmlLogging.obj
+ 0002:000009e4       ?fixed@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9e4     cmlLogging.obj
+ 0002:000009e8       ?collate@?$_Locbase@H@std@@2HB 1000b9e8     cmlLogging.obj
+ 0002:000009ec       ?ctype@?$_Locbase@H@std@@2HB 1000b9ec     cmlLogging.obj
+ 0002:000009f0       ?hexfloat@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9f0     cmlLogging.obj
+ 0002:000009f4       ?monetary@?$_Locbase@H@std@@2HB 1000b9f4     cmlLogging.obj
+ 0002:000009f8       ?numeric@?$_Locbase@H@std@@2HB 1000b9f8     cmlLogging.obj
+ 0002:000009fc       ?boolalpha@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000b9fc     cmlLogging.obj
+ 0002:00000a00       ?time@?$_Locbase@H@std@@2HB 1000ba00     cmlLogging.obj
+ 0002:00000a04       ?_Stdio@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000ba04     cmlLogging.obj
+ 0002:00000a08       ?messages@?$_Locbase@H@std@@2HB 1000ba08     cmlLogging.obj
+ 0002:00000a0c       ?all@?$_Locbase@H@std@@2HB 1000ba0c     cmlLogging.obj
+ 0002:00000a10       ?adjustfield@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000ba10     cmlLogging.obj
+ 0002:00000a14       ?none@?$_Locbase@H@std@@2HB 1000ba14     cmlLogging.obj
+ 0002:00000a18       ?basefield@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000ba18     cmlLogging.obj
+ 0002:00000a1c       ?floatfield@?$_Iosb@H@std@@2W4_Fmtflags@12@B 1000ba1c     cmlLogging.obj
+ 0002:00000a20       ?goodbit@?$_Iosb@H@std@@2W4_Iostate@12@B 1000ba20     cmlLogging.obj
+ 0002:00000a24       ?eofbit@?$_Iosb@H@std@@2W4_Iostate@12@B 1000ba24     cmlLogging.obj
+ 0002:00000a28       ?failbit@?$_Iosb@H@std@@2W4_Iostate@12@B 1000ba28     cmlLogging.obj
+ 0002:00000a2c       ?badbit@?$_Iosb@H@std@@2W4_Iostate@12@B 1000ba2c     cmlLogging.obj
+ 0002:00000a30       ?_Hardfail@?$_Iosb@H@std@@2W4_Iostate@12@B 1000ba30     cmlLogging.obj
+ 0002:00000a34       ?in@?$_Iosb@H@std@@2W4_Openmode@12@B 1000ba34     cmlLogging.obj
+ 0002:00000a38       ?out@?$_Iosb@H@std@@2W4_Openmode@12@B 1000ba38     cmlLogging.obj
+ 0002:00000a3c       ?ate@?$_Iosb@H@std@@2W4_Openmode@12@B 1000ba3c     cmlLogging.obj
+ 0002:00000a40       ?app@?$_Iosb@H@std@@2W4_Openmode@12@B 1000ba40     cmlLogging.obj
+ 0002:00000a44       ?trunc@?$_Iosb@H@std@@2W4_Openmode@12@B 1000ba44     cmlLogging.obj
+ 0002:00000a48       ?_Nocreate@?$_Iosb@H@std@@2W4_Openmode@12@B 1000ba48     cmlLogging.obj
+ 0002:00000a4c       ?_Noreplace@?$_Iosb@H@std@@2W4_Openmode@12@B 1000ba4c     cmlLogging.obj
+ 0002:00000a50       ?binary@?$_Iosb@H@std@@2W4_Openmode@12@B 1000ba50     cmlLogging.obj
+ 0002:00000a54       ?beg@?$_Iosb@H@std@@2W4_Seekdir@12@B 1000ba54     cmlLogging.obj
+ 0002:00000a58       ?cur@?$_Iosb@H@std@@2W4_Seekdir@12@B 1000ba58     cmlLogging.obj
+ 0002:00000a5c       ?end@?$_Iosb@H@std@@2W4_Seekdir@12@B 1000ba5c     cmlLogging.obj
+ 0002:00000a60       ?has_denorm@_Num_base@std@@2W4float_denorm_style@2@B 1000ba60     cmlLogging.obj
+ 0002:00000a64       ?has_denorm_loss@_Num_base@std@@2_NB 1000ba64     cmlLogging.obj
+ 0002:00000a65       ?has_infinity@_Num_base@std@@2_NB 1000ba65     cmlLogging.obj
+ 0002:00000a66       ?has_quiet_NaN@_Num_base@std@@2_NB 1000ba66     cmlLogging.obj
+ 0002:00000a67       ?has_signaling_NaN@_Num_base@std@@2_NB 1000ba67     cmlLogging.obj
+ 0002:00000a68       ?is_bounded@_Num_base@std@@2_NB 1000ba68     cmlLogging.obj
+ 0002:00000a69       ?is_exact@_Num_base@std@@2_NB 1000ba69     cmlLogging.obj
+ 0002:00000a6a       ?is_iec559@_Num_base@std@@2_NB 1000ba6a     cmlLogging.obj
+ 0002:00000a6b       ?is_integer@_Num_base@std@@2_NB 1000ba6b     cmlLogging.obj
+ 0002:00000a6c       ?is_modulo@_Num_base@std@@2_NB 1000ba6c     cmlLogging.obj
+ 0002:00000a6d       ?is_signed@_Num_base@std@@2_NB 1000ba6d     cmlLogging.obj
+ 0002:00000a6e       ?is_specialized@_Num_base@std@@2_NB 1000ba6e     cmlLogging.obj
+ 0002:00000a6f       ?tinyness_before@_Num_base@std@@2_NB 1000ba6f     cmlLogging.obj
+ 0002:00000a70       ?traps@_Num_base@std@@2_NB 1000ba70     cmlLogging.obj
+ 0002:00000a74       ?round_style@_Num_base@std@@2W4float_round_style@2@B 1000ba74     cmlLogging.obj
+ 0002:00000a78       ?digits@_Num_base@std@@2HB 1000ba78     cmlLogging.obj
+ 0002:00000a7c       ?digits10@_Num_base@std@@2HB 1000ba7c     cmlLogging.obj
+ 0002:00000a80       ?max_digits10@_Num_base@std@@2HB 1000ba80     cmlLogging.obj
+ 0002:00000a84       ?max_exponent@_Num_base@std@@2HB 1000ba84     cmlLogging.obj
+ 0002:00000a88       ?max_exponent10@_Num_base@std@@2HB 1000ba88     cmlLogging.obj
+ 0002:00000a8c       ?min_exponent@_Num_base@std@@2HB 1000ba8c     cmlLogging.obj
+ 0002:00000a90       ?min_exponent10@_Num_base@std@@2HB 1000ba90     cmlLogging.obj
+ 0002:00000a94       ?radix@_Num_base@std@@2HB  1000ba94     cmlLogging.obj
+ 0002:00000a98       ?is_bounded@_Num_int_base@std@@2_NB 1000ba98     cmlLogging.obj
+ 0002:00000a99       ?is_exact@_Num_int_base@std@@2_NB 1000ba99     cmlLogging.obj
+ 0002:00000a9a       ?is_integer@_Num_int_base@std@@2_NB 1000ba9a     cmlLogging.obj
+ 0002:00000a9b       ?is_modulo@_Num_int_base@std@@2_NB 1000ba9b     cmlLogging.obj
+ 0002:00000a9c       ?is_specialized@_Num_int_base@std@@2_NB 1000ba9c     cmlLogging.obj
+ 0002:00000aa0       ?radix@_Num_int_base@std@@2HB 1000baa0     cmlLogging.obj
+ 0002:00000aa4       ?has_denorm@_Num_float_base@std@@2W4float_denorm_style@2@B 1000baa4     cmlLogging.obj
+ 0002:00000aa8       ?has_denorm_loss@_Num_float_base@std@@2_NB 1000baa8     cmlLogging.obj
+ 0002:00000aa9       ?has_infinity@_Num_float_base@std@@2_NB 1000baa9     cmlLogging.obj
+ 0002:00000aaa       ?has_quiet_NaN@_Num_float_base@std@@2_NB 1000baaa     cmlLogging.obj
+ 0002:00000aab       ?has_signaling_NaN@_Num_float_base@std@@2_NB 1000baab     cmlLogging.obj
+ 0002:00000aac       ?is_bounded@_Num_float_base@std@@2_NB 1000baac     cmlLogging.obj
+ 0002:00000aad       ?is_exact@_Num_float_base@std@@2_NB 1000baad     cmlLogging.obj
+ 0002:00000aae       ?is_iec559@_Num_float_base@std@@2_NB 1000baae     cmlLogging.obj
+ 0002:00000aaf       ?is_integer@_Num_float_base@std@@2_NB 1000baaf     cmlLogging.obj
+ 0002:00000ab0       ?is_modulo@_Num_float_base@std@@2_NB 1000bab0     cmlLogging.obj
+ 0002:00000ab1       ?is_signed@_Num_float_base@std@@2_NB 1000bab1     cmlLogging.obj
+ 0002:00000ab2       ?is_specialized@_Num_float_base@std@@2_NB 1000bab2     cmlLogging.obj
+ 0002:00000ab3       ?tinyness_before@_Num_float_base@std@@2_NB 1000bab3     cmlLogging.obj
+ 0002:00000ab4       ?traps@_Num_float_base@std@@2_NB 1000bab4     cmlLogging.obj
+ 0002:00000ab8       ?round_style@_Num_float_base@std@@2W4float_round_style@2@B 1000bab8     cmlLogging.obj
+ 0002:00000abc       ?radix@_Num_float_base@std@@2HB 1000babc     cmlLogging.obj
+ 0002:00000ac0       ?is_signed@?$numeric_limits@D@std@@2_NB 1000bac0     cmlLogging.obj
+ 0002:00000ac4       ?digits@?$numeric_limits@D@std@@2HB 1000bac4     cmlLogging.obj
+ 0002:00000ac8       ?digits10@?$numeric_limits@D@std@@2HB 1000bac8     cmlLogging.obj
+ 0002:00000acc       ?is_signed@?$numeric_limits@_W@std@@2_NB 1000bacc     cmlLogging.obj
+ 0002:00000ad0       ?digits@?$numeric_limits@_W@std@@2HB 1000bad0     cmlLogging.obj
+ 0002:00000ad4       ?digits10@?$numeric_limits@_W@std@@2HB 1000bad4     cmlLogging.obj
+ 0002:00000ad8       ?is_modulo@?$numeric_limits@_N@std@@2_NB 1000bad8     cmlLogging.obj
+ 0002:00000ad9       ?is_signed@?$numeric_limits@_N@std@@2_NB 1000bad9     cmlLogging.obj
+ 0002:00000adc       ?digits@?$numeric_limits@_N@std@@2HB 1000badc     cmlLogging.obj
+ 0002:00000ae0       ?digits10@?$numeric_limits@_N@std@@2HB 1000bae0     cmlLogging.obj
+ 0002:00000ae4       ?is_signed@?$numeric_limits@C@std@@2_NB 1000bae4     cmlLogging.obj
+ 0002:00000ae8       ?digits@?$numeric_limits@C@std@@2HB 1000bae8     cmlLogging.obj
+ 0002:00000aec       ?digits10@?$numeric_limits@C@std@@2HB 1000baec     cmlLogging.obj
+ 0002:00000af0       ?is_signed@?$numeric_limits@E@std@@2_NB 1000baf0     cmlLogging.obj
+ 0002:00000af4       ?digits@?$numeric_limits@E@std@@2HB 1000baf4     cmlLogging.obj
+ 0002:00000af8       ?digits10@?$numeric_limits@E@std@@2HB 1000baf8     cmlLogging.obj
+ 0002:00000afc       ?is_signed@?$numeric_limits@F@std@@2_NB 1000bafc     cmlLogging.obj
+ 0002:00000b00       ?digits@?$numeric_limits@F@std@@2HB 1000bb00     cmlLogging.obj
+ 0002:00000b04       ?digits10@?$numeric_limits@F@std@@2HB 1000bb04     cmlLogging.obj
+ 0002:00000b08       ?is_signed@?$numeric_limits@G@std@@2_NB 1000bb08     cmlLogging.obj
+ 0002:00000b0c       ?digits@?$numeric_limits@G@std@@2HB 1000bb0c     cmlLogging.obj
+ 0002:00000b10       ?digits10@?$numeric_limits@G@std@@2HB 1000bb10     cmlLogging.obj
+ 0002:00000b14       ?npos@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@2IB 1000bb14     cmlLogging.obj
+ 0002:00000b1c       ??_7error_category@std@@6B@ 1000bb1c     cmlLogging.obj
+ 0002:00000b40       ??_7_Generic_error_category@std@@6B@ 1000bb40     cmlLogging.obj
+ 0002:00000b60       ??_C@_07DCLBNMLN@generic?$AA@ 1000bb60     cmlLogging.obj
+ 0002:00000b6c       ??_C@_0O@BFJCFAAK@unknown?5error?$AA@ 1000bb6c     cmlLogging.obj
+ 0002:00000b80       ??_7_Iostream_error_category@std@@6B@ 1000bb80     cmlLogging.obj
+ 0002:00000ba0       ??_C@_08LLGCOLLL@iostream?$AA@ 1000bba0     cmlLogging.obj
+ 0002:00000bac       ??_C@_0BG@PADBLCHM@iostream?5stream?5error?$AA@ 1000bbac     cmlLogging.obj
+ 0002:00000bcc       ??_7_System_error_category@std@@6B@ 1000bbcc     cmlLogging.obj
+ 0002:00000bec       ??_C@_06FHFOAHML@system?$AA@ 1000bbec     cmlLogging.obj
+ 0002:00000bf8       ??_C@_1EK@BNMMANHA@?$AAC?$AA?3?$AA?2?$AAt?$AAo?$AAo?$AAl?$AAs?$AA?2?$AAM?$AAS?$AAV?$AAS?$AA2?$AA0?$AA1?$AA3?$AA?2?$AAV?$AAC?$AA?2?$AAI?$AAN?$AAC?$AAL?$AAU?$AAD?$AAE?$AA?2?$AAx?$AAs?$AAt@ 1000bbf8     cmlLogging.obj
+ 0002:00000c50       ??_C@_0BA@JFNIOLAK@string?5too?5long?$AA@ 1000bc50     cmlLogging.obj
+ 0002:00000c64       ??_C@_0BI@CFPLBAOH@invalid?5string?5position?$AA@ 1000bc64     cmlLogging.obj
+ 0002:00000c80       ??_C@_1CK@EOPGIILJ@?$AAi?$AAn?$AAv?$AAa?$AAl?$AAi?$AAd?$AA?5?$AAn?$AAu?$AAl?$AAl?$AA?5?$AAp?$AAo?$AAi?$AAn?$AAt?$AAe?$AAr?$AA?$AA@ 1000bc80     cmlLogging.obj
+ 0002:00000cb8       ??_C@_1MC@KPMPFEII@?$AA?$CI?$AA_?$AA_?$AAo?$AAn?$AAe?$AAx?$AAi?$AAt?$AAb?$AAe?$AAg?$AAi?$AAn?$AA?5?$AA?$CB?$AA?$DN?$AA?5?$AAN?$AAU?$AAL?$AAL?$AA?5?$AA?$CG?$AA?$CG?$AA?5?$AA_?$AA_?$AAo?$AAn?$AAe?$AAx@ 1000bcb8     MSVCRTD:atonexit.obj
+ 0002:00000d7c       ??_C@_15GANGMFKL@?$AA?$CF?$AAs?$AA?$AA@ 1000bd7c     MSVCRTD:atonexit.obj
+ 0002:00000d88       ??_C@_1FK@IGIDCAPD@?$AAf?$AA?3?$AA?2?$AAd?$AAd?$AA?2?$AAv?$AAc?$AAt?$AAo?$AAo?$AAl?$AAs?$AA?2?$AAc?$AAr?$AAt?$AA?2?$AAc?$AAr?$AAt?$AAw?$AA3?$AA2?$AA?2?$AAd?$AAl?$AAl?$AAs?$AAt?$AAu?$AAf@ 1000bd88     MSVCRTD:atonexit.obj
+ 0002:00000de4       ??_C@_0CN@LMJJPMEG@f?3?2dd?2vctools?2crt?2crtw32?2dllstuf@ 1000bde4     MSVCRTD:atonexit.obj
+ 0002:00000e18       ??_7type_info@@6B@         1000be18     MSVCRTD:ti_inst.obj
+ 0002:00000e1c       __pDefaultRawDllMain       1000be1c     MSVCRTD:crtdll.obj
+ 0002:00000e1c       __pRawDllMain              1000be1c     MSVCRTD:crtdll.obj
+ 0002:00000e20       ??_C@_0CL@CCAGLLEM@f?3?2dd?2vctools?2crt?2crtw32?2dllstuf@ 1000be20     MSVCRTD:crtdll.obj
+ 0002:00000e54       ?ProcessDetach@NativeDll@<CrtImplementationDetails>@@0IB 1000be54     MSVCRTD:initsect.obj
+ 0002:00000e58       ?ProcessAttach@NativeDll@<CrtImplementationDetails>@@0IB 1000be58     MSVCRTD:initsect.obj
+ 0002:00000e5c       ?ThreadAttach@NativeDll@<CrtImplementationDetails>@@0IB 1000be5c     MSVCRTD:initsect.obj
+ 0002:00000e60       ?ThreadDetach@NativeDll@<CrtImplementationDetails>@@0IB 1000be60     MSVCRTD:initsect.obj
+ 0002:00000e64       ?ProcessVerifier@NativeDll@<CrtImplementationDetails>@@0IB 1000be64     MSVCRTD:initsect.obj
+ 0002:00000e68       __load_config_used         1000be68     MSVCRTD:loadcfg.obj
+ 0002:00001214       ??_R4error_category@std@@6B@ 1000c214     cmlLogging.obj
+ 0002:0000122c       ??_R3error_category@std@@8 1000c22c     cmlLogging.obj
+ 0002:00001240       ??_R2error_category@std@@8 1000c240     cmlLogging.obj
+ 0002:00001248       ??_R1A@?0A@EA@error_category@std@@8 1000c248     cmlLogging.obj
+ 0002:0000126c       ??_R4_Generic_error_category@std@@6B@ 1000c26c     cmlLogging.obj
+ 0002:00001284       ??_R3_Generic_error_category@std@@8 1000c284     cmlLogging.obj
+ 0002:00001298       ??_R2_Generic_error_category@std@@8 1000c298     cmlLogging.obj
+ 0002:000012a4       ??_R1A@?0A@EA@_Generic_error_category@std@@8 1000c2a4     cmlLogging.obj
+ 0002:000012c8       ??_R4_Iostream_error_category@std@@6B@ 1000c2c8     cmlLogging.obj
+ 0002:000012e0       ??_R3_Iostream_error_category@std@@8 1000c2e0     cmlLogging.obj
+ 0002:000012f4       ??_R2_Iostream_error_category@std@@8 1000c2f4     cmlLogging.obj
+ 0002:00001304       ??_R1A@?0A@EA@_Iostream_error_category@std@@8 1000c304     cmlLogging.obj
+ 0002:00001328       ??_R4_System_error_category@std@@6B@ 1000c328     cmlLogging.obj
+ 0002:00001340       ??_R3_System_error_category@std@@8 1000c340     cmlLogging.obj
+ 0002:00001354       ??_R2_System_error_category@std@@8 1000c354     cmlLogging.obj
+ 0002:00001364       ??_R1A@?0A@EA@_System_error_category@std@@8 1000c364     cmlLogging.obj
+ 0002:00001388       ??_R4type_info@@6B@        1000c388     MSVCRTD:ti_inst.obj
+ 0002:0000139c       ??_R3type_info@@8          1000c39c     MSVCRTD:ti_inst.obj
+ 0002:000013ac       ??_R2type_info@@8          1000c3ac     MSVCRTD:ti_inst.obj
+ 0002:000013b4       ??_R1A@?0A@EA@type_info@@8 1000c3b4     MSVCRTD:ti_inst.obj
+ 0002:000014e8       ___rtc_iaa                 1000c4e8     MSVCRTD:initsect.obj
+ 0002:000015ec       ___rtc_izz                 1000c5ec     MSVCRTD:initsect.obj
+ 0002:000016f0       ___rtc_taa                 1000c6f0     MSVCRTD:initsect.obj
+ 0002:000017f4       ___rtc_tzz                 1000c7f4     MSVCRTD:initsect.obj
+ 0003:00000000       ___security_cookie         1000e000     MSVCRTD:gs_cookie.obj
+ 0003:00000004       ___security_cookie_complement 1000e004     MSVCRTD:gs_cookie.obj
+ 0003:00000010       ___native_dllmain_reason   1000e010     MSVCRTD:natstart.obj
+ 0003:00000118       ??_R0?AVerror_category@std@@@8 1000e118     cmlLogging.obj
+ 0003:00000140       ??_R0?AV_Generic_error_category@std@@@8 1000e140     cmlLogging.obj
+ 0003:00000174       ??_R0?AV_Iostream_error_category@std@@@8 1000e174     cmlLogging.obj
+ 0003:000001a8       ??_R0?AV_System_error_category@std@@@8 1000e1a8     cmlLogging.obj
+ 0003:000001dc       ??_R0?AVtype_info@@@8      1000e1dc     MSVCRTD:ti_inst.obj
+ 0003:00000300       ?_logger@cmlLogging@@0PAV1@A 1000e300     cmlLogging.obj
+ 0003:00000308       ?_Generic_object@?$_Error_objects@H@std@@2V_Generic_error_category@2@A 1000e308     cmlLogging.obj
+ 0003:0000030c       ?_Iostream_object@?$_Error_objects@H@std@@2V_Iostream_error_category@2@A 1000e30c     cmlLogging.obj
+ 0003:00000310       ?_System_object@?$_Error_objects@H@std@@2V_System_error_category@2@A 1000e310     cmlLogging.obj
+ 0003:00000314       ?id@?$num_put@DV?$back_insert_iterator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@@std@@2V0locale@2@A 1000e314     cmlLogging.obj
+ 0003:00000318       ?id@?$num_put@_WV?$back_insert_iterator@V?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@@std@@@std@@2V0locale@2@A 1000e318     cmlLogging.obj
+ 0003:00000640       ?__type_info_root_node@@3U__type_info_node@@A 1000e640     MSVCRTD:tncleanup.obj
+ 0003:00000648       ___native_startup_lock     1000e648     <common>
+ 0003:00000658       ___native_startup_state    1000e658     <common>
+ 0003:0000065c       ___dyn_tls_init_callback   1000e65c     <common>
+ 0003:00000668       ___onexitend               1000e668     <common>
+ 0003:00000678       ___onexitbegin             1000e678     <common>
+ 0004:00000000       __imp__DisableThreadLibraryCalls@4 1000f000     kernel32:KERNEL32.dll
+ 0004:00000004       __imp__GetSystemTimeAsFileTime@4 1000f004     kernel32:KERNEL32.dll
+ 0004:00000008       __imp__GetCurrentThreadId@0 1000f008     kernel32:KERNEL32.dll
+ 0004:0000000c       __imp__GetCurrentProcessId@0 1000f00c     kernel32:KERNEL32.dll
+ 0004:00000010       __imp__QueryPerformanceCounter@4 1000f010     kernel32:KERNEL32.dll
+ 0004:00000014       __imp__IsProcessorFeaturePresent@4 1000f014     kernel32:KERNEL32.dll
+ 0004:00000018       __imp__DecodePointer@4     1000f018     kernel32:KERNEL32.dll
+ 0004:0000001c       __imp__EncodePointer@4     1000f01c     kernel32:KERNEL32.dll
+ 0004:00000020       __imp__IsDebuggerPresent@0 1000f020     kernel32:KERNEL32.dll
+ 0004:00000024       \177KERNEL32_NULL_THUNK_DATA 1000f024     kernel32:KERNEL32.dll
+ 0004:00000054       __imp_??1_Container_base12@std@@QAE@XZ 1000f054     msvcprtd:MSVCP120D.dll
+ 0004:00000058       __imp_?_Orphan_all@_Container_base12@std@@QAEXXZ 1000f058     msvcprtd:MSVCP120D.dll
+ 0004:0000005c       __imp_?_Xbad_alloc@std@@YAXXZ 1000f05c     msvcprtd:MSVCP120D.dll
+ 0004:00000060       __imp_?_Xlength_error@std@@YAXPBD@Z 1000f060     msvcprtd:MSVCP120D.dll
+ 0004:00000064       __imp_?_Xout_of_range@std@@YAXPBD@Z 1000f064     msvcprtd:MSVCP120D.dll
+ 0004:00000068       __imp_??0id@locale@std@@QAE@I@Z 1000f068     msvcprtd:MSVCP120D.dll
+ 0004:0000006c       __imp_?_Syserror_map@std@@YAPBDH@Z 1000f06c     msvcprtd:MSVCP120D.dll
+ 0004:00000070       __imp_?_Winerror_map@std@@YAPBDH@Z 1000f070     msvcprtd:MSVCP120D.dll
+ 0004:00000074       __imp_?good@ios_base@std@@QBE_NXZ 1000f074     msvcprtd:MSVCP120D.dll
+ 0004:00000078       __imp_?flags@ios_base@std@@QBEHXZ 1000f078     msvcprtd:MSVCP120D.dll
+ 0004:0000007c       __imp_?width@ios_base@std@@QBE_JXZ 1000f07c     msvcprtd:MSVCP120D.dll
+ 0004:00000080       __imp_?width@ios_base@std@@QAE_J_J@Z 1000f080     msvcprtd:MSVCP120D.dll
+ 0004:00000084       __imp_?sputc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHD@Z 1000f084     msvcprtd:MSVCP120D.dll
+ 0004:00000088       __imp_?sputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAE_JPBD_J@Z 1000f088     msvcprtd:MSVCP120D.dll
+ 0004:0000008c       __imp_?setstate@?$basic_ios@DU?$char_traits@D@std@@@std@@QAEXH_N@Z 1000f08c     msvcprtd:MSVCP120D.dll
+ 0004:00000090       __imp_?tie@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEPAV?$basic_ostream@DU?$char_traits@D@std@@@2@XZ 1000f090     msvcprtd:MSVCP120D.dll
+ 0004:00000094       __imp_?rdbuf@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEPAV?$basic_streambuf@DU?$char_traits@D@std@@@2@XZ 1000f094     msvcprtd:MSVCP120D.dll
+ 0004:00000098       __imp_?fill@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEDXZ 1000f098     msvcprtd:MSVCP120D.dll
+ 0004:0000009c       __imp_?_Osfx@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEXXZ 1000f09c     msvcprtd:MSVCP120D.dll
+ 0004:000000a0       __imp_?flush@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@XZ 1000f0a0     msvcprtd:MSVCP120D.dll
+ 0004:000000a4       __imp_?_Debug_message@std@@YAXPB_W0I@Z 1000f0a4     msvcprtd:MSVCP120D.dll
+ 0004:000000a8       __imp_?uncaught_exception@std@@YA_NXZ 1000f0a8     msvcprtd:MSVCP120D.dll
+ 0004:000000ac       __imp_??0_Container_base12@std@@QAE@XZ 1000f0ac     msvcprtd:MSVCP120D.dll
+ 0004:000000b0       \177MSVCP120D_NULL_THUNK_DATA 1000f0b0     msvcprtd:MSVCP120D.dll
+ 0004:000000ec       __imp_??3@YAXPAX@Z         1000f0ec     MSVCRTD:MSVCR120D.dll
+ 0004:000000f0       __imp__sprintf_s           1000f0f0     MSVCRTD:MSVCR120D.dll
+ 0004:000000f4       __imp__vsprintf_s          1000f0f4     MSVCRTD:MSVCR120D.dll
+ 0004:000000f8       __imp__memcpy              1000f0f8     MSVCRTD:MSVCR120D.dll
+ 0004:000000fc       __imp__strlen              1000f0fc     MSVCRTD:MSVCR120D.dll
+ 0004:00000100       __imp_??2@YAPAXI@Z         1000f100     MSVCRTD:MSVCR120D.dll
+ 0004:00000104       __imp___access             1000f104     MSVCRTD:MSVCR120D.dll
+ 0004:00000108       __imp___mkdir              1000f108     MSVCRTD:MSVCR120D.dll
+ 0004:0000010c       __imp___CxxThrowException@8 1000f10c     MSVCRTD:MSVCR120D.dll
+ 0004:00000110       __imp____CxxFrameHandler3  1000f110     MSVCRTD:MSVCR120D.dll
+ 0004:00000114       __imp__memset              1000f114     MSVCRTD:MSVCR120D.dll
+ 0004:00000118       __imp___lock               1000f118     MSVCRTD:MSVCR120D.dll
+ 0004:0000011c       __imp___unlock             1000f11c     MSVCRTD:MSVCR120D.dll
+ 0004:00000120       __imp___CrtDbgReportW      1000f120     MSVCRTD:MSVCR120D.dll
+ 0004:00000124       __imp___calloc_dbg         1000f124     MSVCRTD:MSVCR120D.dll
+ 0004:00000128       __imp____dllonexit         1000f128     MSVCRTD:MSVCR120D.dll
+ 0004:0000012c       __imp___onexit             1000f12c     MSVCRTD:MSVCR120D.dll
+ 0004:00000130       __imp_??1type_info@@UAE@XZ 1000f130     MSVCRTD:MSVCR120D.dll
+ 0004:00000134       __imp____CppXcptFilter     1000f134     MSVCRTD:MSVCR120D.dll
+ 0004:00000138       __imp___amsg_exit          1000f138     MSVCRTD:MSVCR120D.dll
+ 0004:0000013c       __imp___malloc_dbg         1000f13c     MSVCRTD:MSVCR120D.dll
+ 0004:00000140       __imp___free_dbg           1000f140     MSVCRTD:MSVCR120D.dll
+ 0004:00000144       __imp___CrtSetCheckCount   1000f144     MSVCRTD:MSVCR120D.dll
+ 0004:00000148       __imp___initterm           1000f148     MSVCRTD:MSVCR120D.dll
+ 0004:0000014c       __imp___initterm_e         1000f14c     MSVCRTD:MSVCR120D.dll
+ 0004:00000150       __imp___except_handler4_common 1000f150     MSVCRTD:MSVCR120D.dll
+ 0004:00000154       __imp___crt_debugger_hook  1000f154     MSVCRTD:MSVCR120D.dll
+ 0004:00000158       __imp____crtUnhandledException 1000f158     MSVCRTD:MSVCR120D.dll
+ 0004:0000015c       __imp____crtTerminateProcess 1000f15c     MSVCRTD:MSVCR120D.dll
+ 0004:00000160       __imp_?terminate@@YAXXZ    1000f160     MSVCRTD:MSVCR120D.dll
+ 0004:00000164       __imp____clean_type_info_names_internal 1000f164     MSVCRTD:MSVCR120D.dll
+ 0004:00000168       __imp___purecall           1000f168     MSVCRTD:MSVCR120D.dll
+ 0004:0000016c       __imp__memmove             1000f16c     MSVCRTD:MSVCR120D.dll
+ 0004:00000170       __imp___hypot              1000f170     MSVCRTD:MSVCR120D.dll
+ 0004:00000174       \177MSVCR120D_NULL_THUNK_DATA 1000f174     MSVCRTD:MSVCR120D.dll
+ 0004:000001b8       __imp_?SetLogFilenameExtension@google@@YAXPBD@Z 1000f1b8     libglog:libglog.dll
+ 0004:000001bc       __imp_?SetLogDestination@google@@YAXHPBD@Z 1000f1bc     libglog:libglog.dll
+ 0004:000001c0       __imp_?stream@LogMessage@google@@QAEAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@XZ 1000f1c0     libglog:libglog.dll
+ 0004:000001c4       __imp_??1LogMessage@google@@QAE@XZ 1000f1c4     libglog:libglog.dll
+ 0004:000001c8       __imp_??0LogMessage@google@@QAE@PBDH@Z 1000f1c8     libglog:libglog.dll
+ 0004:000001cc       __imp_?InitGoogleLogging@google@@YAXPBD@Z 1000f1cc     libglog:libglog.dll
+ 0004:000001d0       \177libglog_NULL_THUNK_DATA 1000f1d0     libglog:libglog.dll
+ 0004:00000200       __IMPORT_DESCRIPTOR_libglog 1000f200     libglog:libglog.dll
+ 0004:00000214       __IMPORT_DESCRIPTOR_MSVCP120D 1000f214     msvcprtd:MSVCP120D.dll
+ 0004:00000228       __IMPORT_DESCRIPTOR_MSVCR120D 1000f228     MSVCRTD:MSVCR120D.dll
+ 0004:0000023c       __IMPORT_DESCRIPTOR_KERNEL32 1000f23c     kernel32:KERNEL32.dll
+ 0004:00000250       __NULL_IMPORT_DESCRIPTOR   1000f250     libglog:libglog.dll
+
+ entry point at        0001:000050b0
+

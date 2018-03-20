@@ -81,97 +81,37 @@ LIST(APPEND CMAKE_MODULE_PATH   ${CMAKE_CFG_DIR}/modules)
 
 SET(CMAKE_PLATFORMS_PATH    ${CMAKE_CFG_DIR}/chameleonPlatforms)
 
-MESSAGE(STATUS "=====================================================================")
-MESSAGE(STATUS "PROJECT_MODULE_DIR=${PROJECT_MODULE_DIR}")
-MESSAGE(STATUS "CMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}")
-MESSAGE(STATUS "CMAKE_PLATFORMS_PATH=${CMAKE_PLATFORMS_PATH}")
-MESSAGE(STATUS "=====================================================================")
-
 # Directory of all the external 3rd party components
 #SET(EXT_DIR ${CHAMELEON_DIR}/../external)
 
 # Include all the target specific configurations
 INCLUDE(${CMAKE_PLATFORMS_PATH}/${TARG_OS}/CMakeDefs.txt)
 
-IF(USE_IDE)
-    SET(BIN_DIR ${CHAMELEON_DIR}/bin/${TARG_OS}/${TARG_CPU}/${TARG_PLAT})
-    SET(LIB_DIR ${CHAMELEON_DIR}/lib/${TARG_OS}/${TARG_CPU}/${TARG_PLAT})
-ELSE(USE_IDE)
-    SET(BIN_DIR ${CHAMELEON_DIR}/bin/${TARG_OS}/${TARG_CPU}/${TARG_PLAT}/${BUILDTYPE})
-    SET(LIB_DIR ${CHAMELEON_DIR}/lib/${TARG_OS}/${TARG_CPU}/${TARG_PLAT}/${BUILDTYPE})
-ENDIF(USE_IDE)
-
+SET(BIN_DIR ${CHAMELEON_DIR}/bin/${TARG_OS}/${TARG_CPU}/${TARG_PLAT})
+SET(LIB_DIR ${CHAMELEON_DIR}/lib/${TARG_OS}/${TARG_CPU}/${TARG_PLAT})
 
 # Place all output to the Collate directory
 SET(EXECUTABLE_OUTPUT_PATH  ${BIN_DIR})
 SET(LIBRARY_OUTPUT_PATH     ${LIB_DIR})
+SET(CMAKE_BUILD_TYPE        ${BUILDTYPE})
+IF (TARG_CPU STREQUAL "x86")
+    SET(CMAKE_PLATFORM   "Win32")
+ELSE (TARG_CPU STREQUAL "x86")
+    SET(CMAKE_PLATFORM "x64")
+ENDIF (TARG_CPU STREQUAL "x86")
 
 
-MESSAGE(STATUS "=====================================================================")
+MESSAGE(STATUS "**************************************************************************************")
+MESSAGE(STATUS "PROJECT_MODULE_DIR=${PROJECT_MODULE_DIR}")
+MESSAGE(STATUS "CMAKE_MODULE_PATH=${CMAKE_MODULE_PATH}")
+MESSAGE(STATUS "CMAKE_PLATFORMS_PATH=${CMAKE_PLATFORMS_PATH}")
 MESSAGE(STATUS "BIN_DIR=${BIN_DIR}")
 MESSAGE(STATUS "LIB_DIR=${LIB_DIR}")
 MESSAGE(STATUS "EXECUTABLE_OUTPUT_PATH=${EXECUTABLE_OUTPUT_PATH}")
 MESSAGE(STATUS "LIBRARY_OUTPUT_PATH=${LIBRARY_OUTPUT_PATH}")
-MESSAGE(STATUS "=====================================================================")
-
-#IF (SDK_PLATFORM STREQUAL "usdk5")
-#
-## Set root path for external matcher libraries
-## Note, that in case of NISE there is no external matcher selection, thus to enforce
-## mather root path check for NISE the checking of not defined VCS_EG_NO_MATHCER is added.
-#IF(NOT DEFINED VCS_EG_NO_MATHCER OR VCS_EG_NO_MATHCER EQUAL 0)
-#    IF($ENV{MATCHER_ROOT_PATH} MATCHES ".+")
-#        SET(MATCHER_ROOT_PATH  $ENV{MATCHER_ROOT_PATH})
-#    ELSE($ENV{MATCHER_ROOT_PATH} MATCHES ".+")
-#        #SET(MATCHER_ROOT_PATH  "\\sjc1wvp-dfsr01.synaptics-inc.local\Release")
-#        MESSAGE(WARNING "Please setup the environment variable 'MATCHER_ROOT_PATH' to the matcher root directory")
-#    ENDIF($ENV{MATCHER_ROOT_PATH} MATCHES ".+")
-#IF (DEFINED VCS_EG_NO_MATHCER)
-#    INCLUDE_DIRECTORIES(${MATCHER_ROOT_PATH}/EgisMatcher/default/include)
-#    INCLUDE_DIRECTORIES(${MATCHER_ROOT_PATH}/DPMatcher/default/include)
-#    INCLUDE_DIRECTORIES(${MATCHER_ROOT_PATH}/RMMatcher/default/include)
-#    INCLUDE_DIRECTORIES(${MATCHER_ROOT_PATH}/PBMatcher/default/include)
-#ENDIF (DEFINED VCS_EG_NO_MATHCER)
-#    INCLUDE_DIRECTORIES(${MATCHER_ROOT_PATH}/QTMatcher/default/include) 
-#    INCLUDE_DIRECTORIES(${MATCHER_ROOT_PATH}/Syna_Asp/default/include)
-#ENDIF(NOT DEFINED VCS_EG_NO_MATHCER OR VCS_EG_NO_MATHCER EQUAL 0)
-#
-#IF (T_ARCH_ABI STREQUAL "armeabi-v7a")
-#    LINK_DIRECTORIES(${MATCHER_ROOT_PATH}/DPMatcher/default/lib/${TARG_OS}/armv7/${BUILDTYPE})
-#    LINK_DIRECTORIES(${MATCHER_ROOT_PATH}/RMMatcher/default/lib/${TARG_OS}/armv7/${BUILDTYPE})
-#    LINK_DIRECTORIES(${MATCHER_ROOT_PATH}/PBMatcher/default/lib/${TARG_OS}/armv7/${BUILDTYPE})
-#    LINK_DIRECTORIES(${MATCHER_ROOT_PATH}/EgisMatcher/default/lib/${TARG_OS}/armv7/${BUILDTYPE})
-#    LINK_DIRECTORIES(${MATCHER_ROOT_PATH}/QTMatcher/default/lib/${TARG_OS}/armv7/${BUILDTYPE})
-#    LINK_DIRECTORIES(${MATCHER_ROOT_PATH}/Syna_Asp/default/lib/${TARG_OS}/armv7/${BUILDTYPE})
-#ELSE (T_ARCH_ABI STREQUAL "armeabi-v7a")
-#    LINK_DIRECTORIES(${MATCHER_ROOT_PATH}/DPMatcher/default/lib/${TARG_OS}/${TARG_CPU}/${BUILDTYPE})
-#    LINK_DIRECTORIES(${MATCHER_ROOT_PATH}/RMMatcher/default/lib/${TARG_OS}/${TARG_CPU}/${BUILDTYPE})
-#    LINK_DIRECTORIES(${MATCHER_ROOT_PATH}/PBMatcher/default/lib/${TARG_OS}/${TARG_CPU}/${BUILDTYPE})
-#    LINK_DIRECTORIES(${MATCHER_ROOT_PATH}/EgisMatcher/default/lib/${TARG_OS}/${TARG_CPU}/${BUILDTYPE})
-#    LINK_DIRECTORIES(${MATCHER_ROOT_PATH}/QTMatcher/default/lib/${TARG_OS}/${TARG_CPU}/${BUILDTYPE})
-#    LINK_DIRECTORIES(${MATCHER_ROOT_PATH}/Syna_Asp/default/lib/${TARG_OS}/${TARG_CPU}/${BUILDTYPE})
-#ENDIF (T_ARCH_ABI STREQUAL "armeabi-v7a") 
-#
-#ENDIF (SDK_PLATFORM STREQUAL "usdk5")
-
-# Set root path for authenticator library
-#IF($ENV{AUTHENTICATOR_ROOT_PATH} MATCHES ".+")
-#    SET(AUTHENTICATOR_ROOT_PATH  $ENV{AUTHENTICATOR_ROOT_PATH})
-#ELSE($ENV{AUTHENTICATOR_ROOT_PATH} MATCHES ".+")
-#    #SET(AUTHENTICATOR_ROOT_PATH  "\\sjc1wvp-dfsr01.synaptics-inc.local\Release")
-#ENDIF($ENV{AUTHENTICATOR_ROOT_PATH} MATCHES ".+")
-#MESSAGE(STATUS "AUTHENTICATOR_ROOT_PATH set to ${AUTHENTICATOR_ROOT_PATH}")
-#INCLUDE_DIRECTORIES(${AUTHENTICATOR_ROOT_PATH}/authenticator/fidouaf/default/include)
-
-#IF (T_ARCH_ABI STREQUAL "armeabi-v7a")
-#    LINK_DIRECTORIES(${AUTHENTICATOR_ROOT_PATH}/authenticator/fidouaf/default/lib/${TARG_OS}/armv7/${BUILDTYPE})
-#ELSE (T_ARCH_ABI STREQUAL "armeabi-v7a")
-#    LINK_DIRECTORIES(${AUTHENTICATOR_ROOT_PATH}/authenticator/fidouaf/default/lib/${TARG_OS}/${TARG_CPU}/${BUILDTYPE})
-#ENDIF (T_ARCH_ABI STREQUAL "armeabi-v7a") 
-#
-#IF( ${TARG_OS} MATCHES "uefi" )
-#	CONFIGURE_FILE(${MATCHER_ROOT_PATH}/DPMatcher/default/lib/${TARG_OS}/${TARG_CPU}/${BUILDTYPE}/dpfr.lib      ${LIBRARY_OUTPUT_PATH}/dpfr.lib     COPYONLY)
-#ENDIF( ${TARG_OS} MATCHES "uefi" )
+MESSAGE(STATUS "CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}")
+MESSAGE(STATUS "CMAKE_PLATFORM=${CMAKE_PLATFORM}")
+MESSAGE(STATUS "**************************************************************************************")
 
 # Automatically add CMAKE_CURRENT_SOURCE_DIR and CMAKE_CURRENT_BINARY_DIR to
 # the include directories in every processed CMakeLists.txt.

@@ -16,7 +16,6 @@ else
 endif
 
 # cmake_flags += -D USE_VS2015=$(USE_VS2015)
-
 ifeq ($(USE_VS2015), 1)
   ifeq ($(TARG_CPU), x64)
     export PATH    := $(VSInstallDir)/Common7/IDE;$(VCInstallDir)/bin/x86_amd64;$(VCInstallDir)/BIN;$(VSInstallDir)/Common7/Tools;$(VSInstallDir)/Common7/Tools/bin;$(MSSDKDir)/bin/x86;$(TOOLS)/MSBuild/14.0/Bin;$(PATH)
@@ -39,7 +38,6 @@ else
   endif
 endif
 
-
 ifeq ($(BUILDTYPE),Release)
     CMAKE_BUILD_TYPE = RelWithDebInfo
 else
@@ -61,6 +59,10 @@ else
 	#build_cmd = msbuild  $@.sln  /p:UseEnv=true  /p:Configuration="$(CMAKE_BUILD_TYPE)";Platform="x86"
 endif
 
+# Add Qt cmake
+export PATH := C:/Qt/Qt5.5.1/5.5/msvc2013/lib/cmake;C:/Qt/Qt5.5.1/5.5/msvc2013/bin;$(PATH)
+#    export INCLUDE :=C:/Qt/Qt5.5.1/5.5/msvc2013/include;C:/Qt/Qt5.5.1/5.5/msvc2013/include/QtCore;C:/Qt/Qt5.5.1/5.5/msvc2013/include/QtGui;C:/Qt/Qt5.5.1/5.5/msvc2013/include/QtWidgets;C:/Qt/Qt5.5.1/5.5/msvc2013/include/QtXml;$(INCLUDE)
+#    export LIB     := C:/Qt/Qt5.5.1/5.5/msvc2013/lib;$(LIB)
 
 $(warning  **************************************************************************************************************************)
 $(warning  VisualStudio=$(VisualStudio))

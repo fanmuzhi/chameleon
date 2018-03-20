@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\FpCPTestStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\FpTestStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\FpTestStepFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_AcqImgFinger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_AcqImgNoFinger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_BubbleTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Calibrate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireImageStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireRefHighImageStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireROIStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireStimulusImageStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPBubbleTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPCurrentTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPDarkBadPixelTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPGPIOTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPHybridCalibration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPImageBadPixelTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPImperfections.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPLEDControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPMeasureSensorAngle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPOLEDPanelControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPPixelQuality.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPPixelUniformity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefHighImageQuality.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefHighIntTimeCollection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefLowImageQuality.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefLowIntTimeCollection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPSmudginessDetect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPSynchronize.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPTuneIntegrationTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPVerifySensorComm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CurrentTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_DRdyTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_EraseFlash.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_FinalizationStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_GetDIMs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_HuaweiIQTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_IdleCurrentTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Imperfections.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_InitializationStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_IOTACheck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_OpensShortsTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_PixelUniformityTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ProgrammingIOTA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ProgrammingIOTA_DATA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ProgrammingMF.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Provision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_RAMTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ROMTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_RunATEPatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_RxTxStandardDev.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Sharpness.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_SleepCurrentTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_SNRTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_UpdateFIB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_VerifyFlashChecksum.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_VerifyOscTrimStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WaitStimulus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WOF_Baseline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WOF_Signal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WriteRunSummary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\FpCPTestStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\FpTestStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\FpTestStepFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\TestStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_AcqImgFinger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_AcqImgNoFinger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_BubbleTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Calibrate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireImageStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireRefHighImageStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireROIStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireStimulusImageStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPBubbleTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPCurrentTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPDarkBadPixelTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPGPIOTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPHybridCalibration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPImageBadPixelTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPImperfections.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPLEDControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPMeasureSensorAngle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPOLEDPanelControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPPixelQuality.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPPixelUniformity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefHighImageQuality.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefHighIntTimeCollection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefLowImageQuality.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefLowIntTimeCollection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPSmudginessDetect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPSynchronize.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPTuneIntegrationTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPVerifySensorComm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CurrentTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_DRdyTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_EraseFlash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_FinalizationStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_GetDIMs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_HuaweiIQTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_IdleCurrentTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Imperfections.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_InitializationStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_IOTACheck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_OpensShortsTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_PixelUniformityTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ProgrammingIOTA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ProgrammingIOTA_DATA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ProgrammingMF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Provision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_RAMTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ROMTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_RunATEPatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_RxTxStandardDev.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Sharpness.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_SleepCurrentTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_SNRTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_UpdateFIB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_VerifyFlashChecksum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_VerifyOscTrimStep.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WaitStimulus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WOF_Baseline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WOF_Signal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WriteRunSummary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E138AF07-8351-3D43-8E9A-EBF1E1F419FD}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{AE4B3840-961E-3D97-A6B0-2620B94DCBEA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

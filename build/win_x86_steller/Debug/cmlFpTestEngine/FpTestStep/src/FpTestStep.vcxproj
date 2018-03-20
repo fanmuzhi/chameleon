@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{7BF62C21-BD2A-34D9-A698-AB42FF50D088}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>FpTestStep</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\chameleon\lib\win\x86\steller\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FpTestStep.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FpTestStep</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\chameleon\lib\win\x86\steller\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FpTestStep.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FpTestStep</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\chameleon\lib\win\x86\steller\MinSizeRel\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">FpTestStep.dir\MinSizeRel\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">FpTestStep</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.lib</TargetExt>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\chameleon\lib\win\x86\steller\RelWithDebInfo\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">FpTestStep.dir\RelWithDebInfo\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">FpTestStep</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.lib</TargetExt>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src;C:\chameleon\build\win_x86_steller\Debug;C:\tools\WindowsKit_8_1\INCLUDE;C:\tools\WindowsKit_8_1\INCLUDE\Shared;C:\Qt\Qt5.5.1\5.5\msvc2013\include;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtCore;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtXml;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\FpImageProcessing\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpModule\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpBridge\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\cmlLogging\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;UNICODE;_UNICODE;_X86_;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;UNICODE;_UNICODE;_X86_;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src;C:\chameleon\build\win_x86_steller\Debug;C:\tools\WindowsKit_8_1\INCLUDE;C:\tools\WindowsKit_8_1\INCLUDE\Shared;C:\Qt\Qt5.5.1\5.5\msvc2013\include;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtCore;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtXml;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\FpImageProcessing\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpModule\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpBridge\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\cmlLogging\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src;C:\chameleon\build\win_x86_steller\Debug;C:\tools\WindowsKit_8_1\INCLUDE;C:\tools\WindowsKit_8_1\INCLUDE\Shared;C:\Qt\Qt5.5.1\5.5\msvc2013\include;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtCore;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtXml;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\FpImageProcessing\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpModule\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpBridge\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\cmlLogging\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src;C:\chameleon\build\win_x86_steller\Debug;C:\tools\WindowsKit_8_1\INCLUDE;C:\tools\WindowsKit_8_1\INCLUDE\Shared;C:\Qt\Qt5.5.1\5.5\msvc2013\include;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtCore;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtXml;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\FpImageProcessing\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpModule\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpBridge\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\cmlLogging\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;_X86_;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;_X86_;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src;C:\chameleon\build\win_x86_steller\Debug;C:\tools\WindowsKit_8_1\INCLUDE;C:\tools\WindowsKit_8_1\INCLUDE\Shared;C:\Qt\Qt5.5.1\5.5\msvc2013\include;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtCore;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtXml;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\FpImageProcessing\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpModule\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpBridge\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\cmlLogging\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src;C:\chameleon\build\win_x86_steller\Debug;C:\tools\WindowsKit_8_1\INCLUDE;C:\tools\WindowsKit_8_1\INCLUDE\Shared;C:\Qt\Qt5.5.1\5.5\msvc2013\include;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtCore;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtXml;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\FpImageProcessing\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpModule\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpBridge\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\cmlLogging\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src;C:\chameleon\build\win_x86_steller\Debug;C:\tools\WindowsKit_8_1\INCLUDE;C:\tools\WindowsKit_8_1\INCLUDE\Shared;C:\Qt\Qt5.5.1\5.5\msvc2013\include;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtCore;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtXml;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\FpImageProcessing\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpModule\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpBridge\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\cmlLogging\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;_X86_;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat></DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;_X86_;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src;C:\chameleon\build\win_x86_steller\Debug;C:\tools\WindowsKit_8_1\INCLUDE;C:\tools\WindowsKit_8_1\INCLUDE\Shared;C:\Qt\Qt5.5.1\5.5\msvc2013\include;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtCore;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtXml;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\FpImageProcessing\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpModule\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpBridge\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\cmlLogging\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src;C:\chameleon\build\win_x86_steller\Debug;C:\tools\WindowsKit_8_1\INCLUDE;C:\tools\WindowsKit_8_1\INCLUDE\Shared;C:\Qt\Qt5.5.1\5.5\msvc2013\include;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtCore;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtXml;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\FpImageProcessing\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpModule\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpBridge\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\cmlLogging\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src;C:\chameleon\build\win_x86_steller\Debug;C:\tools\WindowsKit_8_1\INCLUDE;C:\tools\WindowsKit_8_1\INCLUDE\Shared;C:\Qt\Qt5.5.1\5.5\msvc2013\include;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtCore;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtXml;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\FpImageProcessing\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpModule\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpBridge\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\cmlLogging\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;_X86_;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;UNICODE;_UNICODE;_X86_;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src;C:\chameleon\build\win_x86_steller\Debug;C:\tools\WindowsKit_8_1\INCLUDE;C:\tools\WindowsKit_8_1\INCLUDE\Shared;C:\Qt\Qt5.5.1\5.5\msvc2013\include;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtCore;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtXml;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\FpImageProcessing\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpModule\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpBridge\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\cmlLogging\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src;C:\chameleon\build\win_x86_steller\Debug;C:\tools\WindowsKit_8_1\INCLUDE;C:\tools\WindowsKit_8_1\INCLUDE\Shared;C:\Qt\Qt5.5.1\5.5\msvc2013\include;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtCore;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtGui;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtWidgets;C:\Qt\Qt5.5.1\5.5\msvc2013\include\QtXml;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\include;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\DutUtils\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\FpImageProcessing\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpModule\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\FpBridge\src;C:\chameleon\cmlFpTestEngine\FpTestStep\src\..\..\..\cmlFpSensorEngine\cmlLogging\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions> /machine:X86 %(AdditionalOptions)</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/chameleon/cmlFpTestEngine/FpTestStep/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+C:\tools\CMake-3.4.3\bin\cmake.exe -HC:/chameleon/cmakescripts/common/cmake -BC:/chameleon/build/win_x86_steller/Debug --check-stamp-file C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/chameleon/cmlFpTestEngine/FpTestStep/src/CMakeLists.txt;C:\chameleon\cmlFpTestEngine\FpTestStep\src\CMakeLists.txt;C:\chameleon\cmlFpTestEngine\FpTestStep\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/chameleon/cmlFpTestEngine/FpTestStep/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+C:\tools\CMake-3.4.3\bin\cmake.exe -HC:/chameleon/cmakescripts/common/cmake -BC:/chameleon/build/win_x86_steller/Debug --check-stamp-file C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/chameleon/cmlFpTestEngine/FpTestStep/src/CMakeLists.txt;C:\chameleon\cmlFpTestEngine\FpTestStep\src\CMakeLists.txt;C:\chameleon\cmlFpTestEngine\FpTestStep\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/chameleon/cmlFpTestEngine/FpTestStep/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+C:\tools\CMake-3.4.3\bin\cmake.exe -HC:/chameleon/cmakescripts/common/cmake -BC:/chameleon/build/win_x86_steller/Debug --check-stamp-file C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/chameleon/cmlFpTestEngine/FpTestStep/src/CMakeLists.txt;C:\chameleon\cmlFpTestEngine\FpTestStep\src\CMakeLists.txt;C:\chameleon\cmlFpTestEngine\FpTestStep\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/chameleon/cmlFpTestEngine/FpTestStep/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+C:\tools\CMake-3.4.3\bin\cmake.exe -HC:/chameleon/cmakescripts/common/cmake -BC:/chameleon/build/win_x86_steller/Debug --check-stamp-file C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/chameleon/cmlFpTestEngine/FpTestStep/src/CMakeLists.txt;C:\chameleon\cmlFpTestEngine\FpTestStep\src\CMakeLists.txt;C:\chameleon\cmlFpTestEngine\FpTestStep\src\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\chameleon\build\win_x86_steller\Debug\cmlFpTestEngine\FpTestStep\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\FpCPTestStep.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\FpTestStep.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\FpTestStepFactory.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\TestStep.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_AcqImgFinger.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_AcqImgNoFinger.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_BubbleTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Calibrate.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireImageStep.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireRefHighImageStep.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireROIStep.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireStimulusImageStep.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPBubbleTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPCurrentTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPDarkBadPixelTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPGPIOTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPHybridCalibration.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPImageBadPixelTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPImperfections.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPLEDControl.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPMeasureSensorAngle.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPOLEDPanelControl.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPPixelQuality.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPPixelUniformity.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefHighImageQuality.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefHighIntTimeCollection.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefLowImageQuality.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefLowIntTimeCollection.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPSmudginessDetect.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPSynchronize.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPTuneIntegrationTime.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPVerifySensorComm.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CurrentTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_DRdyTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_EraseFlash.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_FinalizationStep.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_GetDIMs.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_HuaweiIQTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_IdleCurrentTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Imperfections.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_InitializationStep.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_IOTACheck.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_OpensShortsTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_PixelUniformityTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ProgrammingIOTA.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ProgrammingIOTA_DATA.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ProgrammingMF.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Provision.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_RAMTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ROMTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_RunATEPatch.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_RxTxStandardDev.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Sharpness.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_SleepCurrentTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_SNRTest.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_UpdateFIB.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_VerifyFlashChecksum.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_VerifyOscTrimStep.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WaitStimulus.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WOF_Baseline.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WOF_Signal.h" />
+    <ClInclude Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WriteRunSummary.h" />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\FpCPTestStep.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\FpTestStep.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\FpTestStepFactory.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_AcqImgFinger.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_AcqImgNoFinger.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_BubbleTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Calibrate.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireImageStep.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireRefHighImageStep.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireROIStep.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPAcquireStimulusImageStep.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPBubbleTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPCurrentTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPDarkBadPixelTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPGPIOTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPHybridCalibration.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPImageBadPixelTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPImperfections.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPLEDControl.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPMeasureSensorAngle.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPOLEDPanelControl.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPPixelQuality.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPPixelUniformity.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefHighImageQuality.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefHighIntTimeCollection.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefLowImageQuality.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPRefLowIntTimeCollection.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPSmudginessDetect.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPSynchronize.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPTuneIntegrationTime.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CPVerifySensorComm.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_CurrentTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_DRdyTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_EraseFlash.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_FinalizationStep.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_GetDIMs.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_HuaweiIQTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_IdleCurrentTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Imperfections.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_InitializationStep.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_IOTACheck.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_OpensShortsTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_PixelUniformityTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ProgrammingIOTA.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ProgrammingIOTA_DATA.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ProgrammingMF.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Provision.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_RAMTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_ROMTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_RunATEPatch.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_RxTxStandardDev.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_Sharpness.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_SleepCurrentTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_SNRTest.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_UpdateFIB.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_VerifyFlashChecksum.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_VerifyOscTrimStep.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WaitStimulus.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WOF_Baseline.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WOF_Signal.cpp"  />
+    <ClCompile Include="C:\chameleon\cmlFpTestEngine\FpTestStep\src\Ts_WriteRunSummary.cpp"  />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/chameleon/build/win_x86_steller/Debug/ZERO_CHECK.vcxproj">
+      <Project>D1C91140-01A8-35D9-9576-CE0372ABF765</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/chameleon/build/win_x86_steller/Debug/cmlFpTestEngine/DutUtils/src/DutUtils.vcxproj">
+      <Project>956F24C3-8D92-3A39-806F-3C742906D442</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/chameleon/build/win_x86_steller/Debug/cmlFpSensorEngine/FpBridge/src/FpBridge.vcxproj">
+      <Project>768A0BCD-9894-3885-9193-3409911BCD6E</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/chameleon/build/win_x86_steller/Debug/cmlFpTestEngine/FpImageProcessing/src/FpImageProcessing.vcxproj">
+      <Project>EDA68EDD-3AF1-33C9-B60B-E059FEBD62C3</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/chameleon/build/win_x86_steller/Debug/cmlFpSensorEngine/FpModule/src/FpModule.vcxproj">
+      <Project>4F68DE01-A53D-3835-8537-AC00FD1E7A99</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/chameleon/build/win_x86_steller/Debug/cmlFpSensorEngine/cmlLogging/src/cmlLogging.vcxproj">
+      <Project>DA925623-430D-3D03-A864-75FC6B50E960</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/chameleon/build/win_x86_steller/Debug/cmlFpSensorEngine/libM5Drv/src/libM5Drv.vcxproj">
+      <Project>95F11314-A55D-3824-8457-B2B13E18A707</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

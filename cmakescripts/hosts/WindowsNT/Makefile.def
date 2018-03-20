@@ -16,3 +16,4 @@ export MKDIR = "mkdir.exe" -p
 export RMDIR = "rmdir.exe"
 export CON   = /con:
 export CMAKE = "$(TOOLS)\CMake-3.4.3\bin\cmake.exe"
+export WINDEPLOYQT = "windeployqt.exe"

@@ -85,6 +85,7 @@ $(warning  src_dir=$(src_dir))
 $(warning  build_dir=$(build_dir))
 $(warning  cmake_flags=$(cmake_flags))
 #$(warning  CODE_ANALYZE=$(CODE_ANALYZE))
+$(warning  PATH=$(PATH))
 $(warning  ***********************************************************************************************************)
 
 #-----------------------------------------------------------------------
@@ -92,12 +93,17 @@ $(warning  *********************************************************************
 # Default Build Target
 #
 .PHONY: all
+   
 all:	chameleon
 
 .PHONY: chameleon
 chameleon:	$(build_dir)/CMakeCache.txt
-	cd $(build_dir) && $(build_cmd)
- 
+	cd $(build_dir) && $(build_cmd)	
+	$(CP) $(CHAMELEON_DIR)/lib/win/$(TARG_CPU)/$(TARG_PLAT)/*.lib	$(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
+	$(CP) $(CHAMELEON_DIR)/lib/win/$(TARG_CPU)/$(TARG_PLAT)/*.dll	$(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
+	$(CP) $(CHAMELEON_DIR)/lib/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)/*.lib	$(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
+	$(CP) $(CHAMELEON_DIR)/lib/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)/*.dll	$(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
+	$(WINDEPLOYQT) $(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
 $(build_dir):
 	@$(MKDIR) $(build_dir)
 
@@ -111,6 +117,8 @@ confgen-only: $(build_dir)
 	@$(ECHO) "\nStarting the configuration generation..." > $(CURRENT_CONSOLE)
 	cd $(build_dir) && $(CMAKE) -G $(cmake_generator) $(cmake_flags) $(src_dir)
 	@$(ECHO) "Done!\n" > $(CURRENT_CONSOLE)
+
+
 
 #-----------------------------------------------------------------------
 #
