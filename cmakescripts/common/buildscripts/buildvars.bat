@@ -47,14 +47,14 @@ if _%TOOLS% == _   set TOOLS=T:
 
 set CMAKE=%TOOLS%\CMake-3.4.3
 set UNIX_UTILS=%TOOLS%\UnixUtils
-set PYTHON=%TOOLS%\Python2.6.1
-set NINJA=%TOOLS%\ninja-1.6.0
-set GIT=%TOOLS%\Git2.0.0
+REM set PYTHON=%TOOLS%\Python2.6.1
+REM set NINJA=%TOOLS%\ninja-1.6.0
+REM set GIT=%TOOLS%\Git2.0.0
 
 REM Check tools directory
 if not exist %CMAKE%\bin\cmake.exe goto :notools
 if not exist %UNIX_UTILS%\make.exe goto :notools
-if not exist %GIT%\cmd\git.exe goto :notools
+REM if not exist %GIT%\cmd\git.exe goto :notools
 
 REM Tools found
 echo buildvars.bat: Build tools were found under %TOOLS%
@@ -73,10 +73,10 @@ REM Setup paths for build tools
 REM Setup the PATH to make sure nothing unexpected is included
 set PATH=%CMAKE%\BIN;%WINDIR%\SYSTEM32
 set PATH=%GIT%\cmd;%PATH%
-set PATH=%NINJA%\bin;%PATH%
+REM set PATH=%NINJA%\bin;%PATH%
 set PATH=%UNIX_UTILS%;%PATH%
 set PATH=%TOOLS%\BIN;%PATH%
-set PATH=%PYTHON%;%PATH%
+REM set PATH=%PYTHON%;%PATH%
 
 REM Clear any existing INCLUDE and LIB environment variables to avoid interference
 set MSVCDIR=

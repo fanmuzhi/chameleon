@@ -41,20 +41,20 @@
 #export build_host ?= $(shell uname -s)
 
 # Default target platform configurations 
-TARG_OS	      := win
-TARG_CPU      := x86
-TARG_PLAT     := generic
-BUILDTYPE     := Release
-CODE_ANALYZE  := OFF 
+TARG_OS	      		:= win
+TARG_CPU      		:= x86
+TARG_PLAT     		:= steller
+BUILDTYPE     		:= Release
+ENABLE_UNIT_TEST  	:= 1 
 
 export TARG_OS
 export TARG_CPU
 export TARG_PLAT
 export BUILDTYPE
-#export CODE_ANALYZE
+export ENABLE_UNIT_TEST
 
 export TARG_BUILD_PATH  := $(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)
-export TARG_OUT_PATH    := $(TARG_OS)/$(TARG_CPU)/$(TARG_PLAT)
+#export TARG_OUT_PATH    := $(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)
 
 # Include host & platform specific makefile definitions
 include $(CMAKE_CFG_DIR)/chameleonPlatforms/$(TARG_OS)/Makefile.def
@@ -67,25 +67,25 @@ cmake_flags += -D TARG_OS=$(TARG_OS)
 cmake_flags += -D TARG_CPU=$(TARG_CPU)
 cmake_flags += -D TARG_PLAT=$(TARG_PLAT) 
 cmake_flags += -D BUILDTYPE=$(BUILDTYPE)
-#cmake_flags += -D T_ARCH_ABI=$(T_ARCH_ABI) 
-#cmake_flags += -D COMIFACE=$(COMIFACE)
-#cmake_flags += -D ENABLE_MPC04=$(ENABLE_MPC04)
-#cmake_flags += -D ENABLE_M5=$(ENABLE_M5)
-#cmake_flags += -D CODE_ANALYZE=$(CODE_ANALYZE)
+cmake_flags += -D ENABLE_UNIT_TEST=$(ENABLE_UNIT_TEST)
 
 $(warning  ***********************************************************************************************************)
 $(warning  TARG_OS=$(TARG_OS))
 $(warning  TARG_CPU=$(TARG_CPU))
 $(warning  TARG_PLAT=$(TARG_PLAT))
 $(warning  BUILDTYPE=$(BUILDTYPE))
+$(warning  ENABLE_UNIT_TEST=$(ENABLE_UNIT_TEST))
 $(warning  CHAMELEON_DIR=$(CHAMELEON_DIR))
 $(warning  CMAKE_CFG_DIR=$(CMAKE_CFG_DIR))
-#$(warning  CMAKE_MODULE_DIR=$(CMAKE_MODULE_DIR))
+$(warning  ***********************************************************************************************************)
 $(warning  src_dir=$(src_dir))
 $(warning  build_dir=$(build_dir))
+$(warning  cmake_generator=$(cmake_generator))
+$(warning  build_cmd=$(build_cmd))
 $(warning  cmake_flags=$(cmake_flags))
-#$(warning  CODE_ANALYZE=$(CODE_ANALYZE))
 $(warning  PATH=$(PATH))
+$(warning  INCLUDE=$(INCLUDE))
+$(warning  LIB=$(LIB))
 $(warning  ***********************************************************************************************************)
 
 #-----------------------------------------------------------------------
@@ -99,11 +99,9 @@ all:	chameleon
 .PHONY: chameleon
 chameleon:	$(build_dir)/CMakeCache.txt
 	cd $(build_dir) && $(build_cmd)	
-	$(CP) $(CHAMELEON_DIR)/lib/win/$(TARG_CPU)/$(TARG_PLAT)/*.lib	$(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
-	$(CP) $(CHAMELEON_DIR)/lib/win/$(TARG_CPU)/$(TARG_PLAT)/*.dll	$(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
-	$(CP) $(CHAMELEON_DIR)/lib/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)/*.lib	$(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
-	$(CP) $(CHAMELEON_DIR)/lib/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)/*.dll	$(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
-	$(WINDEPLOYQT) $(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
+	$(CP) $(CHAMELEON_DIR)/lib/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)/*.lib	$(CHAMELEON_DIR)/bin/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)
+	$(CP) $(CHAMELEON_DIR)/lib/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)/*.dll	$(CHAMELEON_DIR)/bin/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)
+	$(WINDEPLOYQT) $(CHAMELEON_DIR)/bin/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)
 $(build_dir):
 	@$(MKDIR) $(build_dir)
 
