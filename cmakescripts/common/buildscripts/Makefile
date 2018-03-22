@@ -42,9 +42,6 @@
 #
 # Used to specify sensor communication interface supported in the build.
 # Possible values are:
-#   USB - Support only USB interface.
-#   SPI - Support only SPI interface.
-export COMIFACE = SPI
 build_host 		?= $(shell uname -s)
 
 #-----------------------------------------------------------------------
@@ -101,56 +98,22 @@ win_m5_x64: win_m5_x64_dbg win_m5_x64_rel
 win_m5_x86_dbg: log_ids_gen
 	$(eval TAG_OS := win)
 	@$(ECHO) Building win_x86 Debug... > $(CURRENT_CONSOLE)
-	$(MAKE) -f $(makefile_dir)chameleon.mk TARG_OS=$(TAG_OS) TARG_CPU=x86 COMIFACE=SPI BUILDTYPE=Debug ENABLE_M5=1
+	$(MAKE) -f $(makefile_dir)chameleon.mk TARG_OS=$(TAG_OS) TARG_CPU=x86 BUILDTYPE=Debug ENABLE_UNIT_TEST=$(ENABLE_UNIT_TEST)
 
 win_m5_x86_rel: log_ids_gen
 	$(eval TAG_OS := win)
 	@$(ECHO) Building win_x86 Release... > $(CURRENT_CONSOLE)
-	$(MAKE) -f $(makefile_dir)chameleon.mk TARG_OS=$(TAG_OS) TARG_CPU=x86 COMIFACE=SPI BUILDTYPE=Release ENABLE_M5=1
+	$(MAKE) -f $(makefile_dir)chameleon.mk TARG_OS=$(TAG_OS) TARG_CPU=x86 BUILDTYPE=Release ENABLE_UNIT_TEST=$(ENABLE_UNIT_TEST)
 
 win_m5_x64_dbg: log_ids_gen
 	$(eval TAG_OS := win)
 	@$(ECHO) Building win_x64 Debug... > $(CURRENT_CONSOLE)
-	$(MAKE) -f $(makefile_dir)chameleon.mk TARG_OS=$(TAG_OS) TARG_CPU=x64 COMIFACE=SPI BUILDTYPE=Debug ENABLE_M5=1
-	$(softMetrics) $(TAG_OS)
+	$(MAKE) -f $(makefile_dir)chameleon.mk TARG_OS=$(TAG_OS) TARG_CPU=x64 BUILDTYPE=Debug ENABLE_UNIT_TEST=$(ENABLE_UNIT_TEST)
 
 win_m5_x64_rel: log_ids_gen
 	$(eval TAG_OS := win)
 	@$(ECHO) Building win_x64 Release... > $(CURRENT_CONSOLE)
-	$(MAKE) -f $(makefile_dir)chameleon.mk TARG_OS=$(TAG_OS) TARG_CPU=x64 COMIFACE=SPI BUILDTYPE=Release ENABLE_M5=1
-	$(softMetrics) $(TAG_OS)
-
-	
-# MPC04 support is available for x86/x64
-win_mpc04: win_mpc04_x86 win_mpc04_x64
-win_mpc04_rel: win_mpc04_x86_rel win_mpc04_x64_rel 
-win_mpc04_dbg: win_mpc04_x86_dbg win_mpc04_x64_dbg
-win_mpc04_x86: win_mpc04_x86_dbg win_mpc04_x86_rel
-win_mpc04_x64: win_mpc04_x64_dbg win_mpc04_x64_rel
-
-win_mpc04_x86_dbg: log_ids_gen
-	$(eval TAG_OS := win)
-	@$(ECHO) Building win_x86 Debug... > $(CURRENT_CONSOLE)
-	$(MAKE) -f $(makefile_dir)chameleon.mk TARG_OS=$(TAG_OS) TARG_CPU=x86 COMIFACE=SPI BUILDTYPE=Debug ENABLE_MPC04=1
-	$(softMetrics) $(TAG_OS)
-
-win_mpc04_x86_rel: log_ids_gen
-	$(eval TAG_OS := win)
-	@$(ECHO) Building win_x86 Release... > $(CURRENT_CONSOLE)
-	$(MAKE) -f $(makefile_dir)chameleon.mk TARG_OS=$(TAG_OS) TARG_CPU=x86 COMIFACE=SPI BUILDTYPE=Release ENABLE_MPC04=1
-	$(softMetrics) $(TAG_OS)
-	
-win_mpc04_x64_dbg: log_ids_gen
-	$(eval TAG_OS := win)
-	@$(ECHO) Building win_x64 Debug... > $(CURRENT_CONSOLE)
-	$(MAKE) -f $(makefile_dir)chameleon.mk TARG_OS=$(TAG_OS) TARG_CPU=x64 COMIFACE=SPI BUILDTYPE=Debug ENABLE_MPC04=1
-	$(softMetrics) $(TAG_OS)
-
-win_mpc04_x64_rel: log_ids_gen
-	$(eval TAG_OS := win)
-	@$(ECHO) Building win_x64 Release... > $(CURRENT_CONSOLE)
-	$(MAKE) -f $(makefile_dir)chameleon.mk TARG_OS=$(TAG_OS) TARG_CPU=x64 COMIFACE=SPI BUILDTYPE=Release ENABLE_MPC04=1
-	$(softMetrics) $(TAG_OS)	
+	$(MAKE) -f $(makefile_dir)chameleon.mk TARG_OS=$(TAG_OS) TARG_CPU=x64 BUILDTYPE=Release ENABLE_UNIT_TEST=$(ENABLE_UNIT_TEST)	
 
 
 #-----------------------------------------------------------------------
