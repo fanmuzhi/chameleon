@@ -1,0 +1,8 @@
+#
+# Windows x64 specific definitions
+#
+
+ADD_DEFINITIONS(-D_X64_)
+
+LINK_DIRECTORIES(${NTDDK}/LIB/WLH/AMD64)
+LINK_DIRECTORIES(${WINSDK}/LIB/X64)

@@ -1,0 +1,13 @@
+#
+# Windows x86 specific definitions
+#
+
+ADD_DEFINITIONS(-D_X86_)
+
+LINK_DIRECTORIES(${NTDDK}/LIB/WXP/I386)
+LINK_DIRECTORIES(${WINSDK}/LIB)
+
+MESSAGE(STATUS "*********************************************************************")
+MESSAGE(STATUS "NTDDK=${NTDDK}")
+MESSAGE(STATUS "WINSDK=${WINSDK}")
+MESSAGE(STATUS "*********************************************************************")

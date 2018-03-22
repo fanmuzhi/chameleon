@@ -1,0 +1,22 @@
+# Include common OS definitions and feature selections
+include(${CMAKE_PLATFORMS_PATH}/${TARG_OS}/common/CMakeDefs.txt)
+include(${CMAKE_PLATFORMS_PATH}/${TARG_OS}/common/vcsFeatures.txt)
+
+# Include cpu specific definitions
+include(${CMAKE_PLATFORMS_PATH}/${TARG_OS}/cpu/CMakeDefs_${TARG_CPU}.txt)
+
+# Include target specific definitions
+include(${CMAKE_PLATFORMS_PATH}/${TARG_OS}/${TARG_PLAT}/CMakeDefs.txt)
+include(${CMAKE_PLATFORMS_PATH}/${TARG_OS}/${TARG_PLAT}/vcsFeatures.txt)
+
+# Dump all cmake variables to AllVariables.txt
+FILE(WRITE ${CMAKE_CURRENT_BINARY_DIR}/AllVariables.txt "")
+GET_CMAKE_PROPERTY(res VARIABLES)
+FOREACH(var ${res})
+    FILE(APPEND ${CMAKE_CURRENT_BINARY_DIR}/AllVariables.txt "${var} \"${${var}}\"\n")
+ENDFOREACH(var)
+
+#!!!!!!
+# Do NOT add new variables here. 
+# Add variables before dump them to the AllVariables.txt
+#!!!!!!
