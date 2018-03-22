@@ -1,6 +1,9 @@
 # Ignore LocalSettings
 **/LocalSettings.xml
 log/
+build/
+lib/
+
 
 # Ignore thumbnails created by windows
 Thumbs.db
