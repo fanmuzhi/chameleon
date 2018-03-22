@@ -1,6 +1,6 @@
-REM set BUILD_TARGET=win_m5_x86_dbg
-REM set BUILD_TARGET=win_m5_x86_rel
-set BUILD_TARGET=win_m5_x86
+REM set BUILD_TARGET=win_m5_x64_dbg
+REM set BUILD_TARGET=win_m5_x64_rel
+set BUILD_TARGET=win_m5_x64
 set TARGET_PLATFORM=steller
 set ENABLE_UNIT_TEST=1
 

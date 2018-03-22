@@ -54,7 +54,7 @@ export BUILDTYPE
 export ENABLE_UNIT_TEST
 
 export TARG_BUILD_PATH  := $(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)
-export TARG_OUT_PATH    := $(TARG_OS)/$(TARG_CPU)/$(TARG_PLAT)
+#export TARG_OUT_PATH    := $(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)
 
 # Include host & platform specific makefile definitions
 include $(CMAKE_CFG_DIR)/chameleonPlatforms/$(TARG_OS)/Makefile.def
@@ -99,11 +99,9 @@ all:	chameleon
 .PHONY: chameleon
 chameleon:	$(build_dir)/CMakeCache.txt
 	cd $(build_dir) && $(build_cmd)	
-	$(CP) $(CHAMELEON_DIR)/lib/win/$(TARG_CPU)/$(TARG_PLAT)/*.lib	$(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
-	$(CP) $(CHAMELEON_DIR)/lib/win/$(TARG_CPU)/$(TARG_PLAT)/*.dll	$(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
-	$(CP) $(CHAMELEON_DIR)/lib/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)/*.lib	$(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
-	$(CP) $(CHAMELEON_DIR)/lib/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)/*.dll	$(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
-	$(WINDEPLOYQT) $(CHAMELEON_DIR)/bin/win/$(TARG_CPU)/$(TARG_PLAT)/$(BUILDTYPE)
+	$(CP) $(CHAMELEON_DIR)/lib/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)/*.lib	$(CHAMELEON_DIR)/bin/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)
+	$(CP) $(CHAMELEON_DIR)/lib/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)/*.dll	$(CHAMELEON_DIR)/bin/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)
+	$(WINDEPLOYQT) $(CHAMELEON_DIR)/bin/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)
 $(build_dir):
 	@$(MKDIR) $(build_dir)
 

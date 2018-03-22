@@ -5,7 +5,7 @@
 # **
 # *****************************************************************************
 # **
-# **  Copyright (C) 2016-2017 Synaptics Incorporated. All rights reserved.
+# **  Copyright (C) 2016-2018 Synaptics Incorporated. All rights reserved.
 # **
 # **
 # ** This file contains information that is proprietary to Synaptics
@@ -90,8 +90,8 @@ ENDIF(DEFINED TARG_PLAT)
 SET(CMAKE_PLATFORMS_PATH    ${CMAKE_CFG_DIR}/chameleonPlatforms)
 INCLUDE(${CMAKE_PLATFORMS_PATH}/${TARG_OS}/CMakeDefs.txt)
 
-SET(BIN_DIR ${CHAMELEON_DIR}/bin/${TARG_OS}/${TARG_CPU}/${TARG_PLAT})
-SET(LIB_DIR ${CHAMELEON_DIR}/lib/${TARG_OS}/${TARG_CPU}/${TARG_PLAT})
+SET(BIN_DIR ${CHAMELEON_DIR}/bin/${TARG_OS}_${TARG_CPU}_${TARG_PLAT})
+SET(LIB_DIR ${CHAMELEON_DIR}/lib/${TARG_OS}_${TARG_CPU}_${TARG_PLAT})
 
 # Place all output to the Collate directory
 SET(EXECUTABLE_OUTPUT_PATH  ${BIN_DIR})
@@ -153,37 +153,37 @@ MESSAGE(STATUS "****************************************************************
 #*************************************************************
 # Add ftd2xx.dll as a prebuilt library 
 FILE(GLOB ftd2xx_libs "${CHAMELEON_DIR}/package/ftdi/${CMAKE_PLATFORM}/*")
-FILE(COPY ${ftd2xx_libs} DESTINATION ${LIB_DIR})
+FILE(COPY ${ftd2xx_libs} DESTINATION ${LIB_DIR}/${BUILDTYPE})
 ADD_LIBRARY(ftd2xx SHARED IMPORTED)
-SET_PROPERTY(TARGET ftd2xx PROPERTY IMPORTED_LOCATION ${LIB_DIR}/ftd2xx.dll)
-SET_PROPERTY(TARGET ftd2xx PROPERTY PROPERTY IMPORTED_IMPLIB ${LIB_DIR}/ftd2xx.lib)
+SET_PROPERTY(TARGET ftd2xx PROPERTY IMPORTED_LOCATION ${LIB_DIR}/${BUILDTYPE}/ftd2xx.dll)
+SET_PROPERTY(TARGET ftd2xx PROPERTY PROPERTY IMPORTED_IMPLIB ${LIB_DIR}/${BUILDTYPE}/ftd2xx.lib)
 
 # Add gtestd.dll as a prebuilt library 		   
 FILE(GLOB gtesd_libs "${CHAMELEON_DIR}/package/gtest/lib/${CMAKE_PLATFORM}/${CMAKE_BUILD_TYPE}/*")
-FILE(COPY ${gtesd_libs} DESTINATION ${LIB_DIR})
+FILE(COPY ${gtesd_libs} DESTINATION ${LIB_DIR}/${BUILDTYPE})
 IF(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	ADD_LIBRARY(gtestd STATIC IMPORTED)
-	SET_PROPERTY(TARGET gtestd PROPERTY IMPORTED_LOCATION ${LIB_DIR}/gtestd.lib)
+	SET_PROPERTY(TARGET gtestd PROPERTY IMPORTED_LOCATION ${LIB_DIR}/${BUILDTYPE}/gtestd.lib)
 ELSE(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 	ADD_LIBRARY(gtest STATIC IMPORTED)
-	SET_PROPERTY(TARGET gtest PROPERTY IMPORTED_LOCATION ${LIB_DIR}/gtest.lib)
+	SET_PROPERTY(TARGET gtest PROPERTY IMPORTED_LOCATION ${LIB_DIR}/${BUILDTYPE}/gtest.lib)
 ENDIF(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 
 # Add libglog.dll and libglog_static.lib as a prebuilt library 
 FILE(GLOB libglog_libs "${CHAMELEON_DIR}/package/glog/lib/${CMAKE_PLATFORM}/${CMAKE_BUILD_TYPE}/*")
-FILE(COPY ${libglog_libs} DESTINATION ${LIB_DIR})
+FILE(COPY ${libglog_libs} DESTINATION ${LIB_DIR}/${BUILDTYPE})
 ADD_LIBRARY(libglog SHARED IMPORTED)
 SET_PROPERTY(TARGET libglog PROPERTY IMPORTED_LOCATION ${LIB_DIR}/libglog.dll)
-SET_PROPERTY(TARGET libglog PROPERTY PROPERTY IMPORTED_IMPLIB ${LIB_DIR}/libglog.lib)
+SET_PROPERTY(TARGET libglog PROPERTY PROPERTY IMPORTED_IMPLIB ${LIB_DIR}/${BUILDTYPE}/libglog.lib)
 ADD_LIBRARY(libglog_static STATIC IMPORTED)
-SET_PROPERTY(TARGET libglog_static PROPERTY IMPORTED_LOCATION ${LIB_DIR}/libglog_static.lib)
+SET_PROPERTY(TARGET libglog_static PROPERTY IMPORTED_LOCATION ${LIB_DIR}/${BUILDTYPE}/libglog_static.lib)
 
 # Add stellerAlgoShared.dll as a prebuilt library 
 FILE (GLOB stellerAlgoShared_libs "${CHAMELEON_DIR}/cmlFpTestEngine/FpImageProcessing/lib/${CMAKE_PLATFORM}/${CMAKE_BUILD_TYPE}/*")
-FILE (COPY ${stellerAlgoShared_libs} DESTINATION ${LIB_DIR})
+FILE (COPY ${stellerAlgoShared_libs} DESTINATION ${LIB_DIR}/${BUILDTYPE})
 ADD_LIBRARY(stellerAlgoShared SHARED IMPORTED)
-SET_PROPERTY(TARGET stellerAlgoShared PROPERTY IMPORTED_LOCATION ${LIB_DIR}/stellerAlgoShared.dll)
-SET_PROPERTY(TARGET stellerAlgoShared PROPERTY PROPERTY IMPORTED_IMPLIB ${LIB_DIR}/stellerAlgoShared.lib)
+SET_PROPERTY(TARGET stellerAlgoShared PROPERTY IMPORTED_LOCATION ${LIB_DIR}/${BUILDTYPE}/stellerAlgoShared.dll)
+SET_PROPERTY(TARGET stellerAlgoShared PROPERTY PROPERTY IMPORTED_IMPLIB ${LIB_DIR}/${BUILDTYPE}/stellerAlgoShared.lib)
 
 #*************************************************************
 # Add submodule directory

@@ -1,16 +1,12 @@
 #
 # Chameleon feature selections for Windows generic platform
 #
-
-
 SET (SENSOR_TYPE                "steller")
 
 #SET (SENSOR_TYPE                "denali")
 #SET (SECMGMT_PATCH_VER          "1.00.0004")
 #SET (MFW_FLAVOR                 "0")
 #SET (MFW_VER                    "8.00.0118")
-
-
 
 # Enables Chameleon modules' builds
 SET(CML_BUILD_FP_SENSOR_ENGINE	1)
