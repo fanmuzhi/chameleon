@@ -1,0 +1,69 @@
+# Platform specific makefile definitions
+ifeq ($(USE_VS2015), 1)
+    VisualStudio  := Visual Studio 14 2015
+    # Setup tools environment for Visual Studio 2015
+    VSInstallDir  := $(TOOLS)/MSVS2015
+    VCInstallDir  := $(TOOLS)/MSVS2015/VC
+    MSSDKDir      := $(TOOLS)/WindowsKit_10
+    SDK_VER       := 10.0.15063.0
+else
+    VisualStudio  := Visual Studio 12 2013
+    # Setup tools environment for Visual Studio 2013
+    VSInstallDir  := $(TOOLS)/MSVS2013
+    VCInstallDir  := $(TOOLS)/MSVS2013/VC
+    MSSDKDir      := $(TOOLS)/WindowsKit_8_1
+endif
+
+ifeq ($(USE_VS2015), 1)
+	ifeq ($(TARG_CPU), x64)
+		export PATH    := $(VSInstallDir)/Common7/IDE;$(VCInstallDir)/bin/x86_amd64;$(VCInstallDir)/BIN;$(VSInstallDir)/Common7/Tools;$(VSInstallDir)/Common7/Tools/bin;$(MSSDKDir)/bin/x86;$(TOOLS)/MSBuild/14.0/Bin;$(PATH)
+		export INCLUDE := $(VCInstallDir)/include;$(MSSDKDir)/Include/$(SDK_VER)/um;$(MSSDKDir)/Include/$(SDK_VER)/shared;$(MSSDKDir)/Include/$(SDK_VER)/ucrt
+		export LIB     := $(VCInstallDir)/LIB/amd64;$(MSSDKDir)/Lib/$(SDK_VER)/um/x64;$(MSSDKDir)/Lib/$(SDK_VER)/ucrt/x64;
+	else
+		export PATH    := $(VSInstallDir)/Common7/IDE;$(VCInstallDir)/bin;$(VSInstallDir)/Common7/Tools;$(VSInstallDir)/Common7/Tools/bin;$(MSSDKDir)/bin/x86;$(TOOLS)/MSBuild/14.0/Bin;$(PATH)
+		export INCLUDE := $(VCInstallDir)/include;$(MSSDKDir)/Include/$(SDK_VER)/um;$(MSSDKDir)/Include/$(SDK_VER)/shared;$(MSSDKDir)/Include/$(SDK_VER)/ucrt
+		export LIB     := $(VCInstallDir)/lib;$(MSSDKDir)/Lib/$(SDK_VER)/um/x86;$(MSSDKDir)/Lib/$(SDK_VER)/ucrt/x86;
+	endif
+else
+	ifeq ($(TARG_CPU), x64)
+		export PATH    := $(VSInstallDir)/Common7/IDE;$(VCInstallDir)/BIN/x86_amd64;$(VCInstallDir)/BIN;$(VSInstallDir)/Common7/Tools;$(VSInstallDir)/Common7/Tools/bin;$(VCInstallDir)/PlatformSDK/bin;$(VSInstallDir)/SDK/v2.0/bin;$(VCInstallDir)\VCPackages;$(MSSDKDir)\bin\x86;$(TOOLS)\MSBuild\12.0\Bin;$(PATH)
+		export INCLUDE := $(VCInstallDir)/ATLMFC/INCLUDE;$(VCInstallDir)/INCLUDE;$(VCInstallDir)/PlatformSDK/include;$(VSInstallDir)/SDK/v2.0/include;$(MSSDKDir)\Include\um;
+		export LIB     := $(VCInstallDir)/ATLMFC/LIB/amd64;$(VCInstallDir)/LIB/amd64;$(VCInstallDir)/PlatformSDK/lib/amd64;$(VSInstallDir)/SDK/v2.0/lib/AMD64;$(MSSDKDir)\Lib\winv6.3\um\x64;
+	else
+		export PATH    := $(VSInstallDir)/Common7/IDE;$(VCInstallDir)/BIN;$(VSInstallDir)/Common7/Tools;$(VSInstallDir)/Common7/Tools/bin;$(VCInstallDir)/PlatformSDK/bin;$(VSInstallDir)/SDK/v2.0/bin;$(VCInstallDir)\VCPackages;$(MSSDKDir)\bin\x86;$(TOOLS)\MSBuild\12.0\Bin;$(PATH)   
+		export INCLUDE := $(VCInstallDir)/ATLMFC/INCLUDE;$(VCInstallDir)/INCLUDE;$(VCInstallDir)/PlatformSDK/include;$(VSInstallDir)/SDK/v2.0/include;$(MSSDKDir)/Include/um;$(MSSDKDir)/Include/shared;
+		export LIB     := $(VCInstallDir)/ATLMFC/LIB;$(VCInstallDir)/LIB;$(VCInstallDir)/PlatformSDK/lib;$(VSInstallDir)/SDK/v2.0/lib;$(MSSDKDir)/Lib/winv6.3/um/x86;
+	endif
+endif
+
+ifeq ($(BUILDTYPE),Release)
+	CMAKE_BUILD_TYPE = Release
+else
+	CMAKE_BUILD_TYPE = Debug
+endif
+
+# Set CMake generator and build_cmd
+ifeq ($(TARG_CPU), x64)
+	cmake_generator = "$(VisualStudio) Win64"
+	build_cmd = msbuild  $@.sln  /p:UseEnv=true  /p:Configuration="$(CMAKE_BUILD_TYPE)";Platform="x64"
+else
+	cmake_generator = "$(VisualStudio)"
+	build_cmd = msbuild  $@.sln  /p:UseEnv=true  /p:Configuration="$(CMAKE_BUILD_TYPE)";Platform="Win32"
+endif
+
+# Add Qt cmake
+export PATH := C:/Qt/Qt5.5.1/5.5/msvc2013/lib/cmake;C:/Qt/Qt5.5.1/5.5/msvc2013/bin;$(PATH)
+
+#$(warning  **************************************************************************************************************************)
+#$(warning  VisualStudio=$(VisualStudio))
+#$(warning  VSInstallDir=$(VSInstallDir))
+#$(warning  VCInstallDir=$(VCInstallDir))
+#$(warning  MSSDKDir=$(MSSDKDir))
+#$(warning  CMAKE_BUILD_TYPE=$(CMAKE_BUILD_TYPE))
+#$(warning  cmake_generator=$(cmake_generator))
+#$(warning  build_cmd=$(build_cmd))
+#$(warning  cmake_flags=$(cmake_flags))
+#$(warning  PATH=$(PATH))
+#$(warning  INCLUDE=$(INCLUDE))
+#$(warning  LIB=$(LIB))
+#$(warning  **************************************************************************************************************************)

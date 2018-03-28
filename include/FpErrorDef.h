@@ -102,3 +102,4 @@ using namespace std;
 #define ERROR_ENGINELOG_FOLDER                              0x6101
 #define ERROR_ENGINELOG_FILE                                0x6102
 #define ERROR_LOAD_CPID_LIB                                 0x6103
+#define ERROR_LED_STATUS                                    0x6104
