@@ -3,7 +3,7 @@ include(${CMAKE_PLATFORMS_PATH}/${TARG_OS}/common/CMakeDefs.txt)
 include(${CMAKE_PLATFORMS_PATH}/${TARG_OS}/common/vcsFeatures.txt)
 
 # Include cpu specific definitions
-include(${CMAKE_PLATFORMS_PATH}/${TARG_OS}/cpu/CMakeDefs_${TARG_CPU}.txt)
+#include(${CMAKE_PLATFORMS_PATH}/${TARG_OS}/cpu/CMakeDefs_${TARG_CPU}.txt)
 
 # Include target specific definitions
 include(${CMAKE_PLATFORMS_PATH}/${TARG_OS}/${TARG_PLAT}/CMakeDefs.txt)
