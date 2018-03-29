@@ -99,8 +99,8 @@ all:	chameleon
 .PHONY: chameleon
 chameleon:	$(build_dir)/CMakeCache.txt
 	cd $(build_dir) && $(build_cmd)	
-	$(CP) $(CHAMELEON_DIR)/lib/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)/*.lib	$(CHAMELEON_DIR)/bin/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)
-	$(CP) $(CHAMELEON_DIR)/lib/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)/*.dll	$(CHAMELEON_DIR)/bin/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)
+#	$(CP) $(CHAMELEON_DIR)/lib/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)/*.lib	$(CHAMELEON_DIR)/bin/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)
+#	$(CP) $(CHAMELEON_DIR)/lib/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)/*.dll	$(CHAMELEON_DIR)/bin/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)
 	$(WINDEPLOYQT) $(CHAMELEON_DIR)/bin/$(TARG_OS)_$(TARG_CPU)_$(TARG_PLAT)/$(BUILDTYPE)
 $(build_dir):
 	@$(MKDIR) $(build_dir)
