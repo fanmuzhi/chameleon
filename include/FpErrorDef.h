@@ -16,6 +16,7 @@ using namespace std;
 #define ERROR_REPLY_LENGTH_TOO_SHORT                        0x1507
 #define ERROR_NOT_IMPLEMENTED                               0x1508
 #define ERROR_IOTA_NOT_FOUND                                0x1509
+#define ERROR_INVALID_IMAGE_SIZE                            0x1510
 
 //FT status:
 #define SYN_M5_OK                                           0
