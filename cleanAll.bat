@@ -1,4 +1,4 @@
-REM cd niseCore
+REM cd chameeleon
 call cmakescripts\common\buildscripts\buildvars.bat c:\tools
 make -f cmakescripts\common\buildscripts\Makefile clean
 REM cd ..
